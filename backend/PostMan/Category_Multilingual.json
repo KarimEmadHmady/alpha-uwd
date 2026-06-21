@@ -1,0 +1,272 @@
+{
+  "info": {
+    "name": "Category API - Multilingual",
+    "_postman_id": "category-multilang-2024",
+    "description": "Complete CRUD operations for categories with translations",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [{ "key": "token", "value": "{{auth_token}}", "type": "string" }]
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:3000", "type": "string" },
+    { "key": "auth_token", "value": "", "type": "string" },
+    { "key": "category_id", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Create Category",
+      "item": [
+        {
+          "name": "Create Category - New Format (with translations)",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "if (pm.response.code === 201) {",
+                "    var jsonData = pm.response.json();",
+                "    pm.collectionVariables.set('category_id', jsonData.data.categoryId);",
+                "}"
+              ]
+            }
+          }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Equity Funds\",\n  \"color\": \"#FF5733\",\n  \"translations\": {\n    \"ar\": {\n      \"name\": \"صناديق الأسهم\"\n    },\n    \"en\": {\n      \"name\": \"Equity Funds\"\n    }\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/categories",
+              "host": ["{{base_url}}"],
+              "path": ["api", "categories"]
+            }
+          }
+        },
+        {
+          "name": "Create Category - Old Format (backward compatible)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Bond Funds\",\n  \"name_arabic\": \"صناديق السندات\",\n  \"color\": \"#33FF57\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/categories",
+              "host": ["{{base_url}}"],
+              "path": ["api", "categories"]
+            },
+            "description": "Old format still works - will be converted to new translation system"
+          }
+        },
+        {
+          "name": "Create Category - Mixed Format",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name_ar\": \"صناديق المؤشرات\",\n  \"name_en\": \"Index Funds\",\n  \"color\": \"#5733FF\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/categories",
+              "host": ["{{base_url}}"],
+              "path": ["api", "categories"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Get Categories",
+      "item": [
+        {
+          "name": "Get All Categories - Arabic",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/categories?lang=ar",
+              "host": ["{{base_url}}"],
+              "path": ["api", "categories"],
+              "query": [{ "key": "lang", "value": "ar" }]
+            },
+            "description": "Get all categories with Arabic names"
+          }
+        },
+        {
+          "name": "Get All Categories - English",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/categories?lang=en",
+              "host": ["{{base_url}}"],
+              "path": ["api", "categories"],
+              "query": [{ "key": "lang", "value": "en" }]
+            },
+            "description": "Get all categories with English names"
+          }
+        },
+        {
+          "name": "Get All Categories - Default (AR)",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/categories",
+              "host": ["{{base_url}}"],
+              "path": ["api", "categories"]
+            },
+            "description": "No lang parameter - defaults to Arabic"
+          }
+        },
+        {
+          "name": "Get Category by ID - Arabic",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/categories/{{category_id}}?lang=ar",
+              "host": ["{{base_url}}"],
+              "path": ["api", "categories", "{{category_id}}"],
+              "query": [{ "key": "lang", "value": "ar" }]
+            }
+          }
+        },
+        {
+          "name": "Get Category by ID - English",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/categories/{{category_id}}?lang=en",
+              "host": ["{{base_url}}"],
+              "path": ["api", "categories", "{{category_id}}"],
+              "query": [{ "key": "lang", "value": "en" }]
+            }
+          }
+        },
+        {
+          "name": "Get All Categories with Translations (Admin)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/categories/admin/all",
+              "host": ["{{base_url}}"],
+              "path": ["api", "categories", "admin", "all"]
+            },
+            "description": "Returns all categories with complete translation objects"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Update Category",
+      "item": [
+        {
+          "name": "Update Category - New Format",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Equity Funds Updated\",\n  \"color\": \"#FF0000\",\n  \"translations\": {\n    \"ar\": {\n      \"name\": \"صناديق الأسهم - محدّث\"\n    },\n    \"en\": {\n      \"name\": \"Equity Funds - Updated\"\n    }\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/categories/{{category_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "categories", "{{category_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Category - Old Format",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Name\",\n  \"name_ar\": \"الاسم المحدّث\",\n  \"color\": \"#00FF00\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/categories/{{category_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "categories", "{{category_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Category - Only Color",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"color\": \"#0000FF\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/categories/{{category_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "categories", "{{category_id}}"]
+            },
+            "description": "Update only the color without touching translations"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Delete Category",
+      "item": [
+        {
+          "name": "Delete Category",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/api/categories/{{category_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "categories", "{{category_id}}"]
+            },
+            "description": "Deletes category and all its translations (CASCADE)"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Test Cases",
+      "item": [
+        {
+          "name": "Test: Fallback to Arabic when English not found",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/categories?lang=en",
+              "host": ["{{base_url}}"],
+              "path": ["api", "categories"],
+              "query": [{ "key": "lang", "value": "en" }]
+            },
+            "description": "If a category doesn't have English translation, it should show Arabic"
+          }
+        },
+        {
+          "name": "Test: Accept-Language Header",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "GET",
+            "header": [{ "key": "Accept-Language", "value": "en", "type": "text" }],
+            "url": {
+              "raw": "{{base_url}}/api/categories",
+              "host": ["{{base_url}}"],
+              "path": ["api", "categories"]
+            },
+            "description": "Test language detection via HTTP header"
+          }
+        }
+      ]
+    }
+  ]
+}

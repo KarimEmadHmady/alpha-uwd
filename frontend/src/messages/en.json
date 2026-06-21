@@ -1,0 +1,78 @@
+{
+  "Home": {
+    "title": "Welcome !",
+    "welcome": "We are glad to have you here. Enjoy browsing our products!"
+  },
+  "InvestmentFunds": {
+    "title": "Investment Funds",
+    "lastUpdate": "Last Update",
+    "recent": "Recent",
+    "price": "Price",
+    "seeMore": "See More",
+    "fund": "Fund",
+    "unnamedFund": "Unnamed Fund",
+    "investmentFund": "Investment Fund",
+    "errorLoadingFunds": "Error loading funds"
+  },
+  "fundDetails": {
+    "overview": "Fund Overview",
+    "details": "Fund Details",
+    "type": "Type",
+    "category": "Category",
+    "nav": "NAV",
+    "initialRelease": "Initial Release",
+    "currency": "Currency",
+    "redemptionFrequency": "Redemption Frequency",
+    "subscriptionFrequency": "Subscription Frequency",
+    "minInitial": "Min. Initial",
+    "minRedemption": "Min. Redemption",
+    "subscriptionFee": "Subscription Fee",
+    "redemptionFee": "Redemption Fee",
+    "annualFee": "Annual Fee",
+    "fundManager": "Fund Manager",
+    "latestPrice": "Latest Price",
+    "latestPriceDate": "Latest Price Date"
+  },
+  "Navigation": {
+    "home": "Home",
+    "about": "About Us",
+    "services": "Services",
+    "fundsManagement": "Funds Management",
+    "portfolioManagement": "Portfolio Management",
+    "cashManagement": "Cash Management",
+    "privatePension": "Private Pension Funds",
+    "familyBusiness": "Managing Family Business Portfolios",
+    "blogs": "Blogs",
+    "careers": "Careers",
+    "contact": "Contact us",
+    "address": {
+      "full": "Smart Village, Building Emerald Business Center no. 2210 B, Giza, Egypt",
+      "short": "Smart Village, Giza, Egypt"
+    },
+    "phone1": "01234567890",
+    "phone2": "01098765432",
+    "holdingCompany": "Holding Company",
+    "committees": "Committees"
+  },
+  "fundSidebar": {
+    "details": "Fund Details",
+    "performance": "Performance",
+    "manager": "Fund Manager",
+    "files": "Files",
+    "lastUpdate": "Last Update",
+    "price": "Price"
+  },
+  "performance": {
+    "title": "Performance",
+    "currentBalance": "Current Balance"
+  },
+  "entities": {
+    "title": "Related Entities",
+    "visitWebsite": "Visit Website",
+    "addedOn": "Added on",
+    "noEntities": "No entities available"
+  },
+  "TrustedBySection": {
+    "trustedBy": "Trusted By 15,000 Founders & Business Owners"
+  }
+} 

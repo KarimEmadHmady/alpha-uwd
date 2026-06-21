@@ -1,0 +1,2115 @@
+{
+  "info": {
+    "_postman_id": "a8a0b0a0-a0a0-a0a0-a0a0-a0a0a0a0a0a0",
+    "name": "Backend API Alpha Last V ||",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Categories",
+      "item": [
+        {
+          "name": "Get All Categories (Public)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/categories?lang=en",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "categories"
+              ],
+              "query": [
+                {
+                  "key": "lang",
+                  "value": "en",
+                  "description": "Language for the category names (ar or en)"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Category By ID (Public)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/categories/1?lang=en",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "categories",
+                "1"
+              ],
+              "query": [
+                {
+                  "key": "lang",
+                  "value": "en",
+                  "description": "Language for the category name (ar or en)"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Categories with Translations (Admin)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/categories/admin/all",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "categories",
+                "admin",
+                "all"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Category (Admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Equity Funds\",\n  \"translations\": {\n    \"en\": {\n      \"name\": \"Equity Funds\"\n    },\n    \"ar\": {\n      \"name\": \"صناديق الأسهم\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/categories",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "categories"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Category (Admin)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Equity Funds\",\n  \"translations\": {\n    \"en\": {\n      \"name\": \"Updated Equity Funds\"\n    },\n    \"ar\": {\n      \"name\": \"صناديق الأسهم المحدثة\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/categories/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "categories",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Category (Admin)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/categories/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "categories",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Documents",
+      "item": [
+        {
+          "name": "Create Document",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": []
+                },
+                {
+                  "key": "fund_id",
+                  "value": "1",
+                  "type": "text"
+                },
+                {
+                  "key": "document",
+                  "value": "Document Name",
+                  "type": "text"
+                },
+                {
+                  "key": "linkdoc",
+                  "value": "http://example.com/doc",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/documents",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "documents"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Document",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": []
+                },
+                {
+                  "key": "fund_id",
+                  "value": "1",
+                  "type": "text"
+                },
+                {
+                  "key": "document",
+                  "value": "Updated Document Name",
+                  "type": "text"
+                },
+                {
+                  "key": "linkdoc",
+                  "value": "http://example.com/doc-updated",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/documents/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "documents",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Document",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/documents/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "documents",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Reorder Documents",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"orderedIds\": [2, 1, 3]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/documents/reorder",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "documents",
+                "reorder"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Search Documents",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/documents/search?term=report",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "documents",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "term",
+                  "value": "report"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Documents By Fund ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/documents/fund/:fundId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "documents",
+                "fund",
+                ":fundId"
+              ],
+              "variable": [
+                {
+                  "key": "fundId",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Documents",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/documents/all",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "documents",
+                "all"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Document By ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/documents/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "documents",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Entities",
+      "item": [
+        {
+          "name": "Create Entity",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "imageent",
+                  "type": "file",
+                  "src": []
+                },
+                {
+                  "key": "fund_id",
+                  "value": "1",
+                  "type": "text"
+                },
+                {
+                  "key": "entname",
+                  "value": "Entity Name",
+                  "type": "text"
+                },
+                {
+                  "key": "link",
+                  "value": "http://example.com/entity",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/entities",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "entities"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Entity",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "imageent",
+                  "type": "file",
+                  "src": []
+                },
+                {
+                  "key": "fund_id",
+                  "value": "1",
+                  "type": "text"
+                },
+                {
+                  "key": "entname",
+                  "value": "Updated Entity Name",
+                  "type": "text"
+                },
+                {
+                  "key": "link",
+                  "value": "http://example.com/entity-updated",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/entities/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "entities",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Entity",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/entities/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "entities",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Reorder Entities",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"orderedIds\": [2, 1, 3]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/entities/reorder",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "entities",
+                "reorder"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Entities By Fund ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/entities/fund/:fundId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "entities",
+                "fund",
+                ":fundId"
+              ],
+              "variable": [
+                {
+                  "key": "fundId",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Entities",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/entities/all",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "entities",
+                "all"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Entity By ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/entities/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "entities",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Fund Managers",
+      "item": [
+        {
+          "name": "Create Fund Manager",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": []
+                },
+                {
+                  "key": "fund_id",
+                  "value": "1",
+                  "type": "text"
+                },
+                {
+                  "key": "name",
+                  "value": "Manager Name",
+                  "type": "text"
+                },
+                {
+                  "key": "name_arabic",
+                  "value": "اسم المدير",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/fund-managers",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "fund-managers"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Fund Manager",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": []
+                },
+                {
+                  "key": "fund_id",
+                  "value": "1",
+                  "type": "text"
+                },
+                {
+                  "key": "name",
+                  "value": "Updated Manager Name",
+                  "type": "text"
+                },
+                {
+                  "key": "name_arabic",
+                  "value": "اسم المدير المحدث",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/fund-managers/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "fund-managers",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Fund Manager",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/fund-managers/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "fund-managers",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Reorder Fund Managers",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"orderedIds\": [2, 1, 3]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/fund-managers/reorder",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "fund-managers",
+                "reorder"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Fund Managers By Fund ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/fund-managers/fund/:fundId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "fund-managers",
+                "fund",
+                ":fundId"
+              ],
+              "variable": [
+                {
+                  "key": "fundId",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Fund Manager By ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/fund-managers/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "fund-managers",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Fund & History API",
+        "description": "Complete API collection for Fund management with History tracking",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+      },
+      "variable": [
+        {
+          "key": "base_url",
+          "value": "http://localhost:5000/api",
+          "type": "string"
+        },
+        {
+          "key": "token",
+          "value": "",
+          "type": "string"
+        },
+        {
+          "key": "fund_id",
+          "value": "1",
+          "type": "string"
+        },
+        {
+          "key": "user_id",
+          "value": "1",
+          "type": "string"
+        }
+      ],
+      "item": [
+        {
+          "name": "Funds",
+          "item": [
+            {
+              "name": "Create Fund (Admin/Manager)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "name_ar",
+                      "value": "صندوق الأسهم السعودية",
+                      "type": "text"
+                    },
+                    {
+                      "key": "name_en",
+                      "value": "Saudi Equity Fund",
+                      "type": "text"
+                    },
+                    {
+                      "key": "description_ar",
+                      "value": "صندوق استثماري يركز على الأسهم السعودية المدرجة في السوق المالية",
+                      "type": "text"
+                    },
+                    {
+                      "key": "description_en",
+                      "value": "Investment fund focusing on Saudi equities listed in the financial market",
+                      "type": "text"
+                    },
+                    {
+                      "key": "fund_manager_name_ar",
+                      "value": "شركة الفالح للاستثمار",
+                      "type": "text"
+                    },
+                    {
+                      "key": "fund_manager_name_en",
+                      "value": "Al Faleh Investment Company",
+                      "type": "text"
+                    },
+                    {
+                      "key": "currentprice",
+                      "value": "100.50",
+                      "type": "text"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "SAR",
+                      "type": "text"
+                    },
+                    {
+                      "key": "subscription_frequency",
+                      "value": "يومي",
+                      "type": "text"
+                    },
+                    {
+                      "key": "subscription_frequency_ar",
+                      "value": "يومي",
+                      "type": "text"
+                    },
+                    {
+                      "key": "subscription_frequency_en",
+                      "value": "Daily",
+                      "type": "text"
+                    },
+                    {
+                      "key": "redemption_frequency",
+                      "value": "يومي",
+                      "type": "text"
+                    },
+                    {
+                      "key": "redemption_frequency_ar",
+                      "value": "يومي",
+                      "type": "text"
+                    },
+                    {
+                      "key": "redemption_frequency_en",
+                      "value": "Daily",
+                      "type": "text"
+                    },
+                    {
+                      "key": "minimum_initial",
+                      "value": "10000",
+                      "type": "text"
+                    },
+                    {
+                      "key": "Minimum_redemption_amount",
+                      "value": "1000",
+                      "type": "text"
+                    },
+                    {
+                      "key": "subscription_fee",
+                      "value": "2.5",
+                      "type": "text"
+                    },
+                    {
+                      "key": "redemption_fee",
+                      "value": "1.5",
+                      "type": "text"
+                    },
+                    {
+                      "key": "type",
+                      "value": "أسهم",
+                      "type": "text"
+                    },
+                    {
+                      "key": "type_ar",
+                      "value": "أسهم",
+                      "type": "text"
+                    },
+                    {
+                      "key": "type_en",
+                      "value": "Equity",
+                      "type": "text"
+                    },
+                    {
+                      "key": "annualfee",
+                      "value": "1.75",
+                      "type": "text"
+                    },
+                    {
+                      "key": "catid",
+                      "value": "1",
+                      "type": "text"
+                    },
+                    {
+                      "key": "fund_link",
+                      "value": "https://example.com/fund-details",
+                      "type": "text"
+                    },
+                    {
+                      "key": "created_at",
+                      "value": "2025-01-15",
+                      "type": "text"
+                    },
+                    {
+                      "key": "image",
+                      "type": "file",
+                      "src": ""
+                    },
+                    {
+                      "key": "fund_manager_image",
+                      "type": "file",
+                      "src": ""
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{base_url}}/funds",
+                  "host": ["{{base_url}}"],
+                  "path": ["funds"]
+                }
+              }
+            },
+            {
+              "name": "Update Fund (Admin/Manager)",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "name_ar",
+                      "value": "صندوق الأسهم السعودية المحدث",
+                      "type": "text"
+                    },
+                    {
+                      "key": "name_en",
+                      "value": "Saudi Equity Fund Updated",
+                      "type": "text"
+                    },
+                    {
+                      "key": "description_ar",
+                      "value": "وصف محدث للصندوق الاستثماري",
+                      "type": "text"
+                    },
+                    {
+                      "key": "description_en",
+                      "value": "Updated description for investment fund",
+                      "type": "text"
+                    },
+                    {
+                      "key": "currentprice",
+                      "value": "105.75",
+                      "type": "text"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "SAR",
+                      "type": "text"
+                    },
+                    {
+                      "key": "subscription_frequency",
+                      "value": "أسبوعي",
+                      "type": "text"
+                    },
+                    {
+                      "key": "redemption_frequency",
+                      "value": "أسبوعي",
+                      "type": "text"
+                    },
+                    {
+                      "key": "minimum_initial",
+                      "value": "15000",
+                      "type": "text"
+                    },
+                    {
+                      "key": "annualfee",
+                      "value": "2.0",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{base_url}}/funds/{{fund_id}}",
+                  "host": ["{{base_url}}"],
+                  "path": ["funds", "{{fund_id}}"]
+                }
+              }
+            },
+            {
+              "name": "Update Fund Price (Admin/Manager)",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"newprice\": 108.25,\n  \"date\": \"2025-01-20\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/funds/{{fund_id}}/price",
+                  "host": ["{{base_url}}"],
+                  "path": ["funds", "{{fund_id}}", "price"]
+                }
+              }
+            },
+            {
+              "name": "Update Fund Status - Approve (Admin)",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": 1\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/funds/status/{{fund_id}}",
+                  "host": ["{{base_url}}"],
+                  "path": ["funds", "status", "{{fund_id}}"]
+                }
+              }
+            },
+            {
+              "name": "Update Fund Status - Reject (Admin)",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": 0\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/funds/status/{{fund_id}}",
+                  "host": ["{{base_url}}"],
+                  "path": ["funds", "status", "{{fund_id}}"]
+                }
+              }
+            },
+            {
+              "name": "Decline Fund with Message (Admin)",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": \"الرجاء تحديث البيانات المالية للصندوق\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/funds/status/decline/{{fund_id}}",
+                  "host": ["{{base_url}}"],
+                  "path": ["funds", "status", "decline", "{{fund_id}}"]
+                }
+              }
+            },
+            {
+              "name": "Reorder Funds (Admin)",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"orderedIds\": [5, 3, 1, 2, 4]\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/funds/reorder",
+                  "host": ["{{base_url}}"],
+                  "path": ["funds", "reorder"]
+                }
+              }
+            },
+            {
+              "name": "Delete Fund (Admin)",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/funds/{{fund_id}}",
+                  "host": ["{{base_url}}"],
+                  "path": ["funds", "{{fund_id}}"]
+                }
+              }
+            },
+            {
+              "name": "Get All Funds (Paginated)",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/funds?page=1&lang=ar",
+                  "host": ["{{base_url}}"],
+                  "path": ["funds"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "ar"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get All Funds (English)",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/funds?page=1&lang=en",
+                  "host": ["{{base_url}}"],
+                  "path": ["funds"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get All Funds (No Pagination)",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/funds/all?lang=ar",
+                  "host": ["{{base_url}}"],
+                  "path": ["funds", "all"],
+                  "query": [
+                    {
+                      "key": "lang",
+                      "value": "ar"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Pending Funds",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/funds/status?page=1&lang=ar",
+                  "host": ["{{base_url}}"],
+                  "path": ["funds", "status"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "ar"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Approved Funds",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/funds/approved?page=1&lang=ar",
+                  "host": ["{{base_url}}"],
+                  "path": ["funds", "approved"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "ar"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Fund Details",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/funds/{{fund_id}}?lang=ar",
+                  "host": ["{{base_url}}"],
+                  "path": ["funds", "{{fund_id}}"],
+                  "query": [
+                    {
+                      "key": "lang",
+                      "value": "ar"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get My Funds (Admin/Manager)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/funds/me?page=1",
+                  "host": ["{{base_url}}"],
+                  "path": ["funds", "me"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "History",
+          "item": [
+            {
+              "name": "Get All History",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/funds/history?page=1",
+                  "host": ["{{base_url}}"],
+                  "path": ["funds", "history"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get History by Fund ID",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/funds/history?page=1&fundid={{fund_id}}",
+                  "host": ["{{base_url}}"],
+                  "path": ["funds", "history"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "fundid",
+                      "value": "{{fund_id}}"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get History by User ID",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/funds/history?page=1&userid={{user_id}}",
+                  "host": ["{{base_url}}"],
+                  "path": ["funds", "history"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "userid",
+                      "value": "{{user_id}}"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get History by Specific Date",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/funds/history?page=1&date=2025-01-15",
+                  "host": ["{{base_url}}"],
+                  "path": ["funds", "history"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "date",
+                      "value": "2025-01-15"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get History by Date Range",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/funds/history?page=1&startDate=2025-01-01&endDate=2025-01-31",
+                  "host": ["{{base_url}}"],
+                  "path": ["funds", "history"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "2025-01-01"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "2025-01-31"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get History - Combined Filters",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/funds/history?page=1&fundid={{fund_id}}&userid={{user_id}}&startDate=2025-01-01&endDate=2025-01-31",
+                  "host": ["{{base_url}}"],
+                  "path": ["funds", "history"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "fundid",
+                      "value": "{{fund_id}}"
+                    },
+                    {
+                      "key": "userid",
+                      "value": "{{user_id}}"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "2025-01-01"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "2025-01-31"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get History for Specific Fund",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/funds/{{fund_id}}/history?page=1",
+                  "host": ["{{base_url}}"],
+                  "path": ["funds", "{{fund_id}}", "history"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get History by User (Alternative)",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/funds/history/user/{{user_id}}?page=1",
+                  "host": ["{{base_url}}"],
+                  "path": ["funds", "history", "user", "{{user_id}}"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get History by Date (Alternative)",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/funds/history/date?date=2025-01-15&page=1",
+                  "host": ["{{base_url}}"],
+                  "path": ["funds", "history", "date"],
+                  "query": [
+                    {
+                      "key": "date",
+                      "value": "2025-01-15"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get History by Date Range (Alternative)",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/funds/history/date?startDate=2025-01-01&endDate=2025-01-31&page=1",
+                  "host": ["{{base_url}}"],
+                  "path": ["funds", "history", "date"],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "2025-01-01"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "2025-01-31"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Last Two Records for Fund (by ID)",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/funds/{{fund_id}}/history/last-two-dates",
+                  "host": ["{{base_url}}"],
+                  "path": ["funds", "{{fund_id}}", "history", "last-two-dates"]
+                },
+                "description": "Returns the last 2 records (by ID DESC) for a specific fund with labels. ID 19 (التحديث الأخير), ID 18 (قبل التحديث الأخير)"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"newuser\",\n  \"email\": \"newuser@example.com\",\n  \"password\": \"password123\",\n  \"role\": \"manager\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users/register",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Forgot Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users/forgot-password",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "forgot-password"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Reset Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token\": \"reset_token\",\n  \"newPassword\": \"newpassword123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users/reset-password",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "reset-password"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/logout",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "logout"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Logout All",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/logoutAll",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "logoutAll"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Avatar",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "avatar",
+                  "type": "file",
+                  "src": []
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users/me/avatar",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "me",
+                "avatar"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Bio",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bio\": \"This is my new bio.\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users/bio",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "bio"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"updateduser\",\n  \"email\": \"updateduser@example.com\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Change User Role",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"role\": \"admin\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users/role/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "role",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000"
+    },
+    {
+      "key": "token",
+      "value": ""
+    }
+  ]
+}

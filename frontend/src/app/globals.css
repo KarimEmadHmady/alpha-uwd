@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --font-cairo: "Cairo", sans-serif;
+  --font-geist-mono: "Geist Mono", monospace;
+}
+
+/* امسح الـ .dark block ده خالص */
+
+body {
+  /* امسح السطر ده: background: var(--background); */
+  color: var(--foreground);
+  font-family: var(--font-cairo);
+}
+
+@layer utilities {
+  .animate-fadeIn {
+    animation: fadeIn 0.25s ease-in-out;
+  }
+ 
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

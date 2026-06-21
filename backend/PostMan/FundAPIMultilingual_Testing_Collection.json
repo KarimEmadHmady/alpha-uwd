@@ -1,0 +1,1261 @@
+{
+  "info": {
+    "name": "Fund API - Multilingual Testing",
+    "_postman_id": "fund-multilang-collection-2024",
+    "description": "Complete collection for testing multilingual fund system with authentication",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{auth_token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "auth_token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "fund_id",
+      "value": "1",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Login as Admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.collectionVariables.set('auth_token', jsonData.token || jsonData.data?.token || jsonData.access_token);",
+                  "    console.log('Token saved:', pm.collectionVariables.get('auth_token'));",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"admin123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "login"]
+            },
+            "description": "Login to get authentication token. Token will be saved automatically to collection variables."
+          },
+          "response": []
+        },
+        {
+          "name": "Login as Manager",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.collectionVariables.set('auth_token', jsonData.token || jsonData.data?.token || jsonData.access_token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"manager@example.com\",\n  \"password\": \"manager123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "login"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Create Fund (Multilingual)",
+      "item": [
+        {
+  "name": "Create Fund - ALL Fields Translated",
+  "request": {
+    "method": "POST",
+    "header": [],
+    "body": {
+      "mode": "formdata",
+      "formdata": [
+        {
+          "key": "name_ar",
+          "value": "صندوق الاستثمار المتوازن",
+          "type": "text",
+          "description": "اسم الصندوق بالعربية"
+        },
+        {
+          "key": "name_en",
+          "value": "Balanced Investment Fund",
+          "type": "text",
+          "description": "اسم الصندوق بالإنجليزية"
+        },
+        {
+          "key": "description_ar",
+          "value": "صندوق استثماري متوازن يهدف إلى تحقيق عوائد مستدامة من خلال التنويع بين الأسهم والسندات والأدوات المالية الأخرى",
+          "type": "text",
+          "description": "الوصف بالعربية"
+        },
+        {
+          "key": "description_en",
+          "value": "A balanced investment fund aiming to achieve sustainable returns through diversification between stocks, bonds and other financial instruments",
+          "type": "text",
+          "description": "الوصف بالإنجليزية"
+        },
+        {
+          "key": "fund_manager_name_ar",
+          "value": "د. محمد أحمد الخبير",
+          "type": "text",
+          "description": "اسم مدير الصندوق بالعربية"
+        },
+        {
+          "key": "fund_manager_name_en",
+          "value": "Dr. Mohamed Ahmed Alkhabeer",
+          "type": "text",
+          "description": "اسم مدير الصندوق بالإنجليزية"
+        },
+        {
+          "key": "subscription_frequency_ar",
+          "value": "شهري",
+          "type": "text",
+          "description": "تردد الاشتراك بالعربية"
+        },
+        {
+          "key": "subscription_frequency_en",
+          "value": "Monthly",
+          "type": "text",
+          "description": "تردد الاشتراك بالإنجليزية"
+        },
+        {
+          "key": "redemption_frequency_ar",
+          "value": "ربع سنوي",
+          "type": "text",
+          "description": "تردد الاسترداد بالعربية"
+        },
+        {
+          "key": "redemption_frequency_en",
+          "value": "Quarterly",
+          "type": "text",
+          "description": "تردد الاسترداد بالإنجليزية"
+        },
+        {
+          "key": "type_ar",
+          "value": "صندوق متوازن",
+          "type": "text",
+          "description": "نوع الصندوق بالعربية"
+        },
+        {
+          "key": "type_en",
+          "value": "Balanced Fund",
+          "type": "text",
+          "description": "نوع الصندوق بالإنجليزية"
+        },
+        {
+          "key": "currentprice",
+          "value": "125.50",
+          "type": "text",
+          "description": "السعر الحالي (رقم بدون ترجمة)"
+        },
+        {
+          "key": "currency",
+          "value": "EGP",
+          "type": "text",
+          "description": "العملة (ثابت)"
+        },
+        {
+          "key": "minimum_initial",
+          "value": "5000",
+          "type": "text",
+          "description": "الحد الأدنى للاشتراك (رقم)"
+        },
+        {
+          "key": "Minimum_redemption_amount",
+          "value": "1000",
+          "type": "text",
+          "description": "الحد الأدنى للاسترداد (رقم)"
+        },
+        {
+          "key": "subscription_fee",
+          "value": "2.5",
+          "type": "text",
+          "description": "رسوم الاشتراك % (رقم)"
+        },
+        {
+          "key": "redemption_fee",
+          "value": "1.0",
+          "type": "text",
+          "description": "رسوم الاسترداد % (رقم)"
+        },
+        {
+          "key": "annualfee",
+          "value": "1.5",
+          "type": "text",
+          "description": "الرسوم السنوية % (رقم)"
+        },
+        {
+          "key": "catid",
+          "value": "1",
+          "type": "text",
+          "description": "معرف الفئة"
+        },
+        {
+          "key": "fund_link",
+          "value": "https://example.com/fund/balanced-investment",
+          "type": "text",
+          "description": "رابط الصندوق"
+        },
+        {
+          "key": "image",
+          "type": "file",
+          "src": [],
+          "disabled": true,
+          "description": "صورة الصندوق (اختياري)"
+        },
+        {
+          "key": "fund_manager_image",
+          "type": "file",
+          "src": [],
+          "disabled": true,
+          "description": "صورة المدير (اختياري)"
+        }
+      ]
+    },
+    "url": {
+      "raw": "{{base_url}}/api/funds",
+      "host": ["{{base_url}}"],
+      "path": ["api", "funds"]
+    },
+    "description": "إنشاء صندوق مع ترجمة كاملة لجميع الحقول النصية"
+  },
+  "response": []
+},
+        {
+          "name": "Create Fund - Full Translations (AR + EN)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.collectionVariables.set('fund_id', jsonData.data?.insertId || jsonData.data?.id);",
+                  "    console.log('New Fund ID:', pm.collectionVariables.get('fund_id'));",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name_ar",
+                  "value": "صندوق الخير للأيتام",
+                  "type": "text"
+                },
+                {
+                  "key": "name_en",
+                  "value": "Charity Fund for Orphans",
+                  "type": "text"
+                },
+                {
+                  "key": "description_ar",
+                  "value": "صندوق خيري لدعم الأيتام والمحتاجين في جميع أنحاء مصر. يهدف الصندوق إلى توفير الرعاية الكاملة للأطفال الأيتام.",
+                  "type": "text"
+                },
+                {
+                  "key": "description_en",
+                  "value": "Charitable fund to support orphans and those in need across Egypt. The fund aims to provide complete care for orphaned children.",
+                  "type": "text"
+                },
+                {
+                  "key": "fund_manager_name_ar",
+                  "value": "أحمد محمد السيد",
+                  "type": "text"
+                },
+                {
+                  "key": "fund_manager_name_en",
+                  "value": "Ahmed Mohamed Elsayed",
+                  "type": "text"
+                },
+                {
+                  "key": "currentprice",
+                  "value": "100.50",
+                  "type": "text"
+                },
+                {
+                  "key": "currency",
+                  "value": "EGP",
+                  "type": "text"
+                },
+                {
+                  "key": "subscription_frequency",
+                  "value": "Monthly",
+                  "type": "text"
+                },
+                {
+                  "key": "redemption_frequency",
+                  "value": "Quarterly",
+                  "type": "text"
+                },
+                {
+                  "key": "minimum_initial",
+                  "value": "1000",
+                  "type": "text"
+                },
+                {
+                  "key": "Minimum_redemption_amount",
+                  "value": "500",
+                  "type": "text"
+                },
+                {
+                  "key": "subscription_fee",
+                  "value": "2",
+                  "type": "text"
+                },
+                {
+                  "key": "redemption_fee",
+                  "value": "1.5",
+                  "type": "text"
+                },
+                {
+                  "key": "type",
+                  "value": "Equity",
+                  "type": "text"
+                },
+                {
+                  "key": "annualfee",
+                  "value": "1.2",
+                  "type": "text"
+                },
+                {
+                  "key": "catid",
+                  "value": "1",
+                  "type": "text"
+                },
+                {
+                  "key": "fund_link",
+                  "value": "https://example.com/fund/charity-orphans",
+                  "type": "text"
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": [],
+                  "disabled": true,
+                  "description": "Upload fund image (optional)"
+                },
+                {
+                  "key": "fund_manager_image",
+                  "type": "file",
+                  "src": [],
+                  "disabled": true,
+                  "description": "Upload manager image (optional)"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/funds",
+              "host": ["{{base_url}}"],
+              "path": ["api", "funds"]
+            },
+            "description": "Create a new fund with complete Arabic and English translations"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Fund - Arabic Only",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name_ar",
+                  "value": "صندوق التعليم",
+                  "type": "text"
+                },
+                {
+                  "key": "description_ar",
+                  "value": "صندوق لدعم التعليم في المناطق الريفية",
+                  "type": "text"
+                },
+                {
+                  "key": "fund_manager_name_ar",
+                  "value": "فاطمة أحمد",
+                  "type": "text"
+                },
+                {
+                  "key": "currentprice",
+                  "value": "95.75",
+                  "type": "text"
+                },
+                {
+                  "key": "currency",
+                  "value": "EGP",
+                  "type": "text"
+                },
+                {
+                  "key": "type",
+                  "value": "Mixed",
+                  "type": "text"
+                },
+                {
+                  "key": "annualfee",
+                  "value": "1.5",
+                  "type": "text"
+                },
+                {
+                  "key": "catid",
+                  "value": "2",
+                  "type": "text"
+                },
+                {
+                  "key": "fund_link",
+                  "value": "https://example.com/fund/education",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/funds",
+              "host": ["{{base_url}}"],
+              "path": ["api", "funds"]
+            },
+            "description": "Create fund with Arabic translation only (English will fallback to Arabic)"
+          },
+          "response": []
+        }
+      ]
+    },
+
+    {
+      "name": "Get Funds (Different Languages)",
+      "item": [
+        {
+          "name": "Get All Funds - Arabic (Query Param)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/funds?page=1&lang=ar",
+              "host": ["{{base_url}}"],
+              "path": ["api", "funds"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "lang",
+                  "value": "ar"
+                }
+              ]
+            },
+            "description": "Get all funds with Arabic translations using query parameter"
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Funds - English (Query Param)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/funds?page=1&lang=en",
+              "host": ["{{base_url}}"],
+              "path": ["api", "funds"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "lang",
+                  "value": "en"
+                }
+              ]
+            },
+            "description": "Get all funds with English translations using query parameter"
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Funds - English (Header)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept-Language",
+                "value": "en",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/funds?page=1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "funds"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                }
+              ]
+            },
+            "description": "Get all funds with English translations using Accept-Language header"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Fund by ID - Arabic",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/funds/{{fund_id}}?lang=ar",
+              "host": ["{{base_url}}"],
+              "path": ["api", "funds", "{{fund_id}}"],
+              "query": [
+                {
+                  "key": "lang",
+                  "value": "ar"
+                }
+              ]
+            },
+            "description": "Get specific fund details in Arabic"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Fund by ID - English",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/funds/{{fund_id}}?lang=en",
+              "host": ["{{base_url}}"],
+              "path": ["api", "funds", "{{fund_id}}"],
+              "query": [
+                {
+                  "key": "lang",
+                  "value": "en"
+                }
+              ]
+            },
+            "description": "Get specific fund details in English"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Approved Funds - Arabic",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/funds/approved?page=1&lang=ar",
+              "host": ["{{base_url}}"],
+              "path": ["api", "funds", "approved"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "lang",
+                  "value": "ar"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Approved Funds - English",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/funds/approved?page=1&lang=en",
+              "host": ["{{base_url}}"],
+              "path": ["api", "funds", "approved"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "lang",
+                  "value": "en"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Pending Funds - Arabic",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/funds/status?page=1&lang=ar",
+              "host": ["{{base_url}}"],
+              "path": ["api", "funds", "status"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "lang",
+                  "value": "ar"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Funds No Pagination - English",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept-Language",
+                "value": "en",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/funds/all",
+              "host": ["{{base_url}}"],
+              "path": ["api", "funds", "all"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Update Fund (Multilingual)",
+      "item": [
+        {
+          "name": "Update Fund - Edit Translations",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name_ar",
+                  "value": "صندوق الخير للأيتام - محدّث",
+                  "type": "text"
+                },
+                {
+                  "key": "name_en",
+                  "value": "Charity Fund for Orphans - Updated",
+                  "type": "text"
+                },
+                {
+                  "key": "description_ar",
+                  "value": "وصف محدّث بالعربية مع معلومات إضافية",
+                  "type": "text"
+                },
+                {
+                  "key": "description_en",
+                  "value": "Updated description in English with additional information",
+                  "type": "text"
+                },
+                {
+                  "key": "currentprice",
+                  "value": "105.25",
+                  "type": "text"
+                },
+                {
+                  "key": "currency",
+                  "value": "EGP",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/funds/{{fund_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "funds", "{{fund_id}}"]
+            },
+            "description": "Update fund with new translations"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Fund - Add Missing English Translation",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name_en",
+                  "value": "Education Support Fund",
+                  "type": "text",
+                  "description": "Add missing English name"
+                },
+                {
+                  "key": "description_en",
+                  "value": "Fund to support education in rural areas",
+                  "type": "text"
+                },
+                {
+                  "key": "fund_manager_name_en",
+                  "value": "Fatma Ahmed",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/funds/2",
+              "host": ["{{base_url}}"],
+              "path": ["api", "funds", "2"]
+            },
+            "description": "Add English translations to a fund that only had Arabic"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Admin Operations",
+      "item": [
+        {
+          "name": "Update Fund Price",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"currentprice\": 105.25,\n  \"newprice\": 110.50\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/funds/{{fund_id}}/price",
+              "host": ["{{base_url}}"],
+              "path": ["api", "funds", "{{fund_id}}", "price"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Approve Fund",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/funds/status/{{fund_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "funds", "status", "{{fund_id}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Decline Fund",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"The fund information is incomplete. Please add more details about the investment strategy.\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/funds/status/decline/{{fund_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "funds", "status", "decline", "{{fund_id}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Reorder Funds",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"orderedIds\": [3, 1, 2, 5, 4]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/funds/reorder",
+              "host": ["{{base_url}}"],
+              "path": ["api", "funds", "reorder"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Fund",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/funds/{{fund_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "funds", "{{fund_id}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get My Funds (Manager)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/funds/me?page=1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "funds", "me"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Test Cases - Language Fallback",
+      "item": [
+        {
+          "name": "Test: Invalid Language Code (Should fallback to AR)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/funds?lang=fr",
+              "host": ["{{base_url}}"],
+              "path": ["api", "funds"],
+              "query": [
+                {
+                  "key": "lang",
+                  "value": "fr",
+                  "description": "Unsupported language - should fallback to Arabic"
+                }
+              ]
+            },
+            "description": "Test fallback mechanism when requesting unsupported language"
+          },
+          "response": []
+        },
+        {
+          "name": "Test: No Language Specified (Default AR)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/funds",
+              "host": ["{{base_url}}"],
+              "path": ["api", "funds"]
+            },
+            "description": "Should return Arabic by default"
+          },
+          "response": []
+        },
+        {
+          "name": "Test: Both Query & Header (Query wins)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept-Language",
+                "value": "ar",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/funds?lang=en",
+              "host": ["{{base_url}}"],
+              "path": ["api", "funds"],
+              "query": [
+                {
+                  "key": "lang",
+                  "value": "en"
+                }
+              ]
+            },
+            "description": "Query parameter should take precedence over header (should return English)"
+          },
+          "response": []
+        }
+
+      ]
+    },
+            {
+  "info": {
+    "name": "Fund Relations API - Complete",
+    "_postman_id": "fund-relations-complete-2024",
+    "description": "Full CRUD operations for Fund Managers, Entities, and Documents",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [{ "key": "token", "value": "{{auth_token}}", "type": "string" }]
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:3000", "type": "string" },
+    { "key": "auth_token", "value": "", "type": "string" },
+    { "key": "fund_id", "value": "1", "type": "string" },
+    { "key": "manager_id", "value": "", "type": "string" },
+    { "key": "entity_id", "value": "", "type": "string" },
+    { "key": "document_id", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Fund Managers",
+      "item": [
+        {
+          "name": "Create Manager",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "if (pm.response.code === 201) {",
+                "    var jsonData = pm.response.json();",
+                "    pm.collectionVariables.set('manager_id', jsonData.data.insertId);",
+                "}"
+              ]
+            }
+          }],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "fund_id", "value": "{{fund_id}}", "type": "text" },
+                { "key": "name", "value": "Dr. Mohamed Ahmed", "type": "text" },
+                { "key": "name_arabic", "value": "د. محمد أحمد السيد", "type": "text" },
+                { "key": "display_order", "value": "1", "type": "text" },
+                { "key": "image", "type": "file", "src": [], "disabled": true }
+              ]
+            },
+            "url": { "raw": "{{base_url}}/api/fund-managers", "host": ["{{base_url}}"], "path": ["api", "fund-managers"] }
+          }
+        },
+        {
+          "name": "Update Manager",
+          "request": {
+            "method": "PUT",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "name", "value": "Dr. Mohamed Ahmed - Updated", "type": "text" },
+                { "key": "name_arabic", "value": "د. محمد أحمد - محدّث", "type": "text" },
+                { "key": "display_order", "value": "2", "type": "text" },
+                { "key": "image", "type": "file", "src": [], "disabled": true }
+              ]
+            },
+            "url": { "raw": "{{base_url}}/api/fund-managers/{{manager_id}}", "host": ["{{base_url}}"], "path": ["api", "fund-managers", "{{manager_id}}"] }
+          }
+        },
+        {
+          "name": "Get Managers by Fund ID",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/api/fund-managers/fund/{{fund_id}}", "host": ["{{base_url}}"], "path": ["api", "fund-managers", "fund", "{{fund_id}}"] }
+          }
+        },
+        {
+          "name": "Get Manager by ID",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/api/fund-managers/{{manager_id}}", "host": ["{{base_url}}"], "path": ["api", "fund-managers", "{{manager_id}}"] }
+          }
+        },
+        {
+          "name": "Reorder Managers",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"orderedIds\": [3, 1, 2]\n}" },
+            "url": { "raw": "{{base_url}}/api/fund-managers/reorder", "host": ["{{base_url}}"], "path": ["api", "fund-managers", "reorder"] }
+          }
+        },
+        {
+          "name": "Delete Manager",
+          "request": {
+            "method": "DELETE",
+            "url": { "raw": "{{base_url}}/api/fund-managers/{{manager_id}}", "host": ["{{base_url}}"], "path": ["api", "fund-managers", "{{manager_id}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Entities",
+      "item": [
+        {
+          "name": "Create Entity",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "if (pm.response.code === 201) {",
+                "    var jsonData = pm.response.json();",
+                "    pm.collectionVariables.set('entity_id', jsonData.data.insertId);",
+                "}"
+              ]
+            }
+          }],
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "fund_id", "value": "{{fund_id}}", "type": "text" },
+                { "key": "entname", "value": "Financial Investment Company", "type": "text" },
+                { "key": "link", "value": "https://example.com/entity", "type": "text" },
+                { "key": "display_order", "value": "1", "type": "text" },
+                { "key": "imageent", "type": "file", "src": [], "disabled": true }
+              ]
+            },
+            "url": { "raw": "{{base_url}}/api/entities", "host": ["{{base_url}}"], "path": ["api", "entities"] }
+          }
+        },
+        {
+          "name": "Update Entity",
+          "request": {
+            "method": "PUT",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "entname", "value": "Updated Entity Name", "type": "text" },
+                { "key": "link", "value": "https://example.com/updated", "type": "text" },
+                { "key": "display_order", "value": "2", "type": "text" },
+                { "key": "imageent", "type": "file", "src": [], "disabled": true }
+              ]
+            },
+            "url": { "raw": "{{base_url}}/api/entities/{{entity_id}}", "host": ["{{base_url}}"], "path": ["api", "entities", "{{entity_id}}"] }
+          }
+        },
+        {
+          "name": "Get Entities by Fund ID",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/api/entities/fund/{{fund_id}}", "host": ["{{base_url}}"], "path": ["api", "entities", "fund", "{{fund_id}}"] }
+          }
+        },
+        {
+          "name": "Get All Entities",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/api/entities/all", "host": ["{{base_url}}"], "path": ["api", "entities", "all"] }
+          }
+        },
+        {
+          "name": "Get Entity by ID",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/api/entities/{{entity_id}}", "host": ["{{base_url}}"], "path": ["api", "entities", "{{entity_id}}"] }
+          }
+        },
+        {
+          "name": "Reorder Entities",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"orderedIds\": [2, 3, 1]\n}" },
+            "url": { "raw": "{{base_url}}/api/entities/reorder", "host": ["{{base_url}}"], "path": ["api", "entities", "reorder"] }
+          }
+        },
+        {
+          "name": "Delete Entity",
+          "request": {
+            "method": "DELETE",
+            "url": { "raw": "{{base_url}}/api/entities/{{entity_id}}", "host": ["{{base_url}}"], "path": ["api", "entities", "{{entity_id}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Documents",
+      "item": [
+        {
+          "name": "Create Document",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "if (pm.response.code === 201) {",
+                "    var jsonData = pm.response.json();",
+                "    pm.collectionVariables.set('document_id', jsonData.data.insertId);",
+                "}"
+              ]
+            }
+          }],
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "fund_id", "value": "{{fund_id}}", "type": "text" },
+                { "key": "document", "value": "نشرة الاكتتاب", "type": "text" },
+                { "key": "display_order", "value": "1", "type": "text" },
+                { "key": "file", "type": "file", "src": [], "disabled": true, "description": "PDF or Document file" }
+              ]
+            },
+            "url": { "raw": "{{base_url}}/api/documents", "host": ["{{base_url}}"], "path": ["api", "documents"] }
+          }
+        },
+        {
+          "name": "Update Document",
+          "request": {
+            "method": "PUT",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "document", "value": "نشرة الاكتتاب - محدّثة", "type": "text" },
+                { "key": "display_order", "value": "2", "type": "text" },
+                { "key": "file", "type": "file", "src": [], "disabled": true }
+              ]
+            },
+            "url": { "raw": "{{base_url}}/api/documents/{{document_id}}", "host": ["{{base_url}}"], "path": ["api", "documents", "{{document_id}}"] }
+          }
+        },
+        {
+          "name": "Get Documents by Fund ID",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/api/documents/fund/{{fund_id}}", "host": ["{{base_url}}"], "path": ["api", "documents", "fund", "{{fund_id}}"] }
+          }
+        },
+        {
+          "name": "Get All Documents",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/api/documents/all", "host": ["{{base_url}}"], "path": ["api", "documents", "all"] }
+          }
+        },
+        {
+          "name": "Get Document by ID",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/api/documents/{{document_id}}", "host": ["{{base_url}}"], "path": ["api", "documents", "{{document_id}}"] }
+          }
+        },
+        {
+          "name": "Search Documents",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/documents/search?query=نشرة",
+              "host": ["{{base_url}}"],
+              "path": ["api", "documents", "search"],
+              "query": [{ "key": "query", "value": "نشرة" }]
+            }
+          }
+        },
+        {
+          "name": "Reorder Documents",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"orderedIds\": [3, 1, 2]\n}" },
+            "url": { "raw": "{{base_url}}/api/documents/reorder", "host": ["{{base_url}}"], "path": ["api", "documents", "reorder"] }
+          }
+        },
+        {
+          "name": "Delete Document",
+          "request": {
+            "method": "DELETE",
+            "url": { "raw": "{{base_url}}/api/documents/{{document_id}}", "host": ["{{base_url}}"], "path": ["api", "documents", "{{document_id}}"] }
+          }
+        }
+      ]
+    }
+  ]
+}
+  ]
+}

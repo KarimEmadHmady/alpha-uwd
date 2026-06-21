@@ -1,0 +1,150 @@
+{
+  "info": {
+    "name": "Page Content with Images API",
+    "description": "نظام إدارة محتوى الصفحات مع رفع الصور",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Update Page Content with Single Image",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "content",
+              "value": "{\n  \"hero\": {\n    \"title\": {\n      \"ar\": \"صفحتنا الرئيسية\",\n      \"en\": \"Our Home Page\"\n    },\n    \"description\": {\n      \"ar\": \"مرحباً بكم في موقعنا\",\n      \"en\": \"Welcome to our website\"\n    },\n    \"backgroundImage\": \"uploads/Contant-page/hero-bg.jpg\"\n  }\n}",
+              "type": "text"
+            },
+            {
+              "key": "images",
+              "type": "file",
+              "src": []
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:3000/alpha/api/page-content/home",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["alpha", "api", "page-content", "home"]
+        },
+        "description": "تحديث محتوى الصفحة مع صورة واحدة"
+      }
+    },
+    {
+      "name": "Update Page Content with Multiple Images",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "content",
+              "value": "{\n  \"hero\": {\n    \"title\": {\n      \"ar\": \"صفحتنا الرئيسية\",\n      \"en\": \"Our Home Page\"\n    },\n    \"backgroundImage\": \"uploads/Contant-page/hero-bg.jpg\"\n  },\n  \"sections\": [\n    {\n      \"name\": {\n        \"ar\": \"القسم الأول\",\n        \"en\": \"First Section\"\n      },\n      \"image\": \"uploads/Contant-page/section1.jpg\"\n    },\n    {\n      \"name\": {\n        \"ar\": \"القسم الثاني\",\n        \"en\": \"Second Section\"\n      },\n      \"image\": \"uploads/Contant-page/section2.jpg\"\n    }\n  ]\n}",
+              "type": "text"
+            },
+            {
+              "key": "images",
+              "type": "file",
+              "src": []
+            },
+            {
+              "key": "images",
+              "type": "file",
+              "src": []
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:3000/alpha/api/page-content/home",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["alpha", "api", "page-content", "home"]
+        },
+        "description": "تحديث محتوى الصفحة مع صور متعددة"
+      }
+    },
+    {
+      "name": "Get Page Content (All Languages)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/alpha/api/page-content/home",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["alpha", "api", "page-content", "home"]
+        },
+        "description": "الحصول على محتوى الصفحة بجميع اللغات"
+      }
+    },
+    {
+      "name": "Get Page Content (Arabic Only)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/alpha/api/page-content/home?lang=ar",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["alpha", "api", "page-content", "home"],
+          "query": [
+            {
+              "key": "lang",
+              "value": "ar"
+            }
+          ]
+        },
+        "description": "الحصول على محتوى الصفحة بالعربية فقط"
+      }
+    },
+    {
+      "name": "Get Page Content (English Only)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/alpha/api/page-content/home?lang=en",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["alpha", "api", "page-content", "home"],
+          "query": [
+            {
+              "key": "lang",
+              "value": "en"
+            }
+          ]
+        },
+        "description": "الحصول على محتوى الصفحة بالإنجليزية فقط"
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}

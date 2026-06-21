@@ -1,0 +1,78 @@
+{
+  "Home": {
+    "title": "مرحبًا بك في متجرنا!",
+    "welcome": "سعداء بوجودك معنا. استمتع بتصفح منتجاتنا!"
+  },
+  "InvestmentFunds": {
+    "title": "صناديق الاستثمار",
+    "lastUpdate": "آخر تحديث",
+    "recent": "حديث",
+    "price": "السعر",
+    "seeMore": "عرض المزيد",
+    "fund": "صندوق",
+    "unnamedFund": "صندوق غير مسمى",
+    "investmentFund": "صندوق استثمار",
+    "errorLoadingFunds": "خطأ في تحميل الصناديق"
+  },
+  "fundDetails": {
+    "overview": "نظرة عامة",
+    "details": "تفاصيل الصندوق",
+    "type": "النوع",
+    "category": "الفئة",
+    "nav": "صافي قيمة الأصول",
+    "initialRelease": "تاريخ الإصدار الأولي",
+    "currency": "العملة",
+    "redemptionFrequency": "تكرار الاسترداد",
+    "subscriptionFrequency": "تكرار الاشتراك",
+    "minInitial": "الحد الأدنى الأولي",
+    "minRedemption": "الحد الأدنى للاسترداد",
+    "subscriptionFee": "رسوم الاشتراك",
+    "redemptionFee": "رسوم الاسترداد",
+    "annualFee": "الرسوم السنوية",
+    "fundManager": "مدير الصندوق",
+    "latestPrice": "أحدث سعر",
+    "latestPriceDate": "تاريخ أحدث سعر"
+  },
+  "Navigation": {
+    "home": "الرئيسية",
+    "about": "من نحن",
+    "services": "الخدمات",
+    "fundsManagement": "إدارة الصناديق",
+    "portfolioManagement": "إدارة المحافظ",
+    "cashManagement": "إدارة النقد",
+    "privatePension": "صناديق التقاعد الخاصة",
+    "familyBusiness": "إدارة محافظ الأعمال العائلية",
+    "blogs": "المدونات",
+    "careers": "الوظائف",
+    "contact": "اتصل بنا",
+    "address": {
+      "full": "القرية الذكية، مبناء مركز الأعمال الزمرداين رقم 2210 ب، الجيزة، مصر",
+      "short": "القرية الذكية، الجيزة، مصر"
+    },
+    "phone1": "01234567890",
+    "phone2": "01098765432",
+    "holdingCompany": "الشركة القابضة",
+    "committees": "اللجان"
+  },
+  "fundSidebar": {
+    "details": "تفاصيل الصندوق",
+    "performance": "الأداء",
+    "manager": "مدير الصندوق",
+    "files": "الملفات",
+    "lastUpdate": "آخر تحديث",
+    "price": "السعر"
+  },
+  "performance": {
+    "title": "الأداء",
+    "currentBalance": "الرصيد الحالي"
+  },
+  "entities": {
+    "title": "الكيانات المرتبطة",
+    "visitWebsite": "زيارة الموقع",
+    "addedOn": "أضيف في",
+    "noEntities": "لا توجد كيانات متاحة"
+  },
+  "TrustedBySection": {
+    "trustedBy": "موثوق من قبل 15,000 مؤسس وأصحاب الأعمال"
+  }
+} 

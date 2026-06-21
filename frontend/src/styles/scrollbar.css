@@ -1,0 +1,81 @@
+/* Custom Scrollbar Styles  folder styles file scrollbar.css  */
+
+/* Webkit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f2f2f2;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00437a;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #003060;
+}
+
+::-webkit-scrollbar-corner {
+  background: #f2f2f2;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #00437a #f2f2f2;
+}
+
+/* For specific elements if needed */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f2f2f2;
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #00437a;
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #003060;
+}
+
+/* Background */
+html {
+  background-color: white;
+}
+
+html.dark {
+  background-color: #1a1a1a;
+}
+
+/* Dark mode scrollbar adjustments */
+html.dark::-webkit-scrollbar-track {
+  background: #2a2a2a;
+}
+
+html.dark::-webkit-scrollbar-thumb {
+  background: #00437a;
+}
+
+html.dark::-webkit-scrollbar-thumb:hover {
+  background: #003060;
+}
+
+html.dark::-webkit-scrollbar-corner {
+  background: #2a2a2a;
+}
+
+html.dark {
+  scrollbar-color: #00437a #2a2a2a;
+}

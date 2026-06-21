@@ -1,0 +1,10 @@
+export { default as HeroSection }          from './HeroSection';
+export { default as TrustedBySection }     from './TrustedBySection';
+export { default as TrustedBySectionWrapper } from './TrustedBySectionWrapper';
+export { default as AboutSection }         from './AboutSection';
+export { default as InvestmentFundsSection } from './InvestmentFundsSection';
+export { default as ServicesSection }      from './ServicesSection';
+export { default as CTASection }           from './CTASection';
+export { default as FAQSection }           from './FAQSection';
+export { default as FAQSectionWrapper }   from './FAQSectionWrapper';
+export { default as BlogsSection }         from './BlogsSection';
