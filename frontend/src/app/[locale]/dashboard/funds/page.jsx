@@ -337,7 +337,7 @@ const FundsPage = () => {
               </h3>
               
               <p className="text-center text-gray-600 mb-6">
-                Are you sure you want to delete this fund? This action cannot be undone and will permanently remove the fund from the system.
+                Are you sure you want to delete this fund? <span className="font-bold">This action cannot be undone</span> and will permanently remove the fund from the system.
               </p>
 
               {/* Fund Info */}

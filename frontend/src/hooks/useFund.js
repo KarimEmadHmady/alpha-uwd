@@ -3,6 +3,30 @@ import { useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { fundService } from '@/services/fundService';
 
+// Helper: always get the freshest token available
+const getToken = (reduxToken) => {
+  // Try Redux token first
+  if (reduxToken && reduxToken.trim()) return reduxToken;
+  
+  // Fallback to localStorage
+  if (typeof window !== 'undefined') {
+    const localToken = localStorage.getItem('auth_token');
+    if (localToken && localToken.trim()) return localToken;
+  }
+  
+  // Fallback to cookies if available
+  if (typeof window !== 'undefined') {
+    const cookies = document.cookie.split('; ');
+    for (let cookie of cookies) {
+      if (cookie.startsWith('auth_token=')) {
+        return cookie.substring('auth_token='.length);
+      }
+    }
+  }
+  
+  return null;
+};
+
 export const useFund = () => {
   const [funds, setFunds] = useState([]);
   const [currentFund, setCurrentFund] = useState(null);
@@ -10,36 +34,31 @@ export const useFund = () => {
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
 
-  const { token } = useAuth();
+  const { token: reduxToken } = useAuth();
 
   // Clear messages
   const clearError = () => setError(null);
   const clearSuccessMessage = () => setSuccessMessage(null);
 
-  // Auto-clear success message
   const setSuccessMessageWithTimeout = (message) => {
     setSuccessMessage(message);
-    setTimeout(() => {
-      setSuccessMessage(null);
-    }, 3000);
+    setTimeout(() => setSuccessMessage(null), 3000);
   };
 
-  // Auto-clear error message
   const setErrorWithTimeout = (message) => {
     setError(message);
-    setTimeout(() => {
-      setError(null);
-    }, 5000);
+    setTimeout(() => setError(null), 5000);
   };
 
   // Get all funds
   const getAllFunds = async () => {
-    if (!token) return;
-    
+    const t = getToken(reduxToken);
+    if (!t) { setErrorWithTimeout('Not authenticated. Please log in again.'); return; }
+
     try {
       setIsLoading(true);
       setError(null);
-      const response = await fundService.getAllFunds(token);
+      const response = await fundService.getAllFunds(t);
       const fundsData = response?.funds_all || response?.data || response;
       setFunds(Array.isArray(fundsData) ? fundsData : []);
     } catch (err) {
@@ -51,11 +70,12 @@ export const useFund = () => {
 
   // Get single fund
   const getFundById = async (id, lang = 'en') => {
-    if (!token) return;
-    
+    const t = getToken(reduxToken);
+    if (!t) { setErrorWithTimeout('Not authenticated. Please log in again.'); return; }
+
     try {
       setError(null);
-      const fundData = await fundService.getFundById(id, token, lang);
+      const fundData = await fundService.getFundById(id, t, lang);
       setCurrentFund(fundData);
       return fundData;
     } catch (err) {
@@ -66,14 +86,14 @@ export const useFund = () => {
 
   // Create fund
   const createFund = async (formData) => {
-    if (!token) return;
-    
+    const t = getToken(reduxToken);
+    if (!t) { setErrorWithTimeout('Not authenticated. Please log in again.'); return; }
+
     try {
       setIsLoading(true);
       setError(null);
-      const response = await fundService.createFund(formData, token);
+      const response = await fundService.createFund(formData, t);
       setSuccessMessageWithTimeout('Fund created successfully!');
-      // Refresh funds list
       await getAllFunds();
       return response;
     } catch (err) {
@@ -86,14 +106,18 @@ export const useFund = () => {
 
   // Update fund
   const updateFund = async (id, formData) => {
-    if (!token) return;
-    
+    const t = getToken(reduxToken);
+    if (!t) { 
+      const errorMsg = 'No authentication token found. Please log in again.';
+      setErrorWithTimeout(errorMsg);
+      throw new Error(errorMsg);
+    }
+
     try {
       setIsLoading(true);
       setError(null);
-      const response = await fundService.updateFund(id, formData, token);
+      const response = await fundService.updateFund(id, formData, t);
       setSuccessMessageWithTimeout('Fund updated successfully!');
-      // Refresh funds list
       await getAllFunds();
       return response;
     } catch (err) {
@@ -106,14 +130,14 @@ export const useFund = () => {
 
   // Delete fund
   const deleteFund = async (id) => {
-    if (!token) return;
-    
+    const t = getToken(reduxToken);
+    if (!t) { setErrorWithTimeout('Not authenticated. Please log in again.'); return; }
+
     try {
       setIsLoading(true);
       setError(null);
-      await fundService.deleteFund(id, token);
+      await fundService.deleteFund(id, t);
       setSuccessMessageWithTimeout('Fund deleted successfully!');
-      // Refresh funds list
       await getAllFunds();
     } catch (err) {
       setErrorWithTimeout(err.message);
@@ -125,13 +149,13 @@ export const useFund = () => {
 
   // Reorder funds
   const reorderFunds = async (orderedIds) => {
-    if (!token) return;
-    
+    const t = getToken(reduxToken);
+    if (!t) { setErrorWithTimeout('Not authenticated. Please log in again.'); return; }
+
     try {
       setError(null);
-      await fundService.reorderFunds(orderedIds, token);
+      await fundService.reorderFunds(orderedIds, t);
       setSuccessMessageWithTimeout('Funds reordered successfully!');
-      // Refresh funds list
       await getAllFunds();
     } catch (err) {
       setErrorWithTimeout(err.message);
@@ -141,11 +165,12 @@ export const useFund = () => {
 
   // Update fund price
   const updateFundPrice = async (id, priceData) => {
-    if (!token) return;
-    
+    const t = getToken(reduxToken);
+    if (!t) { setErrorWithTimeout('Not authenticated. Please log in again.'); return; }
+
     try {
       setError(null);
-      await fundService.updateFundPrice(id, priceData, token);
+      await fundService.updateFundPrice(id, priceData, t);
       setSuccessMessageWithTimeout('Fund price updated successfully!');
       return true;
     } catch (err) {
@@ -156,9 +181,11 @@ export const useFund = () => {
 
   // Get fund price history
   const getFundPriceHistory = async (id) => {
+    const t = getToken(reduxToken);
+    if (!t) { setErrorWithTimeout('Not authenticated. Please log in again.'); return; }
     
     try {
-      const response = await fundService.getFundPriceHistory(id);
+      const response = await fundService.getFundPriceHistory(id, t);
       return response?.dates || { latest: null, previous: null };
     } catch (err) {
       setErrorWithTimeout(err.message);
@@ -168,10 +195,11 @@ export const useFund = () => {
 
   // Get waiting funds
   const getWaitingFunds = async (lang = 'en') => {
-    if (!token) return;
-    
+    const t = getToken(reduxToken);
+    if (!t) { setErrorWithTimeout('Not authenticated. Please log in again.'); return; }
+
     try {
-      const response = await fundService.getWaitingFunds(token, lang);
+      const response = await fundService.getWaitingFunds(t, lang);
       return response?.funds_all || [];
     } catch (err) {
       setErrorWithTimeout(err.message);
@@ -181,10 +209,11 @@ export const useFund = () => {
 
   // Update fund status
   const updateFundStatus = async (id, status) => {
-    if (!token) return;
-    
+    const t = getToken(reduxToken);
+    if (!t) { setErrorWithTimeout('Not authenticated. Please log in again.'); return; }
+
     try {
-      const response = await fundService.updateFundStatus(id, status, token);
+      const response = await fundService.updateFundStatus(id, status, t);
       setSuccessMessageWithTimeout(`Fund ${status === 1 ? 'approved' : 'rejected'} successfully`);
       return response;
     } catch (err) {
@@ -195,10 +224,11 @@ export const useFund = () => {
 
   // Decline fund with message
   const declineFund = async (id, message) => {
-    if (!token) return;
-    
+    const t = getToken(reduxToken);
+    if (!t) { setErrorWithTimeout('Not authenticated. Please log in again.'); return; }
+
     try {
-      const response = await fundService.declineFund(id, message, token);
+      const response = await fundService.declineFund(id, message, t);
       setSuccessMessageWithTimeout('Fund declined successfully');
       return response;
     } catch (err) {
@@ -208,14 +238,11 @@ export const useFund = () => {
   };
 
   return {
-    // State
     funds,
     currentFund,
     isLoading,
     error,
     successMessage,
-
-    // Actions
     getAllFunds,
     getFundById,
     createFund,

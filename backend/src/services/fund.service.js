@@ -18,7 +18,13 @@ const processImage = async (file) => {
   return imageUrl;
 };
 
-const sendFundStatusUpdateEmail = (username, email, fundName, updateDate, message, messageAdmin) => {
+const sendFundStatusUpdateEmail = async (username, email, fundName, updateDate, message, messageAdmin) => {
+    // If email credentials are missing, skip silently — don't crash the app
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASSWORD) {
+        console.warn('[Email] Skipping email — EMAIL_USER or EMAIL_PASSWORD not set in environment variables.');
+        return;
+    }
+
     var resetURL = 'https://uwd.agency/clients/alpha/control-alpha/index.html';
     var logo = 'https://uwd.agency/clients/alpha/wp-content/uploads/2024/06/cropped-logo.png';
 
@@ -39,8 +45,6 @@ const sendFundStatusUpdateEmail = (username, email, fundName, updateDate, messag
         html: `...`
     };
 
-    smtpTransport.sendMail(mailOptions1);
-
     var mailOptions2 = {
         to: 'karimkarim20444@gmail.com',
         from: process.env.EMAIL_USER,
@@ -48,7 +52,14 @@ const sendFundStatusUpdateEmail = (username, email, fundName, updateDate, messag
         html: `...`
     };
 
-    smtpTransport.sendMail(mailOptions2);
+    try {
+        await smtpTransport.sendMail(mailOptions1);
+        await smtpTransport.sendMail(mailOptions2);
+        console.log('[Email] Fund status emails sent successfully.');
+    } catch (err) {
+        // Log the error but never crash the app
+        console.error('[Email] Failed to send fund status email:', err.message);
+    }
 };
 
 const FundService = {

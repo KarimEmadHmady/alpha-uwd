@@ -33,17 +33,11 @@ const WaitingApprovePage = () => {
   const countdownRef = useRef(null);
 
   // Helper function to format date
-  const formatDate = (dateString) => {
+  const formatDateForInput = (dateString) => {
     if (!dateString) return 'N/A';
-    return new Date(dateString).toISOString().split('T')[0];
-  };
-
-  // Calculate previous date
-  const getPreviousDate = (fund) => {
-    if (fund.created_at) {
-      return formatDate(fund.created_at);
-    }
-    return 'N/A';
+    const date = new Date(dateString);
+    date.setDate(date.getDate() + 1);
+    return date.toISOString().split('T')[0];
   };
 
   // Fetch user details for each fund
@@ -51,12 +45,12 @@ const WaitingApprovePage = () => {
     try {
       const fundsWithUserPromises = fundsData.map(async (fund) => {
         try {
-          // Get price history to get user_id
           const priceHistory = await getFundPriceHistory(fund.id);
           const userId = priceHistory?.latest?.userid;
+          const latestDate = priceHistory?.latest?.date || null;
+          const previousDate = priceHistory?.previous?.date || null;
 
           if (userId) {
-            // Fetch user details using get all users endpoint
             try {
               const API_URL = process.env.NEXT_PUBLIC_API_URL;
               const token = localStorage.getItem('auth_token');
@@ -68,7 +62,6 @@ const WaitingApprovePage = () => {
                 }
               });
 
-
               if (!usersResponse.ok) {
                 const errorData = await usersResponse.json();
                 console.error('Users API error:', errorData);
@@ -77,25 +70,27 @@ const WaitingApprovePage = () => {
 
               const usersData = await usersResponse.json();
 
-              // Find user by id in the users array
               const user = usersData?.users?.find(u => u.id === parseInt(userId)) ||
                 usersData?.find(u => u.id === parseInt(userId)) ||
                 usersData?.payload?.users?.find(u => u.id === parseInt(userId));
-
 
               const userName = user?.name || user?.username || user?.email || 'Unknown User';
 
               return {
                 ...fund,
                 lastUpdateUser: userName,
-                lastUpdateUserId: userId
+                lastUpdateUserId: userId,
+                latestDate,
+                previousDate
               };
             } catch (userErr) {
               console.error('Error fetching user details:', userErr);
               return {
                 ...fund,
                 lastUpdateUser: 'Unknown User',
-                lastUpdateUserId: userId
+                lastUpdateUserId: userId,
+                latestDate,
+                previousDate
               };
             }
           }
@@ -103,14 +98,18 @@ const WaitingApprovePage = () => {
           return {
             ...fund,
             lastUpdateUser: 'Unknown User',
-            lastUpdateUserId: null
+            lastUpdateUserId: null,
+            latestDate,
+            previousDate
           };
         } catch (err) {
           console.error('Error fetching user for fund:', fund.id, err);
           return {
             ...fund,
             lastUpdateUser: 'Unknown User',
-            lastUpdateUserId: null
+            lastUpdateUserId: null,
+            latestDate: null,
+            previousDate: null
           };
         }
       });
@@ -128,8 +127,6 @@ const WaitingApprovePage = () => {
     try {
       const fundsData = await getWaitingFunds('en');
       setFunds(fundsData);
-
-      // Fetch user details for each fund
       await fetchUsersForFunds(fundsData);
     } catch (error) {
       console.error('Error fetching waiting funds:', error);
@@ -150,12 +147,8 @@ const WaitingApprovePage = () => {
   const resetAutoRefresh = () => {
     setCountdown(120);
 
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-    }
-    if (countdownRef.current) {
-      clearInterval(countdownRef.current);
-    }
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    if (countdownRef.current) clearInterval(countdownRef.current);
 
     intervalRef.current = setInterval(() => {
       handleRefresh();
@@ -163,26 +156,19 @@ const WaitingApprovePage = () => {
 
     countdownRef.current = setInterval(() => {
       setCountdown((prev) => {
-        if (prev <= 1) {
-          return 120;
-        }
+        if (prev <= 1) return 120;
         return prev - 1;
       });
     }, 1000);
   };
 
-  // Initial load and setup auto-refresh
   useEffect(() => {
     fetchWaitingFunds();
     resetAutoRefresh();
 
     return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-      if (countdownRef.current) {
-        clearInterval(countdownRef.current);
-      }
+      if (intervalRef.current) clearInterval(intervalRef.current);
+      if (countdownRef.current) clearInterval(countdownRef.current);
     };
   }, []);
 
@@ -192,14 +178,8 @@ const WaitingApprovePage = () => {
     try {
       await updateFundStatus(fundId, 1);
       setSuccessModal({ isOpen: true, message: 'Fund approved successfully!' });
-
-      setTimeout(() => {
-        closeSuccessModal();
-      }, 2000);
-
-      setTimeout(() => {
-        handleRefresh();
-      }, 500);
+      setTimeout(() => closeSuccessModal(), 2000);
+      setTimeout(() => handleRefresh(), 500);
     } catch (error) {
       console.error('Error approving fund:', error);
     } finally {
@@ -207,20 +187,9 @@ const WaitingApprovePage = () => {
     }
   };
 
-  // Close success modal
-  const closeSuccessModal = () => {
-    setSuccessModal({ isOpen: false, message: '' });
-  };
-
-  // Open reject modal
-  const openRejectModal = (fundId) => {
-    setRejectModal({ isOpen: true, fundId, message: '' });
-  };
-
-  // Close reject modal
-  const closeRejectModal = () => {
-    setRejectModal({ isOpen: false, fundId: null, message: '' });
-  };
+  const closeSuccessModal = () => setSuccessModal({ isOpen: false, message: '' });
+  const openRejectModal = (fundId) => setRejectModal({ isOpen: true, fundId, message: '' });
+  const closeRejectModal = () => setRejectModal({ isOpen: false, fundId: null, message: '' });
 
   // Reject fund
   const handleReject = async () => {
@@ -228,11 +197,7 @@ const WaitingApprovePage = () => {
     try {
       await declineFund(rejectModal.fundId, rejectModal.message);
       setSuccessModal({ isOpen: true, message: 'Fund rejected successfully!' });
-
-      setTimeout(() => {
-        closeSuccessModal();
-      }, 2000);
-
+      setTimeout(() => closeSuccessModal(), 2000);
     } catch (error) {
       console.error('Error rejecting fund:', error);
     } finally {
@@ -242,7 +207,6 @@ const WaitingApprovePage = () => {
     }
   };
 
-  // Format countdown time (MM:SS)
   const formatCountdown = (seconds) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
@@ -274,17 +238,11 @@ const WaitingApprovePage = () => {
               disabled={refreshing}
               className="w-full px-6 py-3 bg-white text-[#00437a] rounded-lg hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
             >
-              <svg
-                className={`w-5 h-5 ${refreshing ? 'animate-spin' : ''}`}
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
+              <svg className={`w-5 h-5 ${refreshing ? 'animate-spin' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
               </svg>
               <span>{refreshing ? 'Refreshing...' : 'Refresh'}</span>
             </button>
-
             <div className="text-white text-sm bg-white/20 px-3 py-1 rounded-full">
               <span className="font-medium">Next refresh in: </span>
               <span className="font-bold">{formatCountdown(countdown)}</span>
@@ -303,11 +261,7 @@ const WaitingApprovePage = () => {
             <div key={fund.id} className="bg-white rounded-xl shadow-lg p-6">
               {/* Fund Image and Name */}
               <div className="mb-4">
-                <img
-                  src={fund.image}
-                  alt={fund.name}
-                  className="w-full h-32 object-cover rounded-xl mb-3"
-                />
+                <img src={fund.image} alt={fund.name} className="w-full h-32 object-cover rounded-xl mb-3" />
                 <h3 className="font-semibold text-gray-900 text-center">{fund.name}</h3>
               </div>
 
@@ -337,15 +291,15 @@ const WaitingApprovePage = () => {
                           <svg className="w-4 h-4 text-blue-500 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                           </svg>
-                          <span className="text-xs font-medium text-blue-700">Latest Update:</span>
+                          <span className="text-xs font-medium text-blue-700">New Update:</span>
                         </div>
+                        {/* ✅ التاريخ من priceHistory.latest.date */}
                         <p className="text-sm font-semibold text-blue-900 ml-5">
-                          {formatDate(fund.date)}
+                          {formatDateForInput(fund.latestDate)}
                         </p>
                       </div>
                       <div>
-                        {/* User who made the update */}
-                        <div className="flex items-center  mt-2">
+                        <div className="flex items-center mt-2">
                           <svg className="w-4 h-4 text-blue-500 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                           </svg>
@@ -364,8 +318,9 @@ const WaitingApprovePage = () => {
                     </svg>
                     <span className="text-xs font-medium text-gray-600">Previous Update:</span>
                   </div>
+                  {/* ✅ التاريخ من priceHistory.previous.date */}
                   <p className="text-sm font-semibold text-gray-700 ml-5">
-                    {getPreviousDate(fund)}
+                    {formatDateForInput(fund.previousDate)}
                   </p>
                 </div>
               </div>
@@ -385,9 +340,7 @@ const WaitingApprovePage = () => {
                       </svg>
                       Approving...
                     </>
-                  ) : (
-                    <>✅ Approve</>
-                  )}
+                  ) : <>✅ Approve</>}
                 </button>
                 <button
                   onClick={() => openRejectModal(fund.id)}
@@ -402,9 +355,7 @@ const WaitingApprovePage = () => {
                       </svg>
                       Rejecting...
                     </>
-                  ) : (
-                    <>❌ Reject</>
-                  )}
+                  ) : <>❌ Reject</>}
                 </button>
               </div>
             </div>
@@ -418,15 +369,13 @@ const WaitingApprovePage = () => {
           <div className="bg-white rounded-xl p-6 w-full max-w-md">
             <h3 className="text-lg font-semibold mb-4">Reject Fund</h3>
             <p className="text-gray-600 mb-4">Please provide a reason for rejection:</p>
-
             <textarea
               value={rejectModal.message}
               onChange={(e) => setRejectModal({ ...rejectModal, message: e.target.value })}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00437a] focus:border-transparent outline-none"
-              rows="4"
+              rows={4}
               placeholder="Enter rejection reason..."
             />
-
             <div className="flex space-x-3 mt-4">
               <button
                 onClick={handleReject}
@@ -441,9 +390,7 @@ const WaitingApprovePage = () => {
                     </svg>
                     Rejecting...
                   </>
-                ) : (
-                  'Reject'
-                )}
+                ) : 'Reject'}
               </button>
               <button
                 onClick={closeRejectModal}
@@ -470,7 +417,6 @@ const WaitingApprovePage = () => {
               <h3 className="text-xl font-semibold text-gray-900 mb-2">Success!</h3>
               <p className="text-gray-600 mb-6">{successModal.message}</p>
             </div>
-
             <button
               onClick={closeSuccessModal}
               className="w-full px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors cursor-pointer"

@@ -16,6 +16,12 @@ const nextConfig: NextConfig = {
         port: '5000',
         pathname: '/uploads/**',
       },
+      //       {
+      //   protocol: 'http',
+      //   hostname: 'localhost',
+      //   port: '5000',
+      //   pathname: '/alpha/**',
+      // },
       {
         protocol: 'http',
         hostname: 'revamp.alpha-odin.com',

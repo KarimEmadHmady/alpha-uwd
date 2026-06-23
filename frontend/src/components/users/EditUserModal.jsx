@@ -1,16 +1,24 @@
 'use client';
 import React, { useState, useEffect } from 'react';
+import { useUsers } from '@/hooks/useUsers';
 
 const EditUserModal = ({ isOpen, onClose, user, onUpdateUser, isCurrentUser }) => {
+  const { changeMyPassword } = useUsers();
   const [formData, setFormData] = useState({
     username: '',
     email: '',
     role: 'manager',
     bio: ''
   });
+  const [passwordData, setPasswordData] = useState({
+    oldPassword: '',
+    newPassword: '',
+    confirmPassword: ''
+  });
   const [avatarFile, setAvatarFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   useEffect(() => {
     if (user && isOpen) {
@@ -20,14 +28,28 @@ const EditUserModal = ({ isOpen, onClose, user, onUpdateUser, isCurrentUser }) =
         role: user.role || 'manager',
         bio: user.bio || ''
       });
+      setPasswordData({
+        oldPassword: '',
+        newPassword: '',
+        confirmPassword: ''
+      });
       setAvatarFile(null);
       setError('');
+      setSuccessMessage('');
     }
   }, [user, isOpen]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handlePasswordChange = (e) => {
+    const { name, value } = e.target;
+    setPasswordData(prev => ({
       ...prev,
       [name]: value
     }));
@@ -55,8 +77,37 @@ const EditUserModal = ({ isOpen, onClose, user, onUpdateUser, isCurrentUser }) =
     e.preventDefault();
     setIsLoading(true);
     setError('');
+    setSuccessMessage('');
 
     try {
+      // Check password fields if trying to change password
+      if (isCurrentUser && (passwordData.oldPassword || passwordData.newPassword)) {
+        if (!passwordData.oldPassword) {
+          throw new Error('Old password is required');
+        }
+        if (!passwordData.newPassword) {
+          throw new Error('New password is required');
+        }
+        if (passwordData.newPassword !== passwordData.confirmPassword) {
+          throw new Error('New passwords do not match');
+        }
+        if (passwordData.newPassword.length < 7) {
+          throw new Error('Password must be at least 7 characters');
+        }
+        if (passwordData.oldPassword === passwordData.newPassword) {
+          throw new Error('New password must be different from old password');
+        }
+
+        // Change password
+        await changeMyPassword(passwordData.oldPassword, passwordData.newPassword);
+        setSuccessMessage('Password changed successfully!');
+        setPasswordData({
+          oldPassword: '',
+          newPassword: '',
+          confirmPassword: ''
+        });
+      }
+
       // Update user info
       const updates = {
         username: formData.username,
@@ -78,9 +129,14 @@ const EditUserModal = ({ isOpen, onClose, user, onUpdateUser, isCurrentUser }) =
       }
 
       await onUpdateUser(user.userId || user.id, updates);
+      if (!successMessage) {
+        setSuccessMessage('User updated successfully!');
+      }
 
       setAvatarFile(null);
-      onClose();
+      setTimeout(() => {
+        onClose();
+      }, 1500);
     } catch (error) {
       setError(error.message || 'Failed to update user');
     } finally {
@@ -90,7 +146,13 @@ const EditUserModal = ({ isOpen, onClose, user, onUpdateUser, isCurrentUser }) =
 
   const handleClose = () => {
     setError('');
+    setSuccessMessage('');
     setAvatarFile(null);
+    setPasswordData({
+      oldPassword: '',
+      newPassword: '',
+      confirmPassword: ''
+    });
     onClose();
   };
 
@@ -123,6 +185,18 @@ const EditUserModal = ({ isOpen, onClose, user, onUpdateUser, isCurrentUser }) =
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
                 <span className="text-red-700 text-sm">{error}</span>
+              </div>
+            </div>
+          )}
+
+          {/* Success Message */}
+          {successMessage && (
+            <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg">
+              <div className="flex items-center">
+                <svg className="w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span className="text-green-700 text-sm">{successMessage}</span>
               </div>
             </div>
           )}
@@ -253,6 +327,61 @@ const EditUserModal = ({ isOpen, onClose, user, onUpdateUser, isCurrentUser }) =
                 </div>
               )}
             </div>
+
+            {/* Password Section - Only for current user */}
+            {isCurrentUser && (
+              <div className="border-t pt-4 mt-4">
+                <h4 className="text-sm font-semibold text-gray-900 mb-3">Change Password</h4>
+                
+                {/* Old Password */}
+                <div className="mb-3">
+                  <label htmlFor="oldPassword" className="block text-sm font-medium text-gray-700 mb-2">
+                    Current Password
+                  </label>
+                  <input
+                    type="password"
+                    id="oldPassword"
+                    name="oldPassword"
+                    value={passwordData.oldPassword}
+                    onChange={handlePasswordChange}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    placeholder="Enter your current password"
+                  />
+                </div>
+
+                {/* New Password */}
+                <div className="mb-3">
+                  <label htmlFor="newPassword" className="block text-sm font-medium text-gray-700 mb-2">
+                    New Password
+                  </label>
+                  <input
+                    type="password"
+                    id="newPassword"
+                    name="newPassword"
+                    value={passwordData.newPassword}
+                    onChange={handlePasswordChange}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    placeholder="Enter new password (min 7 characters)"
+                  />
+                </div>
+
+                {/* Confirm Password */}
+                <div>
+                  <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-2">
+                    Confirm Password
+                  </label>
+                  <input
+                    type="password"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    value={passwordData.confirmPassword}
+                    onChange={handlePasswordChange}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    placeholder="Confirm your new password"
+                  />
+                </div>
+              </div>
+            )}
 
             {/* Actions */}
             <div className="flex gap-3 pt-6">

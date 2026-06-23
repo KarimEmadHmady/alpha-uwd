@@ -7,7 +7,7 @@ const { locale: lang } = await params;
     <main className="min-h-full flex flex-col">
       <HeroSection lang={lang} />
       <ServiceDescription lang={lang} />
-      <FundsGrid />
+      <FundsGrid lang={lang} />
     </main>
   );
 }

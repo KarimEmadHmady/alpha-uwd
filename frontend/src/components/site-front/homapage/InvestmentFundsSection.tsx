@@ -158,7 +158,7 @@ export default function InvestmentFundsSection() {
             >
               {funds.map((fund, i) => {
                 const history = priceHistories[fund.id];
-                const date = fund.status
+                const date = fund.status === 1 || fund.status === -1
                   ? history?.latest?.date
                   : history?.previous?.date;
 

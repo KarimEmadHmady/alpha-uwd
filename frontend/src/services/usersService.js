@@ -1,5 +1,5 @@
 // services/usersService.js
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://revamp.alpha-odin.com/alpha';
 
 export const usersService = {
   async getAllUsers(token) {
@@ -160,6 +160,24 @@ export const usersService = {
     if (!response.ok) {
       const error = await response.json();
       throw new Error(error.message || 'Failed to update user role');
+    }
+
+    return await response.json();
+  },
+
+  async changePassword(oldPassword, newPassword, token) {
+    const response = await fetch(`${API_URL}/api/users/change-password`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ oldPassword, newPassword }),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Failed to change password');
     }
 
     return await response.json();

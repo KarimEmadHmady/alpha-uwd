@@ -37,6 +37,7 @@ router.post("/logout", authenticate, UserController.logout);
 router.post("/logoutAll", authenticate, authorizeAdmin, UserController.logoutAll);
 router.post("/me/avatar", authenticate, upload.single("avatar"), UserController.updateAvatar);
 router.post("/bio", authenticate, UserController.updateBio);
+router.post("/change-password", authenticate, UserController.changePassword);
 router.put("/:id", authenticate, UserController.updateUser);
 router.put("/role/:id", authenticate, authorizeAdmin, UserController.changeUserRole);
 router.delete("/:id", authenticate, authorizeAdmin, UserController.deleteUser);

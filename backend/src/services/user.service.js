@@ -164,5 +164,28 @@ export const UserService = {
 
     const data = { role: newRole };
     return UserModel.updateById(id, data);
+  },
+
+  async changePassword(userId, oldPassword, newPassword) {
+    const user = await UserModel.getById(userId);
+    if (!user) throw new Error("User not found");
+
+    // التحقق من الباسورد القديم
+    const isPasswordValid = bcrypt.compareSync(oldPassword, user.password);
+    if (!isPasswordValid) throw new Error("Old password is incorrect");
+
+    // التحقق من طول الباسورد الجديد
+    if (!validator.isLength(newPassword, { min: 7 }))
+      throw new Error("New password must be at least 7 characters");
+
+    // التحقق من أن الباسورد الجديد مختلف عن القديم
+    if (oldPassword === newPassword)
+      throw new Error("New password must be different from old password");
+
+    // تحديث الباسورد
+    const hashedPassword = bcrypt.hashSync(newPassword, 10);
+    await UserModel.updateById(userId, { password: hashedPassword });
+
+    return "Password changed successfully";
   }
 };

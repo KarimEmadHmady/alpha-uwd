@@ -8,7 +8,8 @@ export const authenticate = (req, res, next) => {
   }
 
   try {
-    const decoded = verifyToken(token, process.env.JWT_SECRET);
+    const jwtSecret = process.env.JWT_SECRET || "cinbon";
+    const decoded = verifyToken(token, jwtSecret);
     req.user = decoded;
     next();
   } catch (err) {

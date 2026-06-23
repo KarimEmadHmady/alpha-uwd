@@ -121,5 +121,20 @@ export const UserController = {
     } catch (e) {
       res.status(400).json({ success: 0, message: e.message });
     }
+  },
+
+  async changePassword(req, res) {
+    try {
+      const { oldPassword, newPassword } = req.body;
+      
+      if (!oldPassword || !newPassword) {
+        return res.status(400).json({ success: 0, message: "Old password and new password are required" });
+      }
+
+      const result = await UserService.changePassword(req.user.id, oldPassword, newPassword);
+      res.json({ success: 1, message: result });
+    } catch (e) {
+      res.status(400).json({ success: 0, message: e.message });
+    }
   }
 };

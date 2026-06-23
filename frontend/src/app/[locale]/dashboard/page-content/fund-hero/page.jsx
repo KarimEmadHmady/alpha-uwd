@@ -281,7 +281,7 @@ const FundHeroContentEditor = () => {
                     {(preview || existingPath) && (
                       <div className="mt-2">
                         <img
-                          src={preview || `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/uploads/${existingPath}`}
+                          src={preview || `${process.env.NEXT_PUBLIC_API_URL || 'https://revamp.alpha-odin.com/alpha'}/uploads/${existingPath}`}
                           alt={label}
                           className="max-w-xs h-auto rounded-lg border border-gray-200"
                         />

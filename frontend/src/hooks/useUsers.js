@@ -104,6 +104,16 @@ export const useUsers = () => {
     return usersService.updateAvatar(formData, token);
   }, []);
 
+  // Change password
+  const changeMyPassword = useCallback(async (oldPassword, newPassword) => {
+    const token = getToken();
+    if (!token) {
+      throw new Error('No authentication token found');
+    }
+    console.log('useUsers - Changing password');
+    return usersService.changePassword(oldPassword, newPassword, token);
+  }, []);
+
   // Clear error
   const clearUsersError = useCallback(() => {
     dispatch(clearError());
@@ -136,6 +146,7 @@ export const useUsers = () => {
     updateUserById,
     updateMyBio,
     updateMyAvatar,
+    changeMyPassword,
     clearUsersError,
     clearCurrentUser,
     setPagination,

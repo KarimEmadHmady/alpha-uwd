@@ -89,6 +89,10 @@ export const fundService = {
   },
 
   async updateFund(id, formData, token) {
+    if (!token) {
+      throw new Error('No authentication token available. Please log in again.');
+    }
+
     const response = await fetch(`${API_URL}/api/funds/${id}`, {
       method: 'PUT',
       headers: {
@@ -99,7 +103,13 @@ export const fundService = {
     });
 
     if (!response.ok) {
-      const error = await response.json();
+      const errorText = await response.text();
+      let error;
+      try {
+        error = JSON.parse(errorText);
+      } catch {
+        error = { message: errorText || 'Failed to update fund' };
+      }
       throw new Error(error.message || 'Failed to update fund');
     }
 
@@ -170,6 +180,7 @@ export const fundService = {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
       },
     });
 

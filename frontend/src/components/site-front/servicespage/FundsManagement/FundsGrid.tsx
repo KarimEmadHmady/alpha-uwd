@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { fundService } from "@/services/fundService";
 import { useCategoryPublic } from "@/hooks/useCategoryPublic";
 
@@ -29,15 +29,14 @@ interface Fund {
   status?: number;
 }
 
-function FundCard({ fund, priceHistory }: { fund: Fund; priceHistory?: any }) {
-  const locale = useLocale();
+function FundCard({ fund, priceHistory, lang }: { fund: Fund; priceHistory?: any; lang: string }) {
   const t = useTranslations('InvestmentFunds');
 
-  const date = fund.status === 1
+  const date = fund.status === 1 || fund.status === -1
     ? priceHistory?.latest?.date
     : priceHistory?.previous?.date;
 
-return (
+  return (
     <div className="bg-white dark:bg-[#2a2a2a] rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm dark:shadow-black/30 p-4 flex flex-col gap-3 hover:shadow-md dark:hover:shadow-black/50 transition-shadow duration-200 cursor-pointer">
       <div className="flex items-center justify-between">
         <div className="w-14 h-10 relative">
@@ -57,7 +56,7 @@ return (
         </span>
       </div>
 
-      <div dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+      <div dir={lang === 'ar' ? 'rtl' : 'ltr'}>
         <h4 className="text-sm font-bold text-gray-800 dark:text-gray-50">{fund.name}</h4>
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{fund.description}</p>
       </div>
@@ -82,14 +81,13 @@ return (
   );
 }
 
-export default function FundsGrid({ lang }: { lang?: string } = {}) {
+// ✅ lang prop مطلوب دايماً — مش بيعتمد على useLocale()
+export default function FundsGrid({ lang }: { lang: string }) {
   const [activeTab, setActiveTab] = useState<FilterTab>("All");
   const [funds, setFunds] = useState<Fund[]>([]);
   const [priceHistories, setPriceHistories] = useState<Record<number, any>>({});
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const locale = lang || useLocale();
-  const safeLang = lang || locale;
   const t = useTranslations('InvestmentFunds');
   const { categories } = useCategoryPublic();
 
@@ -101,16 +99,16 @@ export default function FundsGrid({ lang }: { lang?: string } = {}) {
 
         let response;
         if (activeTab === "All") {
-          response = await fundService.getAllFundsPublic(safeLang);
+          response = await fundService.getAllFundsPublic(lang);
         } else {
           const selectedCategory = (categories as Category[])?.find((cat: Category) =>
             (cat.name || cat.title) === activeTab
           );
           const categoryId = selectedCategory?.id;
           if (categoryId) {
-            response = await fundService.getFundsByCategory(categoryId, safeLang);
+            response = await fundService.getFundsByCategory(categoryId, lang);
           } else {
-            response = await fundService.getAllFundsPublic(safeLang);
+            response = await fundService.getAllFundsPublic(lang);
           }
         }
 
@@ -143,7 +141,8 @@ export default function FundsGrid({ lang }: { lang?: string } = {}) {
             updated_at: fund.updated_at || fund.lastUpdate,
             category: fund.category || 'All',
             status: fund.status,
-            href: `/services/fundsmanagement/${fund.id}`,
+            // ✅ الـ href فيه الـ locale صح
+            href: `/${lang}/services/fundsmanagement/${fund.id}`,
           }))
         );
       } catch (err: any) {
@@ -155,10 +154,10 @@ export default function FundsGrid({ lang }: { lang?: string } = {}) {
     };
 
     getFunds();
-  }, [safeLang, activeTab]);
+  }, [lang, activeTab]);
 
-return (
-    <section className="w-full bg-[#f5f7fa] dark:bg-[#1a1a1a] px-6 py-10 md:px-12 lg:px-16" dir={safeLang === 'ar' ? 'rtl' : 'ltr'}>
+  return (
+    <section className="w-full bg-[#f5f7fa] dark:bg-[#1a1a1a] px-6 py-10 md:px-12 lg:px-16" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-wrap gap-2 mb-8">
           <button
@@ -201,15 +200,16 @@ return (
 
         {!isLoading && !error && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {funds.map((fund) => (
-                <Link href={`/services/fundsmanagement/${fund.id}`} className="block h-full">
-                  <FundCard
-                    key={fund.id}
-                    fund={fund}
-                    priceHistory={priceHistories[fund.id]}
-                  />
-                </Link>
-              ))}
+            {funds.map((fund) => (
+              // ✅ الـ href فيه الـ locale صح
+              <Link key={fund.id} href={`/${lang}/services/fundsmanagement/${fund.id}`} className="block h-full">
+                <FundCard
+                  fund={fund}
+                  priceHistory={priceHistories[fund.id]}
+                  lang={lang}
+                />
+              </Link>
+            ))}
           </div>
         )}
       </div>

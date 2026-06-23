@@ -45,7 +45,7 @@ export default function FundSidebar({
   // Get the correct date based on status
   const fundDetails = fundData?.fundDetails || fundData || {};
   const status = fundDetails?.status;
-  const displayDate = status === 1
+  const displayDate = status === 1 || status === -1
     ? priceHistory?.latest?.date
     : priceHistory?.previous?.date;
 

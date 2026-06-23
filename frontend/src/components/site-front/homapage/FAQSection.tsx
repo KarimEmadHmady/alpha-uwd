@@ -10,7 +10,7 @@ interface Props {
 }
 
 export default function FAQSection({ faqs, content, lang }: Props) {
-  const [openIdx, setOpenIdx] = useState<number>(2);
+  const [openIdx, setOpenIdx] = useState<number>(0);
 
   return (
     <section className="py-20 bg-gray-100 dark:bg-[#222] " dir={lang === 'ar' ? 'rtl' : 'ltr'}>

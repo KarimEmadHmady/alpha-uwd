@@ -79,7 +79,8 @@ const PriceManagement = ({
               name="date"
               value={priceData.date || getTodayDate()}
               onChange={handlePriceChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00437a] focus:border-transparent outline-none"
+              onClick={(e) => e.target.showPicker()}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00437a] focus:border-transparent outline-none cursor-pointer"
             />
           </div>
         </div>

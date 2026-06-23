@@ -31,6 +31,7 @@ const corsOptions = {
     origin: [
         'http://revamp.alpha-odin.com',
         'https://revamp.alpha-odin.com',
+        'http://localhost:3000',
     ],
     credentials: true,           // مهم للـ session/cookies
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
