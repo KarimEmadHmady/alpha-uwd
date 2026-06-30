@@ -1,7 +1,7 @@
 // components/HeroSection.tsx
-import Image from 'next/image';
 import Link from 'next/link';
 import HeroStats from './HeroStats';
+import HeroTrustBadge from './HeroTrustBadge';
 
 // Server-side fetch — بيتنفذ على السيرفر مش في البراوزر
 async function getHeroContent(lang: string) {
@@ -52,6 +52,7 @@ const FALLBACK = {
   activeUsersSubLabel:  'Growth Last Month',
   satisfiedClientsLabel:'Satisfied Clients',
   reviewsLabel:         'Happy Clients',
+  trustLabel:           'From',
   backgroundImage:       '',
 };
 
@@ -65,10 +66,10 @@ export default async function HeroSection({ lang }: { lang: string }) {
       <div className="max-w-7xl mx-auto px-6 pt-12 pb-0">
         
         {/* Badge */}
-        <div className="inline-flex items-center gap-2 border text-gray-500 dark:text-gray-400 border-gray-200 rounded-full px-4 py-1.5 text-sm  ">
+        {/* <div className="inline-flex items-center gap-2 border text-gray-500 dark:text-gray-400 border-gray-200 rounded-full px-4 py-1.5 text-sm  ">
           <span className="w-2 h-2 rounded-full bg-[#00437A]"></span>
           {hero.badgeText}
-        </div>
+        </div> */}
 
         <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[520px]">
           {/* Left */}
@@ -90,6 +91,7 @@ export default async function HeroSection({ lang }: { lang: string }) {
                 </svg>
               </Link>
             </div>
+            <HeroTrustBadge trustLabel={hero.trustLabel || 'From'} />
           </div>
 
           {/* Right — الـ counters في Client Component منفصل */}

@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { pageContentService } from '@/services/pageContentService';
+import { useToast } from '@/context/ToastContext';
+
 
 const SERVICES_PAGE_DEFINITION = {
   pageKey: 'services',
@@ -99,6 +101,7 @@ const ensureContentStructure = (content) => {
 
 const ServicesPageContentEditor = () => {
   const { token } = useAuth();
+  const { showSuccess, showError } = useToast();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(null);
@@ -129,6 +132,7 @@ const ServicesPageContentEditor = () => {
       } catch (err) {
         console.error('Failed to load services page content:', err);
         setError(err.message || 'Failed to load content');
+        showError(err.message || 'Failed to load content'); 
       } finally {
         setLoading(false);
       }
@@ -201,11 +205,13 @@ const ServicesPageContentEditor = () => {
       );
 
       setSuccess('Content saved successfully!');
+      showSuccess('Services page content saved successfully.');
       setImages({});
       setImagePreviews({});
     } catch (err) {
       console.error('Failed to save content:', err);
       setError(err.message || 'Failed to save content');
+      showError(err.message || 'Failed to save content');
     } finally {
       setSaving(false);
     }

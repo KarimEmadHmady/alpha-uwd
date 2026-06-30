@@ -90,7 +90,7 @@ export default async function CTASection({ lang }: { lang: string }) {
           </div>
 
           {/* Right image */}
-          <div className="absolute right-0 -top-10 bottom-0 h-[calc(100%+40px)] w-1/2 hidden lg:block rounded-3xl overflow-hidden">
+          <div className="absolute right-0 -top-10 bottom-0 h-[calc(100%+40px)] w-1/2 hidden lg:block rounded-tl-3xl rounded-tr-3xl rounded-br-3xl rounded-bl-none overflow-hidden">
             <Image
               src={cta.rightImage?.startsWith('http') ? cta.rightImage : (cta.rightImage ? `${BASE_URL}/${cta.rightImage}` : "/cta-team.jpg")}
               alt="Financial Team"
@@ -98,7 +98,7 @@ export default async function CTASection({ lang }: { lang: string }) {
               className="object-cover object-left"
             />
             {/* blend overlay */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#00437A] via-[#00437A]/40 to-transparent" />
+            <div className="absolute inset-0 " />
           </div>
         </div>
       </div>

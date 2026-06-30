@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { pageContentService } from '@/services/pageContentService';
+import { useToast } from '@/context/ToastContext';
+
 
 const FUNDS_MANAGEMENT_PAGE_DEFINITION = {
   pageKey: 'fundsmanagement',
@@ -92,6 +94,7 @@ const ensureContentStructure = (content) => {
 
 const FundsManagementPageContentEditor = () => {
   const { token } = useAuth();
+  const { showSuccess, showError } = useToast();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(null);
@@ -122,6 +125,7 @@ const FundsManagementPageContentEditor = () => {
       } catch (err) {
         console.error('Failed to load funds management page content:', err);
         setError(err.message || 'Failed to load content');
+         showError(err.message || 'Failed to load content'); 
       } finally {
         setLoading(false);
       }
@@ -194,11 +198,13 @@ const FundsManagementPageContentEditor = () => {
       );
 
       setSuccess('Content saved successfully!');
+      showSuccess('Funds management page content saved successfully.');
       setImages({});
       setImagePreviews({});
     } catch (err) {
       console.error('Failed to save content:', err);
       setError(err.message || 'Failed to save content');
+      showError(err.message || 'Failed to save content');
     } finally {
       setSaving(false);
     }

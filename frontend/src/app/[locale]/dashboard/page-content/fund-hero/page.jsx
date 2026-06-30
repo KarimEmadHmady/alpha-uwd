@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { pageContentService } from '@/services/pageContentService';
+import { useToast } from '@/context/ToastContext';
+
 
 // تعريف صفحة Fund Hero - كل السيكشنز من صفحة Fund Details
 const FUND_HERO_PAGE_DEFINITION = {
@@ -74,6 +76,7 @@ const ensureContentStructure = (content) => {
 
 const FundHeroContentEditor = () => {
   const { token } = useAuth();
+  const { showSuccess, showError } = useToast();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(null);
@@ -103,6 +106,7 @@ const FundHeroContentEditor = () => {
       } catch (err) {
         console.error('Failed to load fund hero page content:', err);
         setError(err.message || 'Failed to load content');
+        showError(err.message || 'Failed to load content'); 
       } finally {
         setLoading(false);
       }
@@ -147,7 +151,7 @@ const FundHeroContentEditor = () => {
   };
 
   const handleSave = async () => {
-    if (!token) { setError('You must be logged in as admin to save.'); return; }
+    if (!token) { setError('You must be logged in as admin to save.'); showError('You must be logged in as admin to save.');  return; }
     try {
       setSaving(true);
       setError(null);
@@ -162,8 +166,10 @@ const FundHeroContentEditor = () => {
       setImages({});
       setImagePreviews({});
       setSuccess('Fund hero content saved successfully.');
+      showSuccess('Fund hero content saved successfully.'); 
     } catch (err) {
       setError(err.message || 'Failed to save content');
+      showError(err.message || 'Failed to save content');
     } finally {
       setSaving(false);
     }

@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { pageContentService } from '@/services/pageContentService';
+import { useToast } from '@/context/ToastContext';
 
 // تعريف صفحة About - كل السيكشنز من الصفحة الفعلية
 const ABOUT_PAGE_DEFINITION = {
@@ -184,6 +185,7 @@ const ensureContentStructure = (content) => {
 
 const AboutPageContentEditor = () => {
   const { token } = useAuth();
+  const { showSuccess, showError } = useToast();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(null);
@@ -214,6 +216,7 @@ const AboutPageContentEditor = () => {
       } catch (err) {
         console.error('Failed to load about page content:', err);
         setError(err.message || 'Failed to load content');
+        showError(err.message || 'Failed to load content'); 
       } finally {
         setLoading(false);
       }
@@ -258,7 +261,9 @@ const AboutPageContentEditor = () => {
   };
 
   const handleSave = async () => {
-    if (!token) { setError('You must be logged in as admin to save.'); return; }
+    if (!token) { 
+      setError('You must be logged in as admin to save.');
+      showError('You must be logged in as admin to save.'); return; }
     try {
       setSaving(true);
       setError(null);
@@ -273,8 +278,10 @@ const AboutPageContentEditor = () => {
       setImages({});
       setImagePreviews({});
       setSuccess('About page content saved successfully.');
+      showSuccess('About page content saved successfully.'); 
     } catch (err) {
       setError(err.message || 'Failed to save content');
+      showError(err.message || 'Failed to save content');
     } finally {
       setSaving(false);
     }

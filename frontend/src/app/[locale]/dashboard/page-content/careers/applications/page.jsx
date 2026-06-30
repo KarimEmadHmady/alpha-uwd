@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { pageContentService } from '@/services/pageContentService';
+import { useToast } from '@/context/ToastContext';
+
 
 const LANGUAGES = [
   { code: 'ar', label: 'العربية' },
@@ -12,7 +14,8 @@ const LANGUAGES = [
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL?.replace('/api', '');
 
 const ApplicationsEditor = () => {
-  const { token } = useAuth();
+    const { token } = useAuth();
+    const { showSuccess, showError } = useToast();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [applications, setApplications] = useState([]);
@@ -33,6 +36,7 @@ const ApplicationsEditor = () => {
       setLastUpdated(new Date());
     } catch (err) {
       setError(err.message || 'Failed to load applications');
+      showError(err.message || 'Failed to load content'); 
       setApplications([]);
     } finally {
       setLoading(false);

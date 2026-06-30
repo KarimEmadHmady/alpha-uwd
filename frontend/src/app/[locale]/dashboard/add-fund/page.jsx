@@ -5,34 +5,35 @@ import React, { useState, useEffect } from 'react';
 import { useFund } from '@/hooks/useFund';
 import { useAuth } from '@/hooks/useAuth';
 import { useCategory } from '@/hooks/useCategory';
+import { useToast } from '@/context/ToastContext';
 
 // ── Validation rules ──────────────────────────────────────────────────────────
 const VALIDATIONS = {
-  name_ar:                      { required: true, label: 'اسم الصندوق (عربي)' },
-  name_en:                      { required: true, label: 'Fund Name (English)' },
-  description_ar:               { required: true, label: 'الوصف (عربي)' },
-  description_en:               { required: true, label: 'Description (English)' },
-  fund_manager_name_ar:         { required: true, label: 'اسم مدير الصندوق (عربي)' },
-  fund_manager_name_en:         { required: true, label: 'Fund Manager Name (English)' },
-  currentprice:                 { required: true, numeric: true, min: 0, label: 'Current Price' },
-  catid:                        { required: true, label: 'Category' },
-  minimum_initial:              { required: true, label: 'Minimum Initial Investment (English)' },
-  minimum_initial_ar:           { required: true, label: 'الحد الأدنى للاستثمار الأولي (عربي)' },
-  Minimum_redemption_amount:    { required: true, label: 'Minimum Redemption Amount (English)' },
+  name_ar: { required: true, label: 'اسم الصندوق (عربي)' },
+  name_en: { required: true, label: 'Fund Name (English)' },
+  description_ar: { required: true, label: 'الوصف (عربي)' },
+  description_en: { required: true, label: 'Description (English)' },
+  fund_manager_name_ar: { required: true, label: 'اسم مدير الصندوق (عربي)' },
+  fund_manager_name_en: { required: true, label: 'Fund Manager Name (English)' },
+  currentprice: { required: true, numeric: true, min: 0, label: 'Current Price' },
+  catid: { required: true, label: 'Category' },
+  minimum_initial: { required: true, label: 'Minimum Initial Investment (English)' },
+  minimum_initial_ar: { required: true, label: 'الحد الأدنى للاستثمار الأولي (عربي)' },
+  Minimum_redemption_amount: { required: true, label: 'Minimum Redemption Amount (English)' },
   Minimum_redemption_amount_ar: { required: true, label: 'الحد الأدنى للاسترداد (عربي)' },
-  subscription_fee:             { required: true, label: 'Subscription Fee (English)' },
-  subscription_fee_ar:          { required: true, label: 'رسوم الاشتراك (عربي)' },
-  redemption_fee:               { required: true, label: 'Redemption Fee (English)' },
-  redemption_fee_ar:            { required: true, label: 'رسوم الاسترداد (عربي)' },
-  annualfee:                    { required: true, label: 'Annual Fee (English)' },
-  annualfee_ar:                 { required: true, label: 'الرسوم السنوية (عربي)' },
-  subscription_frequency_ar:    { required: true, label: 'تكرار الاشتراك (عربي)' },
-  subscription_frequency_en:    { required: true, label: 'Subscription Frequency (English)' },
-  redemption_frequency_ar:      { required: true, label: 'تكرار الاسترداد (عربي)' },
-  redemption_frequency_en:      { required: true, label: 'Redemption Frequency (English)' },
-  type_ar:                      { required: true, label: 'نوع الصندوق (عربي)' },
-  type_en:                      { required: true, label: 'Fund Type (English)' },
-  fund_link:                    { url: true, label: 'Fund Link' },
+  subscription_fee: { required: true, label: 'Subscription Fee (English)' },
+  subscription_fee_ar: { required: true, label: 'رسوم الاشتراك (عربي)' },
+  redemption_fee: { required: true, label: 'Redemption Fee (English)' },
+  redemption_fee_ar: { required: true, label: 'رسوم الاسترداد (عربي)' },
+  annualfee: { required: true, label: 'Annual Fee (English)' },
+  annualfee_ar: { required: true, label: 'الرسوم السنوية (عربي)' },
+  subscription_frequency_ar: { required: true, label: 'تكرار الاشتراك (عربي)' },
+  subscription_frequency_en: { required: true, label: 'Subscription Frequency (English)' },
+  redemption_frequency_ar: { required: true, label: 'تكرار الاسترداد (عربي)' },
+  redemption_frequency_en: { required: true, label: 'Redemption Frequency (English)' },
+  type_ar: { required: true, label: 'نوع الصندوق (عربي)' },
+  type_en: { required: true, label: 'Fund Type (English)' },
+  fund_link: { url: true, label: 'Fund Link' },
 };
 
 function validateForm(formData) {
@@ -89,10 +90,9 @@ function Field({ label, error, children }) {
 }
 
 const inputClass = (hasError) =>
-  `w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#00437a] focus:border-transparent outline-none transition placeholder-gray-500 text-black ${
-    hasError
-      ? 'border-red-400 bg-red-50 focus:ring-red-400'
-      : 'border-gray-300'
+  `w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#00437a] focus:border-transparent outline-none transition placeholder-gray-500 text-black ${hasError
+    ? 'border-red-400 bg-red-50 focus:ring-red-400'
+    : 'border-gray-300'
   }`;
 
 // ── Main component ────────────────────────────────────────────────────────────
@@ -115,16 +115,17 @@ const EMPTY_FORM = {
 };
 
 const AddFundPage = () => {
-  const [formData, setFormData]                     = useState(EMPTY_FORM);
-  const [imageFile, setImageFile]                   = useState(null);
+  const [formData, setFormData] = useState(EMPTY_FORM);
+  const [imageFile, setImageFile] = useState(null);
   const [fundManagerImageFile, setFundManagerImageFile] = useState(null);
-  const [fieldErrors, setFieldErrors]               = useState({});
-  const [submitted, setSubmitted]                   = useState(false); // track first submit attempt
+  const [fieldErrors, setFieldErrors] = useState({});
+  const [submitted, setSubmitted] = useState(false); 
 
-  const { createFund, isLoading, error, successMessage, clearError, clearSuccessMessage } = useFund();
-  const { token } = useAuth();
-  const { getCategoriesWithTranslations, categories: categoriesList } = useCategory();
-  const [categoriesLoaded, setCategoriesLoaded] = useState(false);
+const [categoriesLoaded, setCategoriesLoaded] = useState(false); 
+const { createFund, isLoading, error, successMessage, clearError, clearSuccessMessage } = useFund();
+const { token } = useAuth();
+const { getCategoriesWithTranslations, categories: categoriesList } = useCategory();
+const { showSuccess, showError } = useToast();
 
   useEffect(() => {
     if (successMessage) setTimeout(clearSuccessMessage, 3000);
@@ -182,10 +183,12 @@ const AddFundPage = () => {
     try {
       const formDataToSend = new FormData();
       Object.keys(formData).forEach(key => formDataToSend.append(key, formData[key]));
-      if (imageFile)            formDataToSend.append('image', imageFile);
+      if (imageFile) formDataToSend.append('image', imageFile);
       if (fundManagerImageFile) formDataToSend.append('fund_manager_image', fundManagerImageFile);
 
       await createFund(formDataToSend);
+
+      showSuccess('Fund created successfully!');
 
       setFormData(EMPTY_FORM);
       setImageFile(null);
@@ -194,6 +197,7 @@ const AddFundPage = () => {
       setSubmitted(false);
     } catch (err) {
       console.error('Error:', err);
+      showError('Failed to create fund. Please try again.');
     }
   };
 
@@ -382,71 +386,71 @@ const AddFundPage = () => {
 
             {/* ── Frequencies ── */}
             <section>
-  <h3 className="text-lg font-semibold mb-4 pb-2 border-b">Frequencies</h3>
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-    
-    <Field label="تكرار الاشتراك (عربي)" error={fieldErrors.subscription_frequency_ar}>
-      <select
-        name="subscription_frequency_ar"
-        value={formData.subscription_frequency_ar}
-        onChange={handleChange}
-        className={inputClass(!!fieldErrors.subscription_frequency_ar)}
-      >
-        <option value="">-- اختر --</option>
-        <option value="يومي">يومي</option>
-        <option value="أسبوعي">أسبوعي</option>
-        <option value="شهري">شهري</option>
-        <option value="ربع سنوي">ربع سنوي</option>
-      </select>
-    </Field>
+              <h3 className="text-lg font-semibold mb-4 pb-2 border-b">Frequencies</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-    <Field label="Subscription Frequency (English)" error={fieldErrors.subscription_frequency_en}>
-      <select
-        name="subscription_frequency_en"
-        value={formData.subscription_frequency_en}
-        onChange={handleChange}
-        className={inputClass(!!fieldErrors.subscription_frequency_en)}
-      >
-        <option value="">-- Select --</option>
-        <option value="Daily">Daily</option>
-        <option value="Weekly">Weekly</option>
-        <option value="Monthly">Monthly</option>
-        <option value="Quarterly">Quarterly</option>
-      </select>
-    </Field>
+                <Field label="تكرار الاشتراك (عربي)" error={fieldErrors.subscription_frequency_ar}>
+                  <select
+                    name="subscription_frequency_ar"
+                    value={formData.subscription_frequency_ar}
+                    onChange={handleChange}
+                    className={inputClass(!!fieldErrors.subscription_frequency_ar)}
+                  >
+                    <option value="">-- اختر --</option>
+                    <option value="يومي">يومي</option>
+                    <option value="أسبوعي">أسبوعي</option>
+                    <option value="شهري">شهري</option>
+                    <option value="ربع سنوي">ربع سنوي</option>
+                  </select>
+                </Field>
 
-    <Field label="تكرار الاسترداد (عربي)" error={fieldErrors.redemption_frequency_ar}>
-      <select
-        name="redemption_frequency_ar"
-        value={formData.redemption_frequency_ar}
-        onChange={handleChange}
-        className={inputClass(!!fieldErrors.redemption_frequency_ar)}
-      >
-        <option value="">-- اختر --</option>
-        <option value="يومي">يومي</option>
-        <option value="أسبوعي">أسبوعي</option>
-        <option value="شهري">شهري</option>
-        <option value="ربع سنوي">ربع سنوي</option>
-      </select>
-    </Field>
+                <Field label="Subscription Frequency (English)" error={fieldErrors.subscription_frequency_en}>
+                  <select
+                    name="subscription_frequency_en"
+                    value={formData.subscription_frequency_en}
+                    onChange={handleChange}
+                    className={inputClass(!!fieldErrors.subscription_frequency_en)}
+                  >
+                    <option value="">-- Select --</option>
+                    <option value="Daily">Daily</option>
+                    <option value="Weekly">Weekly</option>
+                    <option value="Monthly">Monthly</option>
+                    <option value="Quarterly">Quarterly</option>
+                  </select>
+                </Field>
 
-    <Field label="Redemption Frequency (English)" error={fieldErrors.redemption_frequency_en}>
-      <select
-        name="redemption_frequency_en"
-        value={formData.redemption_frequency_en}
-        onChange={handleChange}
-        className={inputClass(!!fieldErrors.redemption_frequency_en)}
-      >
-        <option value="">-- Select --</option>
-        <option value="Daily">Daily</option>
-        <option value="Weekly">Weekly</option>
-        <option value="Monthly">Monthly</option>
-        <option value="Quarterly">Quarterly</option>
-      </select>
-    </Field>
+                <Field label="تكرار الاسترداد (عربي)" error={fieldErrors.redemption_frequency_ar}>
+                  <select
+                    name="redemption_frequency_ar"
+                    value={formData.redemption_frequency_ar}
+                    onChange={handleChange}
+                    className={inputClass(!!fieldErrors.redemption_frequency_ar)}
+                  >
+                    <option value="">-- اختر --</option>
+                    <option value="يومي">يومي</option>
+                    <option value="أسبوعي">أسبوعي</option>
+                    <option value="شهري">شهري</option>
+                    <option value="ربع سنوي">ربع سنوي</option>
+                  </select>
+                </Field>
 
-  </div>
-</section>
+                <Field label="Redemption Frequency (English)" error={fieldErrors.redemption_frequency_en}>
+                  <select
+                    name="redemption_frequency_en"
+                    value={formData.redemption_frequency_en}
+                    onChange={handleChange}
+                    className={inputClass(!!fieldErrors.redemption_frequency_en)}
+                  >
+                    <option value="">-- Select --</option>
+                    <option value="Daily">Daily</option>
+                    <option value="Weekly">Weekly</option>
+                    <option value="Monthly">Monthly</option>
+                    <option value="Quarterly">Quarterly</option>
+                  </select>
+                </Field>
+
+              </div>
+            </section>
 
             {/* ── Fund Type ── */}
             <section>

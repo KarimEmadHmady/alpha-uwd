@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { pageContentService } from '@/services/pageContentService';
+import { useToast } from '@/context/ToastContext';
+
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL?.replace('/api', '');
 
@@ -202,6 +204,7 @@ const ensureContentStructure = (content) => {
 };
 const HomePageContentEditor = () => {
   const { token } = useAuth();
+  const { showSuccess, showError } = useToast();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(null);
@@ -232,6 +235,7 @@ const HomePageContentEditor = () => {
       } catch (err) {
         console.error('Failed to load home page content:', err);
         setError(err.message || 'Failed to load content');
+        showError(err.message || 'Failed to load content'); 
       } finally {
         setLoading(false);
       }
@@ -277,7 +281,7 @@ const HomePageContentEditor = () => {
   };
 
   const handleSave = async () => {
-    if (!token) { setError('You must be logged in as admin to save.'); return; }
+    if (!token) { setError('You must be logged in as admin to save.'); showError('You must be logged in as admin to save.');  return; }
     try {
       setSaving(true);
       setError(null);
@@ -290,8 +294,10 @@ const HomePageContentEditor = () => {
       setImages({});
       setImagePreviews({});
       setSuccess('Page content saved successfully.');
+      showSuccess('Home page content saved successfully.'); 
     } catch (err) {
       setError(err.message || 'Failed to save content');
+       showError(err.message || 'Failed to save content');
     } finally {
       setSaving(false);
     }

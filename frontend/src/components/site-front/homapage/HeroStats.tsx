@@ -85,22 +85,7 @@ export default function HeroStats({
         <p className="text-xs text-gray-500 dark:text-gray-400">{satisfiedClientsLabel}</p>
       </div>
 
-      {/* Reviews */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex items-center gap-3">
-        <div className="flex -space-x-2">
-          {[1,2,3,4].map(i => (
-            <div key={i} className="w-9 h-9 rounded-full border-2 border-white bg-gray-200 overflow-hidden">
-              <Image src={`/avatars/avatar-${i}.jpg`} alt="" width={36} height={36} className="object-cover" />
-            </div>
-          ))}
-        </div>
-        <div>
-          <div className="flex text-amber-400 text-sm">★★★★★</div>
-          <p className="text-xs text-gray-500 dark:text-gray-400">
-            From <span ref={el => { counterRefs.current[3] = el; }}>0+</span> {reviewsLabel}
-          </p>
-        </div>
-      </div>
+
     </div>
   );
 }

@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { pageContentService } from '@/services/pageContentService';
+import { useToast } from '@/context/ToastContext';
+
 
 const COMMITTEE_PAGE_DEFINITION = {
   pageKey: 'committee',
@@ -132,6 +134,7 @@ const ensureContentStructure = (content) => {
 
 const CommitteePageContentEditor = () => {
   const { token } = useAuth();
+  const { showSuccess, showError } = useToast();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(null);
@@ -162,6 +165,7 @@ const CommitteePageContentEditor = () => {
       } catch (err) {
         console.error('Failed to load committee page content:', err);
         setError(err.message || 'Failed to load content');
+        showError(err.message || 'Failed to load content'); 
       } finally {
         setLoading(false);
       }
@@ -206,7 +210,7 @@ const CommitteePageContentEditor = () => {
   };
 
   const handleSave = async () => {
-    if (!token) { setError('You must be logged in as admin to save.'); return; }
+    if (!token) { setError('You must be logged in as admin to save.'); showError('You must be logged in as admin to save.');  return; }
     try {
       setSaving(true);
       setError(null);
@@ -221,8 +225,10 @@ const CommitteePageContentEditor = () => {
       setImages({});
       setImagePreviews({});
       setSuccess('Committee page content saved successfully.');
+      showSuccess('Committee page content saved successfully.'); 
     } catch (err) {
       setError(err.message || 'Failed to save content');
+      showError(err.message || 'Failed to save content');
     } finally {
       setSaving(false);
     }

@@ -39,18 +39,23 @@ function FundCard({ fund, priceHistory, lang }: { fund: Fund; priceHistory?: any
   return (
     <div className="bg-white dark:bg-[#2a2a2a] rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm dark:shadow-black/30 p-4 flex flex-col gap-3 hover:shadow-md dark:hover:shadow-black/50 transition-shadow duration-200 cursor-pointer">
       <div className="flex items-center justify-between">
-        <div className="w-14 h-10 relative">
-          <Image
-            src={fund.image ? (fund.image.startsWith('http') ? fund.image : `/${fund.image.replace(/^\/+/, '')}`) : '/funds/default.png'}
-            alt={`${fund.name} logo`}
-            fill
-            className="object-contain"
-            sizes="56px"
-            onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
-              e.currentTarget.src = '/funds/default.png';
-            }}
-          />
-        </div>
+      <div className="w-16 h-16 relative rounded-xl overflow-hidden border border-gray-100 dark:border-gray-800 flex-shrink-0 bg-white">
+                            <Image
+                              src={
+                                fund.image
+                                  ? fund.image.startsWith("http")
+                                    ? fund.image
+                                    : `/${fund.image.replace(/^\/+/, "")}`
+                                  : "/funds/default.png"
+                              }
+                              alt={fund.name || "Fund"}
+                              fill
+                              className="object-cover"
+                              onError={(e) => {
+                                e.currentTarget.src = "/funds/default.png";
+                              }}
+                            />
+                          </div>
         <span className="text-[11px] text-orange-500 dark:text-orange-400 font-medium">
           {t('lastUpdate')}: {date ? new Date(date).toLocaleDateString() : t('recent')}
         </span>

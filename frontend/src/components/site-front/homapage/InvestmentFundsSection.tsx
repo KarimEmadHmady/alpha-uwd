@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import Image from 'next/image';
-import { useState, useEffect, useRef } from 'react';
-import { useLocale, useTranslations } from 'next-intl';
-import { fundService } from '@/services/fundService';
+import Link from "next/link";
+import Image from "next/image";
+import { useState, useEffect, useRef } from "react";
+import { useLocale, useTranslations } from "next-intl";
+import { fundService } from "@/services/fundService";
 
 export default function InvestmentFundsSection() {
   const [active, setActive] = useState(0);
@@ -18,7 +18,7 @@ export default function InvestmentFundsSection() {
   const autoPlayRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const locale = useLocale();
-  const t = useTranslations('InvestmentFunds');
+  const t = useTranslations("InvestmentFunds");
 
   /* ─────────────────────────────── data ─────────────────────────────── */
   const getAllFunds = async () => {
@@ -39,18 +39,20 @@ export default function InvestmentFundsSection() {
           } catch {
             histories[fund.id] = null;
           }
-        })
+        }),
       );
       setPriceHistories(histories);
     } catch (err: any) {
-      setError(err.message || 'Failed to load funds');
+      setError(err.message || "Failed to load funds");
       setFunds([]);
     } finally {
       setIsLoading(false);
     }
   };
 
-  useEffect(() => { getAllFunds(); }, [locale]);
+  useEffect(() => {
+    getAllFunds();
+  }, [locale]);
 
   /* ── track visibleCount for dots (CSS handles layout, JS only counts) ── */
   useEffect(() => {
@@ -59,8 +61,8 @@ export default function InvestmentFundsSection() {
       setVisibleCount(w >= 1024 ? 3 : w >= 640 ? 2 : 1);
     };
     update();
-    window.addEventListener('resize', update);
-    return () => window.removeEventListener('resize', update);
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
   }, []);
 
   /* ──────────────────────── scroll to card ──────────────────────────── */
@@ -69,7 +71,7 @@ export default function InvestmentFundsSection() {
     if (!container) return;
     const card = container.children[index] as HTMLElement;
     if (!card) return;
-    container.scrollTo({ left: card.offsetLeft, behavior: 'smooth' });
+    container.scrollTo({ left: card.offsetLeft, behavior: "smooth" });
     setActive(index);
   };
 
@@ -78,13 +80,14 @@ export default function InvestmentFundsSection() {
     const container = scrollRef.current;
     if (!container) return;
     const onScroll = () => {
-      const cardWidth = (container.children[0] as HTMLElement)?.offsetWidth ?? 0;
+      const cardWidth =
+        (container.children[0] as HTMLElement)?.offsetWidth ?? 0;
       if (cardWidth === 0) return;
       const idx = Math.round(container.scrollLeft / (cardWidth + 24)); // 24 = gap
       setActive(idx);
     };
-    container.addEventListener('scroll', onScroll, { passive: true });
-    return () => container.removeEventListener('scroll', onScroll);
+    container.addEventListener("scroll", onScroll, { passive: true });
+    return () => container.removeEventListener("scroll", onScroll);
   }, [funds]);
 
   /* ──────────────────────────── auto-play ────────────────────────────── */
@@ -97,7 +100,9 @@ export default function InvestmentFundsSection() {
         return next;
       });
     }, 5000);
-    return () => { if (autoPlayRef.current) clearInterval(autoPlayRef.current); };
+    return () => {
+      if (autoPlayRef.current) clearInterval(autoPlayRef.current);
+    };
   }, [funds]);
 
   const stopAutoPlay = () => {
@@ -108,11 +113,10 @@ export default function InvestmentFundsSection() {
   return (
     <section className="py-20 bg-gray-100 dark:bg-[#222] " dir="ltr">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-
         {/* Header */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 border border-gray-200 rounded-full px-4 py-1.5 text-sm  mb-4 text-gray-800 dark:text-gray-50 ">
-            {t('title')}
+          <div className="inline-flex items-center gap-2 border border-gray-200 rounded-full px-5 py-2 text-xl  mb-4 text-gray-800 dark:text-gray-50 bg-white dark:bg-gray-800 shadow-lg ">
+            {t("title")}
           </div>
         </div>
 
@@ -126,7 +130,9 @@ export default function InvestmentFundsSection() {
         {/* Error */}
         {error && (
           <div className="text-center py-12">
-            <p className="text-red-600">{t('errorLoadingFunds')}: {error}</p>
+            <p className="text-red-600">
+              {t("errorLoadingFunds")}: {error}
+            </p>
           </div>
         )}
 
@@ -152,79 +158,103 @@ export default function InvestmentFundsSection() {
                 scrollbar-hide
                 pb-2
               "
-              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
               onMouseDown={stopAutoPlay}
               onTouchStart={stopAutoPlay}
             >
               {funds.map((fund, i) => {
                 const history = priceHistories[fund.id];
-                const date = fund.status === 1 || fund.status === -1
-                  ? history?.latest?.date
-                  : history?.previous?.date;
+                const date =
+                  fund.status === 1 || fund.status === -1
+                    ? history?.latest?.date
+                    : history?.previous?.date;
 
                 return (
                   <div key={fund.id ?? i} className="snap-start">
-                    <Link href={`/services/fundsmanagement/${fund.id}`} className="block h-full">
+                    <Link
+                      href={`/services/fundsmanagement/${fund.id}`}
+                      className="block h-full"
+                    >
                       <div className="bg-white dark:bg-[#1a1a1a] rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-5 hover:shadow-md transition-all duration-300 flex flex-col gap-4 h-full hover:bg-gray-50 dark:hover:bg-[#333] hover:-translate-y-0.5">
-
                         {/* Top row */}
                         <div className="flex items-start justify-between">
-                          <div className="w-12 h-12 relative rounded-xl overflow-hidden border border-gray-100 dark:border-gray-800 flex-shrink-0">
+                          <div className="w-16 h-16 relative rounded-xl overflow-hidden border border-gray-100 dark:border-gray-800 flex-shrink-0 bg-white">
                             <Image
                               src={
                                 fund.image
-                                  ? fund.image.startsWith('http')
+                                  ? fund.image.startsWith("http")
                                     ? fund.image
-                                    : `/${fund.image.replace(/^\/+/, '')}`
-                                  : '/funds/default.png'
+                                    : `/${fund.image.replace(/^\/+/, "")}`
+                                  : "/funds/default.png"
                               }
-                              alt={fund.name || 'Fund'}
+                              alt={fund.name || "Fund"}
                               fill
-                              className="object-contain p-1  "
-                              onError={(e) => { e.currentTarget.src = '/funds/default.png'; }}
+                              className="object-cover"
+                              onError={(e) => {
+                                e.currentTarget.src = "/funds/default.png";
+                              }}
                             />
                           </div>
                           <span
                             className="text-xs px-2.5 py-1 rounded-full font-medium"
-                            style={{ background: '#00437A18', color: '#00437A' }}
+                            style={{
+                              background: "#00437A18",
+                              color: "#00437A",
+                            }}
                           >
-                            {fund.type || t('fund')}
+                            {fund.type || t("fund")}
                           </span>
                         </div>
 
                         {/* Last update */}
                         <p className="text-[11px] text-gray-400">
-                          {t('lastUpdate')}:{' '}
-                          {date ? new Date(date).toLocaleDateString() : t('recent')}
+                          {t("lastUpdate")}:{" "}
+                          {date
+                            ? new Date(date).toLocaleDateString()
+                            : t("recent")}
                         </p>
 
                         {/* Name & description */}
-                        <div dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+                        <div dir={locale === "ar" ? "rtl" : "ltr"}>
                           <h3 className="font-bold text-base leading-snug text-gray-800 dark:text-gray-200">
-                            {fund.name || t('unnamedFund')}
+                            {fund.name || t("unnamedFund")}
                           </h3>
                           <p className="text-sm mt-1 line-clamp-2 text-gray-800 dark:text-gray-50">
-                            {fund.description || t('investmentFund')}
+                            {fund.description || t("investmentFund")}
                           </p>
                         </div>
 
                         {/* Price + link */}
                         <div className="flex items-center justify-between mt-auto pt-3 border-t border-gray-50">
                           <div>
-                            <p className="text-[11px] text-gray-400">{t('price')}</p>
+                            <p className="text-[11px] text-gray-400">
+                              {t("price")}
+                            </p>
                             <div className="flex items-baseline gap-1">
                               <span className="text-sm font-bold text-gray-800 dark:text-gray-50">
-                                {fund.status === 1 ? (fund.newprice || '0.00') : (fund.currentprice || '0.00')}
+                                {fund.status === 1
+                                  ? fund.newprice || "0.00"
+                                  : fund.currentprice || "0.00"}
                               </span>
                               <span className="text-xs text-gray-400">
-                                {fund.currency || 'EGP'}
+                                {fund.currency || "EGP"}
                               </span>
                             </div>
                           </div>
                           <span className="text-sm text-[#00437A] font-semibold flex items-center gap-1 hover:underline">
-                            {t('seeMore')}
-                            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                            {t("seeMore")}
+                            <svg
+                              className="w-3.5 h-3.5"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2.5"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M9 5l7 7-7 7"
+                              />
                             </svg>
                           </span>
                         </div>
@@ -249,8 +279,8 @@ export default function InvestmentFundsSection() {
                       aria-label={`Go to page ${pageIndex + 1}`}
                       className={`rounded-full transition-all duration-300 ${
                         activePage === pageIndex
-                          ? 'w-6 h-2.5 bg-[#00437A]'
-                          : 'w-2.5 h-2.5 bg-gray-200 hover:bg-gray-300'
+                          ? "w-6 h-2.5 bg-[#00437A]"
+                          : "w-2.5 h-2.5 bg-gray-200 hover:bg-gray-300"
                       }`}
                     />
                   ))}

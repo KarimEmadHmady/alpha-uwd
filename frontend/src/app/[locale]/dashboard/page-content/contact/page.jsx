@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { pageContentService } from '@/services/pageContentService';
+import { useToast } from '@/context/ToastContext';
 
 const CONTACT_PAGE_DEFINITION = {
   pageKey: 'contact',
@@ -96,6 +97,7 @@ const ensureContentStructure = (content) => {
 
 const ContactPageContentEditor = () => {
   const { token } = useAuth();
+  const { showSuccess, showError } = useToast();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(null);
@@ -126,6 +128,7 @@ const ContactPageContentEditor = () => {
       } catch (err) {
         console.error('Failed to load contact page content:', err);
         setError(err.message || 'Failed to load content');
+        showError(err.message || 'Failed to load content'); 
       } finally {
         setLoading(false);
       }
@@ -198,11 +201,13 @@ const ContactPageContentEditor = () => {
       );
 
       setSuccess('Content saved successfully!');
+      showSuccess('Contact page content saved successfully.');
       setImages({});
       setImagePreviews({});
     } catch (err) {
       console.error('Failed to save content:', err);
       setError(err.message || 'Failed to save content');
+      showError(err.message || 'Failed to save content');
     } finally {
       setSaving(false);
     }

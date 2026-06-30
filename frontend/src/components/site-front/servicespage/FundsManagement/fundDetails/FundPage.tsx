@@ -152,9 +152,14 @@ export default function FundPage() {
 return (
     <div className="min-h-screen bg-gray-50 dark:bg-[#1a1a1a] px-4" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       <HeroSection />
-      <div className="max-w-6xl mx-auto flex gap-6 py-5">
+
+
+
+
+
+      <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-6 py-5 items-center lg:items-stretch">
         {/* Main Content */}
-        <div className="flex-1 min-w-0">
+        <div className="order-2 lg:order-none flex-1 min-w-0 w-full">
           {/* Animated content swap */}
           <div key={activeTab} className="animate-fadeIn">
             {renderContent()}
@@ -162,23 +167,25 @@ return (
         </div>
 
         {/* Right Column */}
-        <div className="flex flex-col gap-6 w-72 shrink-0 mb-5">
+        <div className="contents lg:flex lg:flex-col lg:gap-6 lg:w-72 lg:shrink-0 lg:mb-5">
           {/* Sidebar / Navigation Card */}
-          <FundSidebar
-            activeTab={activeTab}
-            onTabChange={setActiveTab}
-            fundName={fundData.fundDetails?.name || fundData.fundDetails?.fund_name}
-            fundType={fundData.fundDetails?.type || fundData.fundDetails?.categoryName}
-            price={parseFloat(fundData.fundDetails?.status === 1 ? (fundData.fundDetails?.newprice || fundData.fundDetails?.currentprice || '0') : (fundData.fundDetails?.currentprice || fundData.fundDetails?.newprice || '0')) || 0}
-            currency={fundData.fundDetails?.currency || 'EGP'}
-            lastUpdate={fundData.fundDetails?.updated_at}
-            logo={fundData.fundDetails?.image || fundData.fundDetails?.logo || '/funds/default.png'}
-            fundData={fundData}
-            priceHistory={priceHistories[parseInt(fundId)]}
-          />
+          <div className="order-1 lg:order-none w-full max-w-md mx-auto lg:max-w-none lg:mx-0">
+            <FundSidebar
+              activeTab={activeTab}
+              onTabChange={setActiveTab}
+              fundName={fundData.fundDetails?.name || fundData.fundDetails?.fund_name}
+              fundType={fundData.fundDetails?.type || fundData.fundDetails?.categoryName}
+              price={parseFloat(fundData.fundDetails?.status === 1 ? (fundData.fundDetails?.newprice || fundData.fundDetails?.currentprice || '0') : (fundData.fundDetails?.currentprice || fundData.fundDetails?.newprice || '0')) || 0}
+              currency={fundData.fundDetails?.currency || 'EGP'}
+              lastUpdate={fundData.fundDetails?.updated_at}
+              logo={fundData.fundDetails?.image || fundData.fundDetails?.logo || '/funds/default.png'}
+              fundData={fundData}
+              priceHistory={priceHistories[parseInt(fundId)]}
+            />
+          </div>
 
           {/* Other Funds */}
-          <div>
+          <div className="order-3 lg:order-none w-full max-w-md mx-auto lg:max-w-none lg:mx-0 mb-5 lg:mb-0">
             <h3 className="text-xl font-bold text-gray-800 dark:text-gray-50 mb-3">
               {locale === 'ar' ? 'صناديق أخرى' : 'Other Funds'}
             </h3>

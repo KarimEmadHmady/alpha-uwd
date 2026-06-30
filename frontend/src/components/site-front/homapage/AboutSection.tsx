@@ -84,7 +84,7 @@ export default async function AboutSection({ lang }: { lang: string }) {
 
           {/* Right — content */}
           <div className="space-y-6">
-            <div className="inline-flex text-gray-800 dark:text-gray-50 items-center gap-2 border border-gray-200 rounded-full px-4 py-1.5 text-sm ">
+            <div className="inline-flex text-gray-800 dark:text-gray-50 items-center gap-2 border border-gray-200 rounded-full px-5 py-2 text-xl bg-white dark:bg-gray-800 shadow-lg ">
               {about.badgeText}
             </div>
 

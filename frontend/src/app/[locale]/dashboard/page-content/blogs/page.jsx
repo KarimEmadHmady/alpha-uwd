@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { pageContentService } from '@/services/pageContentService';
+import { useToast } from '@/context/ToastContext';
 
 const BLOGS_PAGE_DEFINITION = {
   pageKey: 'blogs',
@@ -75,6 +76,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_API_URL?.replace('/api', '');
 
 const BlogsPageContentEditor = () => {
   const { token } = useAuth();
+  const { showSuccess, showError } = useToast();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(null);
@@ -99,6 +101,7 @@ const BlogsPageContentEditor = () => {
         }
       } catch (err) {
         setError(err.message || 'Failed to load content');
+         showError(err.message || 'Failed to load content'); 
       } finally {
         setLoading(false);
       }
@@ -175,7 +178,7 @@ const BlogsPageContentEditor = () => {
   };
 
   const handleSave = async () => {
-    if (!token) { setError('You must be logged in as admin to save.'); return; }
+    if (!token) { setError('You must be logged in as admin to save.'); showError('You must be logged in as admin to save.');  return; }
     try {
       setSaving(true);
       setError(null);
@@ -187,8 +190,10 @@ const BlogsPageContentEditor = () => {
       setImages({});
       setImagePreviews({});
       setSuccess('Blogs content saved successfully.');
+      showSuccess('Blogs content saved successfully.'); 
     } catch (err) {
       setError(err.message || 'Failed to save content');
+      showError(err.message || 'Failed to save content');
     } finally {
       setSaving(false);
     }
