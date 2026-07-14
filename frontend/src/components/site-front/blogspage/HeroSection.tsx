@@ -46,7 +46,7 @@ export default function HeroSection({ data, BASE_URL, lang }: { data: any; BASE_
         <div className="grid lg:grid-cols-2 gap-10 items-center min-h-[420px]">
 
           <div className="space-y-6 relative z-10">
-            <div className="inline-flex items-center gap-2 border border-gray-200 dark:border-gray-700 rounded-full px-5 py-2 text-xl text-gray-600 dark:text-gray-400  bg-white dark:bg-gray-800 shadow-lg mb-8">
+            <div className="inline-flex items-center gap-2 border-3 border-[#00437A] dark:border-gray-700 rounded-full px-5 py-2 text-xl text-gray-600 dark:text-gray-400  bg-white dark:bg-gray-800 shadow-lg mb-8">
               <span className="w-2 h-2 rounded-full bg-[#00437A]"></span>
               {safeData.badgeText || 'Welcome to Alpha Asset Management'}
             </div>

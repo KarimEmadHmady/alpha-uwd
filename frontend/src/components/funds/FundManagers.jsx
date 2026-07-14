@@ -229,7 +229,7 @@ const FundManagers = ({ fundId }) => {
           </div>
         ) : (
           fundManagers.map((manager) => (
-            <div key={manager.id} className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-all duration-200 hover:scale-105">
+            <div key={manager.id} className="bg-white border-3 border-[#00437A] rounded-lg p-6 hover:shadow-lg transition-all duration-200 hover:scale-105">
               {/* Manager Image */}
               <div className="flex justify-center mb-4">
                 {manager.image ? (

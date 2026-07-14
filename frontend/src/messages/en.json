@@ -36,7 +36,9 @@
   "Navigation": {
     "home": "Home",
     "about": "About Us",
+    "aboutPage": "About Us Page",
     "services": "Services",
+    "servicesPage": "Services Page",
     "fundsManagement": "Funds Management",
     "portfolioManagement": "Portfolio Management",
     "cashManagement": "Cash Management",

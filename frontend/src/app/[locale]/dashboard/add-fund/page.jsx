@@ -18,7 +18,7 @@ const VALIDATIONS = {
   currentprice: { required: true, numeric: true, min: 0, label: 'Current Price' },
   catid: { required: true, label: 'Category' },
   minimum_initial: { required: true, label: 'Minimum Initial Investment (English)' },
-  minimum_initial_ar: { required: true, label: 'الحد الأدنى للاستثمار الأولي (عربي)' },
+  minimum_initial_ar: { required: true, label: 'الحد الأدنى للاستثمار الأول (عربي)' },
   Minimum_redemption_amount: { required: true, label: 'Minimum Redemption Amount (English)' },
   Minimum_redemption_amount_ar: { required: true, label: 'الحد الأدنى للاسترداد (عربي)' },
   subscription_fee: { required: true, label: 'Subscription Fee (English)' },
@@ -334,7 +334,7 @@ const { showSuccess, showError } = useToast();
                   <input type="text" name="minimum_initial" value={formData.minimum_initial} onChange={handleChange}
                     className={inputClass(!!fieldErrors.minimum_initial)} />
                 </Field>
-                <Field label="الحد الأدنى للاستثمار الأولي (عربي)" error={fieldErrors.minimum_initial_ar}>
+                <Field label="الحد الأدنى للاستثمار الأول (عربي)" error={fieldErrors.minimum_initial_ar}>
                   <input type="text" name="minimum_initial_ar" value={formData.minimum_initial_ar} onChange={handleChange}
                     className={inputClass(!!fieldErrors.minimum_initial_ar)} />
                 </Field>

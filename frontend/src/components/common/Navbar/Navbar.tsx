@@ -135,7 +135,7 @@ export default function Navbar() {
               </Link>
 
               <div className="flex px-16 -mx-4 flex-row items-center capitalize">
-                <Link href={localePath('/')} onClick={closeAll} className="transition-all duration-500 text-gray-500 dark:text-gray-400 transform mx-4 hover:-translate-y-0.5 hover:bg-[#00437a] hover:text-white px-3 py-1 rounded-full font-medium">
+                <Link href={localePath('/')} onClick={closeAll} className="transition-all duration-500 text-gray-500 dark:text-gray-400 transform mx-4 hover:-translate-y-0.5 hover:bg-[#00437a] hover:text-white px-3 py-1 rounded-full font-bold">
                   {t('home')}
                 </Link>
 
@@ -143,7 +143,7 @@ export default function Navbar() {
                 <div className="relative dropdown-container" onMouseLeave={() => setDropdownOpen(null)}>
                   <button
                     onClick={() => toggleDropdown('about')}
-                    className="transition-all duration-500 text-gray-500 dark:text-gray-400 transform mx-4 hover:-translate-y-0.5 hover:bg-[#00437a] hover:text-white px-3 py-1 rounded-full font-medium flex items-center"
+                    className="transition-all duration-500 text-gray-500 dark:text-gray-400 transform mx-4 hover:-translate-y-0.5 hover:bg-[#00437a] hover:text-white px-3 py-1 rounded-full font-bold flex items-center"
                   >
                     {t('about')}
                     <svg className={`w-4 h-4 ${isRTL ? 'mr-1' : 'ml-1'} transition-transform ${dropdownOpen === 'about' ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -151,8 +151,8 @@ export default function Navbar() {
                     </svg>
                   </button>
                   {dropdownOpen === 'about' && (
-                    <div className={`absolute top-full mt-[1px] w-64 bg-white dark:bg-[#1a1a1a] shadow-lg rounded-lg z-[9999] border border-gray-200 dark:border-gray-700 ${isRTL ? 'right-0' : 'left-0'}`}>
-                      <Link href={localePath('/about')} onClick={closeAll} className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">{t('about')}</Link>
+                    <div className={`absolute top-full mt-[1px] w-64 bg-white dark:bg-[#1a1a1a] shadow-lg rounded-lg z-[9999] border border-[#00437A] dark:border-gray-700 ${isRTL ? 'right-0' : 'left-0'}`}>
+                      <Link href={localePath('/about')} onClick={closeAll} className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">{t('aboutPage')}</Link>
                       <Link href={localePath('/about/holdingcompany')} onClick={closeAll} className="block px-4 py-3 text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">{t('holdingCompany')}</Link>
                       <Link href={localePath('/about/Committeessupportingboard')} onClick={closeAll} className="block px-4 py-3 text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">{t('committees')}</Link>
                     </div>
@@ -163,7 +163,7 @@ export default function Navbar() {
                 <div className="relative dropdown-container" onMouseLeave={() => setDropdownOpen(null)}>
                   <button
                     onClick={() => toggleDropdown('services')}
-                    className="transition-all duration-500 text-gray-500 dark:text-gray-400 transform mx-4 hover:-translate-y-0.5 hover:bg-[#00437a] hover:text-white px-3 py-1 rounded-full font-medium flex items-center"
+                    className="transition-all duration-500 text-gray-500 dark:text-gray-400 transform mx-4 hover:-translate-y-0.5 hover:bg-[#00437a] hover:text-white px-3 py-1 rounded-full font-bold flex items-center"
                   >
                     {t('services')}
                     <svg className={`w-4 h-4 ${isRTL ? 'mr-1' : 'ml-1'} transition-transform ${dropdownOpen === 'services' ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -171,8 +171,8 @@ export default function Navbar() {
                     </svg>
                   </button>
                   {dropdownOpen === 'services' && (
-                    <div className={`absolute top-full mt-[1px] w-64 bg-white dark:bg-[#1a1a1a] shadow-lg rounded-lg z-[9999] border border-gray-200 dark:border-gray-700 ${isRTL ? 'right-0' : 'left-0'}`}>
-                      <Link href={localePath('/services')} onClick={closeAll} className="block px-4 py-3 text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">{t('services')}</Link>
+                    <div className={`absolute top-full mt-[1px] w-64 bg-white dark:bg-[#1a1a1a] shadow-lg rounded-lg z-[9999] border border-[#00437A] dark:border-gray-700 ${isRTL ? 'right-0' : 'left-0'}`}>
+                      <Link href={localePath('/services')} onClick={closeAll} className="block px-4 py-3 text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">{t('servicesPage')}</Link>
                       <Link href={localePath('/services/fundsmanagement')} onClick={closeAll} className="block px-4 py-3 text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">{t('fundsManagement')}</Link>
                       <Link href="#" onClick={closeAll} className="block px-4 py-3 text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">{t('portfolioManagement')}</Link>
                       <Link href="#" onClick={closeAll} className="block px-4 py-3 text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">{t('cashManagement')}</Link>
@@ -182,9 +182,9 @@ export default function Navbar() {
                   )}
                 </div>
 
-                <Link href={localePath('/blogs')} onClick={closeAll} className="transition-all duration-500 text-gray-500 dark:text-gray-400 transform mx-4 hover:-translate-y-0.5 hover:bg-[#00437a] hover:text-white px-3 py-1 rounded-full font-medium">{t('blogs')}</Link>
-                <Link href={localePath('/careers')} onClick={closeAll} className="transition-all duration-500 text-gray-500 dark:text-gray-400 transform mx-4 hover:-translate-y-0.5 hover:bg-[#00437a] hover:text-white px-3 py-1 rounded-full font-medium">{t('careers')}</Link>
-                <Link href={localePath('/contact')} onClick={closeAll} className="transition-all duration-500 text-gray-500 dark:text-gray-400 transform mx-4 hover:-translate-y-0.5 hover:bg-[#00437a] hover:text-white px-3 py-1 rounded-full font-medium">{t('contact')}</Link>
+                <Link href={localePath('/blogs')} onClick={closeAll} className="transition-all duration-500 text-gray-500 dark:text-gray-400 transform mx-4 hover:-translate-y-0.5 hover:bg-[#00437a] hover:text-white px-3 py-1 rounded-full font-bold">{t('blogs')}</Link>
+                <Link href={localePath('/careers')} onClick={closeAll} className="transition-all duration-500 text-gray-500 dark:text-gray-400 transform mx-4 hover:-translate-y-0.5 hover:bg-[#00437a] hover:text-white px-3 py-1 rounded-full font-bold">{t('careers')}</Link>
+                <Link href={localePath('/contact')} onClick={closeAll} className="transition-all duration-500 text-gray-500 dark:text-gray-400 transform mx-4 hover:-translate-y-0.5 hover:bg-[#00437a] hover:text-white px-3 py-1 rounded-full font-bold">{t('contact')}</Link>
               </div>
 
               <div className="flex items-center -mx-2">
@@ -192,13 +192,13 @@ export default function Navbar() {
                   <Link
                     href={switchLocalePath('en')}
                     onClick={closeAll}
-                    className={`px-3 py-1 rounded-full text-sm font-medium transition-all duration-300 ${currentLocale === 'en' ? 'bg-[#00437a] text-white' : 'text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200'}`}>
+                    className={`px-3 py-1 rounded-full text-sm font-bold transition-all duration-300 ${currentLocale === 'en' ? 'bg-[#00437a] text-white' : 'text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200'}`}>
                     En
                   </Link>
                   <Link
                     href={switchLocalePath('ar')}
                     onClick={closeAll}
-                    className={`px-3 py-1 rounded-full text-sm font-medium transition-all duration-300 ${currentLocale === 'ar' ? 'bg-[#00437a] text-white' : 'text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200'}`}>
+                    className={`px-3 py-1 rounded-full text-sm font-bold transition-all duration-300 ${currentLocale === 'ar' ? 'bg-[#00437a] text-white' : 'text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200'}`}>
                     Ar
                   </Link>
                 </div>
@@ -258,7 +258,7 @@ export default function Navbar() {
                     </button>
                     {dropdownOpen === 'about' && (
                       <div className={`${isRTL ? 'mr-4 border-r-2' : 'ml-4 border-l-2'} border-[#00437A] mt-2 flex flex-col gap-1 px-3 py-2 bg-gray-50 dark:bg-gray-800/30 rounded-lg`}>
-                        <Link href={localePath('/about')} onClick={closeAll} className="block px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:text-[#00437A] dark:hover:text-blue-400 transition-colors rounded-lg hover:bg-white dark:hover:bg-gray-800">{t('about')}</Link>
+                        <Link href={localePath('/about')} onClick={closeAll} className="block px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:text-[#00437A] dark:hover:text-blue-400 transition-colors rounded-lg hover:bg-white dark:hover:bg-gray-800">{t('aboutPage')}</Link>
                         <Link href={localePath('/about/holdingcompany')} onClick={closeAll} className="block px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:text-[#00437A] dark:hover:text-blue-400 transition-colors rounded-lg hover:bg-white dark:hover:bg-gray-800">{t('holdingCompany')}</Link>
                         <Link href="#" onClick={closeAll} className="block px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:text-[#00437A] dark:hover:text-blue-400 transition-colors rounded-lg hover:bg-white dark:hover:bg-gray-800">{t('committees')}</Link>
                       </div>
@@ -283,6 +283,7 @@ export default function Navbar() {
                     </button>
                     {dropdownOpen === 'services' && (
                       <div className={`${isRTL ? 'mr-4 border-r-2' : 'ml-4 border-l-2'} border-[#00437A] mt-2 flex flex-col gap-1 px-3 py-2 bg-gray-50 dark:bg-gray-800/30 rounded-lg`}>
+                        <Link href={localePath('/services')} onClick={closeAll} className="block px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:text-[#00437A] dark:hover:text-blue-400 transition-colors rounded-lg hover:bg-white dark:hover:bg-gray-800">{t('servicesPage')}</Link>
                         <Link href={localePath('/services/fundsmanagement')} onClick={closeAll} className="block px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:text-[#00437A] dark:hover:text-blue-400 transition-colors rounded-lg hover:bg-white dark:hover:bg-gray-800">{t('fundsManagement')}</Link>
                         <Link href="#" onClick={closeAll} className="block px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:text-[#00437A] dark:hover:text-blue-400 transition-colors rounded-lg hover:bg-white dark:hover:bg-gray-800">{t('portfolioManagement')}</Link>
                         <Link href="#" onClick={closeAll} className="block px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:text-[#00437A] dark:hover:text-blue-400 transition-colors rounded-lg hover:bg-white dark:hover:bg-gray-800">{t('cashManagement')}</Link>

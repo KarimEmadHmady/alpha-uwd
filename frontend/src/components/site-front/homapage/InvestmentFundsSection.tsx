@@ -115,7 +115,7 @@ export default function InvestmentFundsSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 border border-gray-200 rounded-full px-5 py-2 text-xl  mb-4 text-gray-800 dark:text-gray-50 bg-white dark:bg-gray-800 shadow-lg ">
+          <div className="inline-flex items-center gap-2 border-3 border-[#00437A] rounded-full px-5 py-2 text-xl  mb-4 text-gray-800 dark:text-gray-50 bg-white dark:bg-gray-800 shadow-lg ">
             {t("title")}
           </div>
         </div>

@@ -92,7 +92,7 @@ export default async function ServicesSection({ lang }: { lang: string }) {
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="mb-10">
-          <div className="inline-flex items-center gap-2 border border-gray-200 rounded-full px-5 py-2 text-xl  mb-3  text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-800 shadow-lg">
+          <div className="inline-flex items-center gap-2 border-3 border-[#00437A] rounded-full px-5 py-2 text-xl  mb-3  text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-800 shadow-lg">
             {services.badgeText}
           </div>
           <p className=" text-sm text-gray-800 dark:text-gray-50 ">

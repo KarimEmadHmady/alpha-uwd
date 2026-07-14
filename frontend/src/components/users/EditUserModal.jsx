@@ -288,7 +288,7 @@ const EditUserModal = ({ isOpen, onClose, user, onUpdateUser, isCurrentUser }) =
                 {!isCurrentUser && <span className="ml-2 text-xs text-gray-500"></span>}
               </label>
               {isCurrentUser ? (
-                <div className="w-full px-4 py-3 border border-gray-200 rounded-lg bg-gray-50 text-gray-700">
+                <div className="w-full px-4 py-3 border-3 border-[#00437A] rounded-lg bg-gray-50 text-gray-700">
                   {formData.role}
                 </div>
               ) : (
@@ -322,7 +322,7 @@ const EditUserModal = ({ isOpen, onClose, user, onUpdateUser, isCurrentUser }) =
                   placeholder="Tell us about yourself..."
                 />
               ) : (
-                <div className="w-full px-4 py-3 border border-gray-200 rounded-lg bg-gray-50 text-gray-700 min-h-[80px]">
+                <div className="w-full px-4 py-3 border-3 border-[#00437A] rounded-lg bg-gray-50 text-gray-700 min-h-[80px]">
                   {formData.bio || 'No bio provided'}
                 </div>
               )}

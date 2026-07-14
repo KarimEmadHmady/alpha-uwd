@@ -19,7 +19,7 @@ export default function FAQSection({ faqs, content, lang }: Props) {
 
           {/* Left */}
           <div className="space-y-6">
-            <div className="inline-flex items-center gap-2 border border-gray-200 rounded-full px-5 py-2 text-xl text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-800 shadow-lg ">
+            <div className="inline-flex items-center gap-2 border-3 border-[#00437A] rounded-full px-5 py-2 text-xl text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-800 shadow-lg ">
               {content.badgeText}
             </div>
             <h2 className="text-3xl lg:text-4xl font-bold leading-snug text-gray-800 dark:text-gray-200">

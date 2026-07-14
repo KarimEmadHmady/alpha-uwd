@@ -27,7 +27,7 @@ const VALIDATIONS = {
   fund_manager_name_en:         { required: true, label: 'Fund Manager Name (English)' },
   catid:                        { required: true, label: 'Category' },
   minimum_initial:              { required: true, label: 'Minimum Initial Investment (English)' },
-  minimum_initial_ar:           { required: true, label: 'الحد الأدنى للاستثمار الأولي (عربي)' },
+  minimum_initial_ar:           { required: true, label: 'الحد الأدنى للاستثمار الأول (عربي)' },
   Minimum_redemption_amount:    { required: true, label: 'Minimum Redemption Amount (English)' },
   Minimum_redemption_amount_ar: { required: true, label: 'الحد الأدنى للاسترداد (عربي)' },
   subscription_fee:             { required: true, label: 'Subscription Fee (English)' },

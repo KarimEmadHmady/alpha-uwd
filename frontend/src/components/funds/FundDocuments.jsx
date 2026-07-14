@@ -226,7 +226,7 @@ const FundDocuments = ({ fundId }) => {
           </div>
         ) : (
           documents.map((doc) => (
-            <div key={doc.id} className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-all duration-200 hover:scale-105">
+            <div key={doc.id} className="bg-white border-3 border-[#00437A] rounded-lg p-6 hover:shadow-lg transition-all duration-200 hover:scale-105">
               {/* PDF Icon */}
               <div className="flex justify-center mb-4">
                 <div className="w-16 h-16 bg-red-50 rounded-lg flex items-center justify-center">

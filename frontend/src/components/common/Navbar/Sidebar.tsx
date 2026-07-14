@@ -151,7 +151,7 @@ export default function Sidebar() {
                 <div
                   id="dropdown-user"
                   onMouseLeave={() => setDropdownOpen(null)}
-                  className={`absolute top-full right-0 mt-2 z-50 bg-white/95 backdrop-blur-md border border-gray-200 rounded-xl shadow-2xl w-auto transition-all duration-300 ${dropdownOpen === 'user'
+                  className={`absolute top-full right-0 mt-2 z-50 bg-white/95 backdrop-blur-md border-3 border-[#00437A] rounded-xl shadow-2xl w-auto transition-all duration-300 ${dropdownOpen === 'user'
                       ? 'block scale-100 opacity-100'
                       : 'hidden scale-95 opacity-0'
                     }`}

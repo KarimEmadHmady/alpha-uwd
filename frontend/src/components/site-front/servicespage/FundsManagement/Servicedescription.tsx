@@ -85,7 +85,7 @@ return (
                     className={`flex items-center justify-between w-full px-4 py-3 rounded-xl text-sm font-medium transition-colors duration-200 ${
                       service.active
                         ? "bg-[#1a3c6e] text-white shadow-md"
-                        : "bg-white dark:bg-[#1a1a1a] text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-[#333] border border-gray-200 dark:border-gray-600"
+                        : "bg-white dark:bg-[#1a1a1a] text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-[#333] border-3 border-[#00437A] dark:border-gray-600"
                     }`}
                   >
                     <span>{service.label}</span>

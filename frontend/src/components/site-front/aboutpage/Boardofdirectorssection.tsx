@@ -42,7 +42,7 @@ return (
 
         {/* Header */}
         <div className="mb-10">
-          <div className="inline-flex items-center gap-2 border border-gray-200 dark:border-gray-700 rounded-full px-5 py-2 text-xl text-gray-600 dark:text-gray-400  bg-white dark:bg-gray-800 shadow-lg bg-gray-50 dark:bg-white/5">
+          <div className="inline-flex items-center gap-2 border-3 border-[#00437A] dark:border-gray-700 rounded-full px-5 py-2 text-xl text-gray-600 dark:text-gray-400  bg-white dark:bg-gray-800 shadow-lg bg-gray-50 dark:bg-white/5">
             Board Of Director
           </div>
         </div>
@@ -78,7 +78,7 @@ return (
                   <div className="flex gap-2">
                     <a
                       href="#"
-                      className="w-7 h-7 rounded-full border border-gray-200 dark:border-gray-600 flex items-center justify-center text-gray-400 dark:text-gray-500 hover:border-[#00437A] hover:text-[#00437A] dark:hover:border-[#00437A] dark:hover:text-[#00437A] transition-colors"
+                      className="w-7 h-7 rounded-full border-3 border-[#00437A] dark:border-gray-600 flex items-center justify-center text-gray-400 dark:text-gray-500 hover:border-[#00437A] hover:text-[#00437A] dark:hover:border-[#00437A] dark:hover:text-[#00437A] transition-colors"
                       aria-label="LinkedIn"
                     >
                       <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
@@ -87,7 +87,7 @@ return (
                     </a>
                     <a
                       href="#"
-                      className="w-7 h-7 rounded-full border border-gray-200 dark:border-gray-600 flex items-center justify-center text-gray-400 dark:text-gray-500 hover:border-[#00437A] hover:text-[#00437A] dark:hover:border-[#00437A] dark:hover:text-[#00437A] transition-colors"
+                      className="w-7 h-7 rounded-full border-3 border-[#00437A] dark:border-gray-600 flex items-center justify-center text-gray-400 dark:text-gray-500 hover:border-[#00437A] hover:text-[#00437A] dark:hover:border-[#00437A] dark:hover:text-[#00437A] transition-colors"
                       aria-label="Email"
                     >
                       <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">

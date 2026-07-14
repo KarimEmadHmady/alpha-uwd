@@ -28,7 +28,7 @@ const FundDetails: React.FC<FundDetailsProps> = ({ fundData }) => {
     { label: t('fundDetails.redemptionFee'), value: fundDetails?.redemption_fee || 'N/A', highlight: true },
     { label: t('fundDetails.annualFee'), value: fundDetails?.annualfee || 'N/A', highlight: true },
     { label: t('fundDetails.fundManager'), value: fundDetails?.fund_manager_name || 'N/A', highlight: true },
-    { label: t('fundDetails.latestPrice'), value: fundDetails?.latest_price || 'N/A', highlight: false },
+    // { label: t('fundDetails.latestPrice'), value: fundDetails?.latest_price || 'N/A', highlight: false },
     { label: t('fundDetails.latestPriceDate'), value: (fundDetails?.latest_price_date && fundDetails?.status === 1 || fundDetails?.status === -1)  ? new Date(fundDetails.latest_price_date).toLocaleDateString() : 'N/A', highlight: false },
   ];
 return (
@@ -49,33 +49,34 @@ return (
         {t('fundDetails.details')}
       </h2>
       <div className={`bg-white dark:bg-[#1a1a1a] rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden ${locale === 'ar' ? 'rtl' : ''}`}>
-        {rows.map((row, i) => (
-          <div
-            key={row.label}
-            className={[
-              'flex',
-              'items-center',
-              'justify-between',
-              'px-6',
-              'py-4',
-              i !== rows.length - 1 ? 'border-b border-gray-100 dark:border-gray-800' : '',
-              locale === 'ar' ? 'flex-row-reverse' : ''
-            ].join(' ')}
-          >
-            <span className="text-gray-500 dark:text-gray-400 text-sm">{row.label}</span>
-            <span
-              className={[
-                'text-sm',
-                'font-medium',
-                'text-right',
-                'max-w-[55%]',
-                row.highlight ? 'text-[#00437A] dark:text-blue-400' : 'text-gray-800 dark:text-gray-50'
-              ].join(' ')}
-            >
-              {row.value}
-            </span>
-          </div>
-        ))}
+{rows.map((row, i) => (
+  <div
+    key={row.label}
+    dir={locale === 'ar' ? 'rtl' : 'ltr'}
+    className={[
+      'flex',
+      'items-center',
+      'justify-between',
+      'px-6',
+      'py-4',
+     'font-bold',
+      i !== rows.length - 1 ? 'border-b border-gray-100 dark:border-gray-800' : '',
+    ].join(' ')}
+  >
+    <span className="text-gray-500 dark:text-gray-400 text-sm">{row.label}</span>
+    <span
+      className={[
+        'text-sm',
+        'font-medium',
+        locale === 'ar' ? 'text-left' : 'text-right',
+        'max-w-[55%]',
+        row.highlight ? 'text-[#00437A] dark:text-blue-400' : 'text-gray-800 dark:text-gray-50'
+      ].join(' ')}
+    >
+      {row.value}
+    </span>
+  </div>
+))}
       </div>
     </div>
 
