@@ -116,7 +116,7 @@ function MemberCard({ img, name, title, index }: MemberCardProps) {
             {/* LinkedIn */}
             <a
               href="#"
-              className="w-7 h-7 rounded-full border-3 border-[#00437A] flex items-center justify-center text-gray-400 hover:border-[#00437A] hover:text-[#00437A] transition-colors"
+              className="w-7 h-7 rounded-full border border-[#00437A] flex items-center justify-center text-gray-400 hover:border-[#00437A] hover:text-[#00437A] transition-colors"
               aria-label="LinkedIn"
             >
               <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
@@ -126,7 +126,7 @@ function MemberCard({ img, name, title, index }: MemberCardProps) {
             {/* Email */}
             <a
               href="#"
-              className="w-7 h-7 rounded-full border-3 border-[#00437A] flex items-center justify-center text-gray-400 hover:border-[#00437A] hover:text-[#00437A] transition-colors"
+              className="w-7 h-7 rounded-full border border-[#00437A] flex items-center justify-center text-gray-400 hover:border-[#00437A] hover:text-[#00437A] transition-colors"
               aria-label="Email"
             >
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">

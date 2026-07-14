@@ -130,7 +130,7 @@ return (
               className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 ${
                 activeTab === tab.key
                   ? "bg-white text-[#00437A]"
-                  : "bg-white dark:bg-gray-700 text-gray-500 dark:text-gray-400 border-3 border-[#00437A] dark:border-gray-600"
+                  : "bg-white dark:bg-gray-700 text-gray-500 dark:text-gray-400 border border-[#00437A] dark:border-gray-600"
               }`}
             >
               <ArrowRight className="w-3.5 h-3.5" />

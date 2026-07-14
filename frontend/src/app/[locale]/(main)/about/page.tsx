@@ -7,8 +7,8 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       <HeroSectionWrapper lang={lang} />
       <AboutSection lang={lang} />
       <OurStorySection lang={lang} />
-      <WhyChooseUsSection />
-      <PartnersStripSection />
+      <WhyChooseUsSection lang={lang} />
+      <PartnersStripSection lang={lang} />
       <BoardOfDirectorsSection  lang={lang}/>
     </main>
   );

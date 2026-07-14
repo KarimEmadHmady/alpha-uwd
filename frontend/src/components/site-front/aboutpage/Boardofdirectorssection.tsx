@@ -2,48 +2,56 @@
 
 import Image from 'next/image';
 
-const BOARD = [
-  {
-    img: '/board/ahmed-darwish.jpg',
-    name: 'DR. Ahmed Darwish',
-    title: 'Managing Director Funds & Portfolios Management',
-  },
-  {
-    img: '/board/rania-essam.jpg',
-    name: 'MS. Rania Essam',
-    title: 'Board Members',
-  },
-  {
-    img: '/board/mohamed-hassan.jpg',
-    name: 'MR. Mohamed Hassan',
-    title: 'Managing Director - Specialized Investment Funds',
-  },
-  {
-    img: '/board/ahmed-shehata.jpg',
-    name: 'DR. Ahmed Shehata',
-    title: 'Managing Director REITs & Private Equity Funds',
-  },
-  {
-    img: '/board/heba-zaghoul.jpg',
-    name: 'ENG. Heba Saad Zaghoul',
-    title: 'Board Members',
-  },
-  {
-    img: '/board/ashraf-elaraby.jpg',
-    name: 'DR. Ashraf El-Araby',
-    title: 'Board Members',
-  },
-];
+interface BoardOfDirectorsSectionProps {
+  data?: any;
+  BASE_URL?: string;
+  lang?: string;
+}
 
-export default function BoardOfDirectorsSection({ lang }: { lang: string }) {
+export default function BoardOfDirectorsSection({ data, BASE_URL, lang }: BoardOfDirectorsSectionProps) {
+  const safeData = data || {};
+  const safeLang = lang || 'en';
+
+  const BOARD = [
+    {
+      img: safeData.member1Image?.startsWith('http') ? safeData.member1Image : (safeData.member1Image ? `${BASE_URL}/${safeData.member1Image}` : '/board/ahmed-darwish.jpg'),
+      name: safeData.member1Name || 'DR. Ahmed Darwish',
+      title: safeData.member1Title || 'Managing Director Funds & Portfolios Management',
+    },
+    {
+      img: safeData.member2Image?.startsWith('http') ? safeData.member2Image : (safeData.member2Image ? `${BASE_URL}/${safeData.member2Image}` : '/board/rania-essam.jpg'),
+      name: safeData.member2Name || 'MS. Rania Essam',
+      title: safeData.member2Title || 'Board Members',
+    },
+    {
+      img: safeData.member3Image?.startsWith('http') ? safeData.member3Image : (safeData.member3Image ? `${BASE_URL}/${safeData.member3Image}` : '/board/mohamed-hassan.jpg'),
+      name: safeData.member3Name || 'MR. Mohamed Hassan',
+      title: safeData.member3Title || 'Managing Director - Specialized Investment Funds',
+    },
+    {
+      img: safeData.member4Image?.startsWith('http') ? safeData.member4Image : (safeData.member4Image ? `${BASE_URL}/${safeData.member4Image}` : '/board/ahmed-shehata.jpg'),
+      name: safeData.member4Name || 'DR. Ahmed Shehata',
+      title: safeData.member4Title || 'Managing Director REITs & Private Equity Funds',
+    },
+    {
+      img: safeData.member5Image?.startsWith('http') ? safeData.member5Image : (safeData.member5Image ? `${BASE_URL}/${safeData.member5Image}` : '/board/heba-zaghoul.jpg'),
+      name: safeData.member5Name || 'ENG. Heba Saad Zaghoul',
+      title: safeData.member5Title || 'Board Members',
+    },
+    {
+      img: safeData.member6Image?.startsWith('http') ? safeData.member6Image : (safeData.member6Image ? `${BASE_URL}/${safeData.member6Image}` : '/board/ashraf-elaraby.jpg'),
+      name: safeData.member6Name || 'DR. Ashraf El-Araby',
+      title: safeData.member6Title || 'Board Members',
+    },
+  ];
 return (
     <section className="py-20 bg-white dark:bg-[#1a1a1a]" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Header */}
         <div className="mb-10">
-          <div className="inline-flex items-center gap-2 border-3 border-[#00437A] dark:border-gray-700 rounded-full px-5 py-2 text-xl text-gray-600 dark:text-gray-400  bg-white dark:bg-gray-800 shadow-lg bg-gray-50 dark:bg-white/5">
-            Board Of Director
+          <div className="inline-flex items-center gap-2 border border-[#00437A] dark:border-gray-700 rounded-full px-5 py-2 text-xl text-gray-600 dark:text-gray-400  bg-white dark:bg-gray-800 shadow-lg bg-gray-50 dark:bg-white/5">
+            {safeData.badgeText || 'Board Of Director'}
           </div>
         </div>
 
@@ -78,7 +86,7 @@ return (
                   <div className="flex gap-2">
                     <a
                       href="#"
-                      className="w-7 h-7 rounded-full border-3 border-[#00437A] dark:border-gray-600 flex items-center justify-center text-gray-400 dark:text-gray-500 hover:border-[#00437A] hover:text-[#00437A] dark:hover:border-[#00437A] dark:hover:text-[#00437A] transition-colors"
+                      className="w-7 h-7 rounded-full border border-[#00437A] dark:border-gray-600 flex items-center justify-center text-gray-400 dark:text-gray-500 hover:border-[#00437A] hover:text-[#00437A] dark:hover:border-[#00437A] dark:hover:text-[#00437A] transition-colors"
                       aria-label="LinkedIn"
                     >
                       <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
@@ -87,7 +95,7 @@ return (
                     </a>
                     <a
                       href="#"
-                      className="w-7 h-7 rounded-full border-3 border-[#00437A] dark:border-gray-600 flex items-center justify-center text-gray-400 dark:text-gray-500 hover:border-[#00437A] hover:text-[#00437A] dark:hover:border-[#00437A] dark:hover:text-[#00437A] transition-colors"
+                      className="w-7 h-7 rounded-full border border-[#00437A] dark:border-gray-600 flex items-center justify-center text-gray-400 dark:text-gray-500 hover:border-[#00437A] hover:text-[#00437A] dark:hover:border-[#00437A] dark:hover:text-[#00437A] transition-colors"
                       aria-label="Email"
                     >
                       <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">

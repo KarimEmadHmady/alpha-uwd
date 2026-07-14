@@ -171,7 +171,7 @@ export default function FundsGrid({ lang }: { lang: string }) {
             className={`px-5 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${
               activeTab === "All"
                 ? "bg-[#1a3c6e] text-white shadow"
-                : "bg-white dark:bg-transparent text-gray-700 dark:text-gray-400 border-3 border-[#00437A] dark:border-gray-600 hover:bg-gray-100 dark:hover:border-[#1a3c6e] dark:hover:text-[#1a3c6e]"
+                : "bg-white dark:bg-transparent text-gray-700 dark:text-gray-400 border border-[#00437A] dark:border-gray-600 hover:bg-gray-100 dark:hover:border-[#1a3c6e] dark:hover:text-[#1a3c6e]"
             }`}
           >
             All
@@ -183,7 +183,7 @@ export default function FundsGrid({ lang }: { lang: string }) {
               className={`px-5 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${
                 activeTab === (category.name || category.title)
                   ? "bg-[#1a3c6e] text-white shadow"
-                  : "bg-white dark:bg-transparent text-gray-700 dark:text-gray-400 border-3 border-[#00437A] dark:border-gray-600 hover:bg-gray-100 dark:hover:border-[#1a3c6e] dark:hover:text-[#1a3c6e]"
+                  : "bg-white dark:bg-transparent text-gray-700 dark:text-gray-400 border border-[#00437A] dark:border-gray-600 hover:bg-gray-100 dark:hover:border-[#1a3c6e] dark:hover:text-[#1a3c6e]"
               }`}
             >
               {category.name || category.title}

@@ -42,13 +42,13 @@ const FALLBACK = {
   highlight3: 'Provides Family Portfolio Management Services',
   otherServicesTitle: 'Other Services',
   otherService1Label: 'Portfolio Management',
-  otherService1Link: '/services/portfolio-management',
+  otherService1Link: '/services/PortfolioManagement',
   otherService2Label: 'Cash Management',
-  otherService2Link: '/services/cash-management',
+  otherService2Link: '/services/CashManagement',
   otherService3Label: 'Private Pension Funds',
-  otherService3Link: '/services/private-pension-funds',
+  otherService3Link: '/services/PrivatePensionFunds',
   otherService4Label: 'Managing Family Business',
-  otherService4Link: '/services/managing-family-business',
+  otherService4Link: '/services/ManagingFamilyBusiness',
 };
 
 export default async function ServiceDescriptionWrapper({ lang }: { lang: string }) {

@@ -174,10 +174,10 @@ export default function Navbar() {
                     <div className={`absolute top-full mt-[1px] w-64 bg-white dark:bg-[#1a1a1a] shadow-lg rounded-lg z-[9999] border border-[#00437A] dark:border-gray-700 ${isRTL ? 'right-0' : 'left-0'}`}>
                       <Link href={localePath('/services')} onClick={closeAll} className="block px-4 py-3 text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">{t('servicesPage')}</Link>
                       <Link href={localePath('/services/fundsmanagement')} onClick={closeAll} className="block px-4 py-3 text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">{t('fundsManagement')}</Link>
-                      <Link href="#" onClick={closeAll} className="block px-4 py-3 text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">{t('portfolioManagement')}</Link>
-                      <Link href="#" onClick={closeAll} className="block px-4 py-3 text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">{t('cashManagement')}</Link>
-                      <Link href="#" onClick={closeAll} className="block px-4 py-3 text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">{t('privatePension')}</Link>
-                      <Link href="#" onClick={closeAll} className="block px-4 py-3 text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">{t('familyBusiness')}</Link>
+                      <Link href={localePath('/services/PortfolioManagement')} onClick={closeAll} className="block px-4 py-3 text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">{t('portfolioManagement')}</Link>
+                      <Link href={localePath('/services/CashManagement')} onClick={closeAll} className="block px-4 py-3 text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">{t('cashManagement')}</Link>
+                      <Link href={localePath('/services/PrivatePensionFunds')} onClick={closeAll} className="block px-4 py-3 text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">{t('privatePension')}</Link>
+                      <Link href={localePath('/services/ManagingFamilyBusiness')} onClick={closeAll} className="block px-4 py-3 text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">{t('familyBusiness')}</Link>
                     </div>
                   )}
                 </div>

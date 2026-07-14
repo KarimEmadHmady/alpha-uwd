@@ -16,22 +16,22 @@ export default function ServiceDescription({ data, BASE_URL, lang }: ServiceDesc
   const otherServices = [
     { 
       label: safeData.otherService1Label || "Portfolio Management", 
-      href: safeData.otherService1Link || "/services/portfolio-management", 
+      href: safeData.otherService1Link || "/services/PortfolioManagement", 
       active: true 
     },
     { 
       label: safeData.otherService2Label || "Cash Management", 
-      href: safeData.otherService2Link || "/services/cash-management", 
+      href: safeData.otherService2Link || "/services/CashManagement", 
       active: false 
     },
     { 
       label: safeData.otherService3Label || "Private Pension Funds", 
-      href: safeData.otherService3Link || "/services/private-pension-funds", 
+      href: safeData.otherService3Link || "/services/PrivatePensionFunds", 
       active: false 
     },
     { 
       label: safeData.otherService4Label || "Managing Family Business", 
-      href: safeData.otherService4Link || "/services/managing-family-business", 
+      href: safeData.otherService4Link || "/services/ManagingFamilyBusiness", 
       active: false 
     },
   ];
@@ -85,7 +85,7 @@ return (
                     className={`flex items-center justify-between w-full px-4 py-3 rounded-xl text-sm font-medium transition-colors duration-200 ${
                       service.active
                         ? "bg-[#1a3c6e] text-white shadow-md"
-                        : "bg-white dark:bg-[#1a1a1a] text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-[#333] border-3 border-[#00437A] dark:border-gray-600"
+                        : "bg-white dark:bg-[#1a1a1a] text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-[#333] border border-[#00437A] dark:border-gray-600"
                     }`}
                   >
                     <span>{service.label}</span>

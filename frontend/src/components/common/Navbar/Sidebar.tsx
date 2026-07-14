@@ -151,7 +151,7 @@ export default function Sidebar() {
                 <div
                   id="dropdown-user"
                   onMouseLeave={() => setDropdownOpen(null)}
-                  className={`absolute top-full right-0 mt-2 z-50 bg-white/95 backdrop-blur-md border-3 border-[#00437A] rounded-xl shadow-2xl w-auto transition-all duration-300 ${dropdownOpen === 'user'
+                  className={`absolute top-full right-0 mt-2 z-50 bg-white/95 backdrop-blur-md border border-[#00437A] rounded-xl shadow-2xl w-auto transition-all duration-300 ${dropdownOpen === 'user'
                       ? 'block scale-100 opacity-100'
                       : 'hidden scale-95 opacity-0'
                     }`}
@@ -339,6 +339,10 @@ export default function Sidebar() {
                           <ul className="ms-8 mt-2 space-y-1">
                             <li><Link href="/dashboard/page-content/services" className={subLinkClass(pathname === '/dashboard/page-content/services')}><span className="ms-3">Services Main</span></Link></li>
                             <li><Link href="/dashboard/page-content/services/fundsmanagement" className={subLinkClass(pathname.includes('/dashboard/page-content/services/fundsmanagement'))}><span className="ms-3">Funds Management</span></Link></li>
+                            <li><Link href="/dashboard/page-content/services/CashManagement" className={subLinkClass(pathname.includes('/dashboard/page-content/services/CashManagement'))}><span className="ms-3">Cash Management</span></Link></li>
+                            <li><Link href="/dashboard/page-content/services/PortfolioManagement" className={subLinkClass(pathname.includes('/dashboard/page-content/services/PortfolioManagement'))}><span className="ms-3">Portfolio Management</span></Link></li>
+                            <li><Link href="/dashboard/page-content/services/PrivatePensionFunds" className={subLinkClass(pathname.includes('/dashboard/page-content/services/PrivatePensionFunds'))}><span className="ms-3">Private Pension Funds</span></Link></li>
+                            <li><Link href="/dashboard/page-content/services/ManagingFamilyBusiness" className={subLinkClass(pathname.includes('/dashboard/page-content/services/ManagingFamilyBusiness'))}><span className="ms-3">Managing Family Business</span></Link></li>
                           </ul>
                         )}
                       </li>

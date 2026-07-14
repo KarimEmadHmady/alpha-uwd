@@ -115,7 +115,7 @@ export default function InvestmentFundsSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 border-3 border-[#00437A] rounded-full px-5 py-2 text-xl  mb-4 text-gray-800 dark:text-gray-50 bg-white dark:bg-gray-800 shadow-lg ">
+          <div className="inline-flex items-center gap-2 border border-[#00437A] rounded-full px-5 py-2 text-xl  mb-4 text-gray-800 dark:text-gray-50 bg-white dark:bg-gray-800 shadow-lg ">
             {t("title")}
           </div>
         </div>
@@ -207,7 +207,7 @@ export default function InvestmentFundsSection() {
                         </div>
 
                         {/* Last update */}
-                        <p className="text-[11px] text-gray-400">
+                        <p className="text-[11px] text-gray-800">
                           {t("lastUpdate")}:{" "}
                           {date
                             ? new Date(date).toLocaleDateString()
@@ -227,11 +227,13 @@ export default function InvestmentFundsSection() {
                         {/* Price + link */}
                         <div className="flex items-center justify-between mt-auto pt-3 border-t border-gray-50">
                           <div>
-                            <p className="text-[11px] text-gray-400">
-                              {t("price")}
-                            </p>
+
                             <div className="flex items-baseline gap-1">
                               <span className="text-sm font-bold text-gray-800 dark:text-gray-50">
+                                <span className="text-[11px] text-gray-600">
+                                  {t("price")}
+                                </span>
+                                {" "}
                                 {fund.status === 1
                                   ? fund.newprice || "0.00"
                                   : fund.currentprice || "0.00"}

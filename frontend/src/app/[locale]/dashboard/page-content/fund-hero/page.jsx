@@ -289,7 +289,7 @@ const FundHeroContentEditor = () => {
                         <img
                           src={preview || `${process.env.NEXT_PUBLIC_API_URL || 'https://revamp.alpha-odin.com/alpha'}/uploads/${existingPath}`}
                           alt={label}
-                          className="max-w-xs h-auto rounded-lg border-3 border-[#00437A]"
+                          className="max-w-xs h-auto rounded-lg border border-[#00437A]"
                         />
                       </div>
                     )}

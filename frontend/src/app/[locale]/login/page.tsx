@@ -53,7 +53,7 @@ export default function LoginPage() {
     }
   };
 
-  const handleKeyPress = (e) => {
+  const handleKeyPress = (e:any) => {
     if (e.key === 'Enter' && !isLoading && email && password) {
       handleSubmit();
     }
@@ -120,7 +120,7 @@ export default function LoginPage() {
                     onChange={(e) => setEmail(e.target.value)}
                     onKeyPress={handleKeyPress}
                     disabled={isLoading}
-                    className="w-full pl-12 pr-4 py-3.5 bg-gray-50 border-3 border-[#00437A] rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#00437a] focus:border-transparent focus:bg-white transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full pl-12 pr-4 py-3.5 bg-gray-50 border border-[#00437A] rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#00437a] focus:border-transparent focus:bg-white transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                     placeholder="admin@example.com"
                   />
                 </div>
@@ -146,7 +146,7 @@ export default function LoginPage() {
                     onChange={(e) => setPassword(e.target.value)}
                     onKeyPress={handleKeyPress}
                     disabled={isLoading}
-                    className="w-full pl-12 pr-12 py-3.5 bg-gray-50 border-3 border-[#00437A] rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#00437a] focus:border-transparent focus:bg-white transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full pl-12 pr-12 py-3.5 bg-gray-50 border border-[#00437A] rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#00437a] focus:border-transparent focus:bg-white transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                     placeholder="Enter your password"
                   />
                   <button

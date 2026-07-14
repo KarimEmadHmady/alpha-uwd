@@ -2,21 +2,28 @@
 
 import Image from 'next/image';
 
-const PARTNERS = [
-  { name: 'ODIN',      src: '/partners/odin.png' },
-  { name: 'Certus',    src: '/partners/certus.png' },
-  { name: 'EgyTrox',   src: '/partners/egytrox.png' },
-  { name: 'GreenCap',  src: '/partners/greencap.png' },
-  { name: 'FinGuard',  src: '/partners/finguard.png' },
-  { name: 'VoltFund',  src: '/partners/voltfund.png' },
-];
+interface PartnersStripSectionProps {
+  data?: any;
+  BASE_URL?: string;
+  lang?: string;
+}
 
-export default function TrustedBySection() {
+export default function TrustedBySection({ data, BASE_URL, lang }: PartnersStripSectionProps) {
+  const safeData = data || {};
+
+  const PARTNERS = [
+    { name: 'ODIN',      src: safeData.partner1Logo?.startsWith('http') ? safeData.partner1Logo : (safeData.partner1Logo ? `${BASE_URL}/${safeData.partner1Logo}` : '/partners/odin.png') },
+    { name: 'Certus',    src: safeData.partner2Logo?.startsWith('http') ? safeData.partner2Logo : (safeData.partner2Logo ? `${BASE_URL}/${safeData.partner2Logo}` : '/partners/certus.png') },
+    { name: 'EgyTrox',   src: safeData.partner3Logo?.startsWith('http') ? safeData.partner3Logo : (safeData.partner3Logo ? `${BASE_URL}/${safeData.partner3Logo}` : '/partners/egytrox.png') },
+    { name: 'GreenCap',  src: safeData.partner4Logo?.startsWith('http') ? safeData.partner4Logo : (safeData.partner4Logo ? `${BASE_URL}/${safeData.partner4Logo}` : '/partners/greencap.png') },
+    { name: 'FinGuard',  src: safeData.partner5Logo?.startsWith('http') ? safeData.partner5Logo : (safeData.partner5Logo ? `${BASE_URL}/${safeData.partner5Logo}` : '/partners/finguard.png') },
+    { name: 'VoltFund',  src: safeData.partner6Logo?.startsWith('http') ? safeData.partner6Logo : (safeData.partner6Logo ? `${BASE_URL}/${safeData.partner6Logo}` : '/partners/voltfund.png') },
+  ];
   return (
     <section className="py-12" dir="ltr">
       <div className="max-w-7xl mx-auto px-6">
         <p className="text-center text-xl text-gray-400 font-medium mb-8 tracking-wide uppercase">
-          Trusted By 15,000 Founders &amp; Business Owners
+          {safeData.title || 'Trusted By 15,000 Founders & Business Owners'}
         </p>
 
         <div className="relative overflow-hidden">

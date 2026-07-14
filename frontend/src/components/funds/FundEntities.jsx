@@ -228,7 +228,7 @@ const FundEntities = ({ fundId }) => {
           </div>
         ) : (
           entities.map((entity) => (
-            <div key={entity.id} className="bg-white border-3 border-[#00437A] rounded-lg p-6 hover:shadow-lg transition-all duration-200 hover:scale-105">
+            <div key={entity.id} className="bg-white border border-[#00437A] rounded-lg p-6 hover:shadow-lg transition-all duration-200 hover:scale-105">
               {/* Entity Image */}
               <div className="flex justify-center mb-4">
                 {entity.imageent ? (

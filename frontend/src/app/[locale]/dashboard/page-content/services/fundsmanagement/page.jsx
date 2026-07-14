@@ -327,7 +327,7 @@ const FundsManagementPageContentEditor = () => {
                       <img
                         src={imagePreviews[`${activeSection}-${field}`]}
                         alt={label}
-                        className="h-32 w-auto object-cover rounded-lg border-3 border-[#00437A]"
+                        className="h-32 w-auto object-cover rounded-lg border border-[#00437A]"
                       />
                     </div>
                   )}
@@ -338,7 +338,7 @@ const FundsManagementPageContentEditor = () => {
                           ? currentContent[field] 
                           : `${process.env.NEXT_PUBLIC_API_URL?.replace('/api', '')}/${currentContent[field]}`}
                         alt={label}
-                        className="h-32 w-auto object-cover rounded-lg border-3 border-[#00437A]"
+                        className="h-32 w-auto object-cover rounded-lg border border-[#00437A]"
                       />
                     </div>
                   )}

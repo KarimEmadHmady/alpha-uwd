@@ -97,7 +97,7 @@ return (
         </p>
 
         {/* Info Card */}
-        <div className="border-3 border-[#00437A] dark:border-gray-800 rounded-2xl p-6 mb-6">
+        <div className="border border-[#00437A] dark:border-gray-800 rounded-2xl p-6 mb-6">
           <div className="space-y-4 text-sm text-gray-700 dark:text-gray-300">
             <div className="flex gap-2">
               <span className="font-bold min-w-[110px] text-gray-800 dark:text-gray-50">Phone Number:</span>
@@ -144,7 +144,7 @@ return (
         </div>
 
         {/* Map */}
-        <div className="rounded-2xl overflow-hidden border-3 border-[#00437A] dark:border-gray-800 h-40 bg-gray-100 dark:bg-gray-900">
+        <div className="rounded-2xl overflow-hidden border border-[#00437A] dark:border-gray-800 h-40 bg-gray-100 dark:bg-gray-900">
           <iframe
             title="Alpha Asset Management Location"
             src="https://maps.google.com/maps?q=Smart+Village+Giza+Egypt&output=embed"

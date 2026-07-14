@@ -39,7 +39,7 @@ export default function JobCard({
   const t = translations[lang as keyof typeof translations] || translations.en;
 
 return (
-  <div className="flex flex-col justify-between rounded-xl border-3 border-[#00437A] dark:border-gray-800 bg-white dark:bg-[#1a1a1a] p-5 shadow-sm transition hover:shadow-md">
+  <div className="flex flex-col justify-between rounded-xl border border-[#00437A] dark:border-gray-800 bg-white dark:bg-[#1a1a1a] p-5 shadow-sm transition hover:shadow-md">
     {/* Top row: badge + availability */}
     <div className="mb-4 flex items-center justify-between">
       <span className="rounded-md bg-gray-100 dark:bg-gray-800 px-3 py-1 text-xs font-medium text-gray-600 dark:text-gray-400">
