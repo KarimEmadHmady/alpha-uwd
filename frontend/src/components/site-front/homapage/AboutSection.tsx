@@ -69,7 +69,7 @@ export default async function AboutSection({ lang }: { lang: string }) {
           {/* Left — image */}
           <div className="relative">
             <div className="relative rounded-2xl overflow-hidden aspect-[4/3]">
-              <Image src={about.sectionImage?.startsWith('http') ? about.sectionImage : (about.sectionImage ? `${BASE_URL}/${about.sectionImage}` : "/about-team.jpg")} alt="Alpha Team" fill className="object-cover" />
+              <Image src={about.sectionImage?.startsWith('http') ? about.sectionImage : (about.sectionImage ? `${BASE_URL}/${about.sectionImage}` : "/about-team.jpg")} alt="Alpha Team" fill className="object-fill" />
             </div>
             <div className="absolute bottom-6 -right-10 bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-4 flex items-center gap-4 opacity-80">
               <div className="text-4xl font-black text-[#00437A]">99%</div>

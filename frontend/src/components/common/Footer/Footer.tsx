@@ -155,12 +155,12 @@ export default async function Footer({ locale }: { locale: string }) {
                   {footer.phoneNumber}
                 </a>
               </li>
-              <li className="flex items-center gap-2">
+              {/* <li className="flex items-center gap-2">
                 <Mail size={16} className="text-gray-400" />
                 <a href={`mailto:${footer.emailAddress}`} className="text-sm text-gray-300 hover:text-white transition-colors">
                   {footer.emailAddress}
                 </a>
-              </li>
+              </li> */}
               <li>
                 <Link
                   href="/contact"

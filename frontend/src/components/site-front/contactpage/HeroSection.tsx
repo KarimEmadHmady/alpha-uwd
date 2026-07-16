@@ -58,7 +58,7 @@ return (
 
           {/* CTA */}
           <div className="flex items-center gap-6 flex-wrap">
-            <Link
+            {/* <Link
               href={safeData.ctaLink || '#'}
               className="flex items-center gap-2 bg-[#00437A] hover:bg-[#003060] text-white px-6 py-3 rounded-full font-semibold text-sm transition-colors shadow-md"
             >
@@ -66,7 +66,7 @@ return (
               <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
-            </Link>
+            </Link> */}
           </div>
 
           {/* Stars + avatars */}

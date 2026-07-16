@@ -60,7 +60,7 @@ export default function HeroSection({ data, BASE_URL, lang }: { data: any; BASE_
             </p>
 
             <div className="flex items-center gap-6 flex-wrap">
-              <Link href="#"
+              <Link href="/contact"
                 className="flex items-center gap-2 bg-[#00437A] hover:bg-[#003060] text-white px-6 py-3 rounded-full font-semibold text-sm transition-colors shadow-md">
                 {safeData.ctaText || "Let's Talk"}
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">

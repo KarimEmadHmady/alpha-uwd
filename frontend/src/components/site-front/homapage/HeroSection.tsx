@@ -82,7 +82,7 @@ export default async function HeroSection({ lang }: { lang: string }) {
             </p>
             <div className="flex items-center gap-6 flex-wrap">
               <Link
-                href="#"
+                href="/contact"
                 className="flex items-center gap-2 bg-[#00437A] hover:bg-[#003060] text-white px-6 py-3 rounded-full font-semibold text-sm transition-colors shadow-md"
               >
                 {hero.buttonText}

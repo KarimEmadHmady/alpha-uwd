@@ -17,7 +17,6 @@ export default function LoginPage() {
   // لو المستخدم مسجل دخول، نوديه للداشبورد المناسب
   useEffect(() => {
     if (isAuthenticated && user) {
-      // Check user role and redirect accordingly
       if (user.role === 'manager') {
         router.push('/dashboard/funds-manager');
       } else {
@@ -33,7 +32,7 @@ export default function LoginPage() {
     }
   }, [email, password]);
 
-  const handleSubmit = async () => {
+const handleSubmit = async () => {
     if (!email || !password) {
       return;
     }
@@ -47,8 +46,8 @@ export default function LoginPage() {
       } else {
         router.push('/dashboard');
       }
+      router.refresh(); // ← السطر الجديد
     } catch (err) {
-      // الـ error هيتعرض من الـ Redux state
       console.error('Login failed:', err);
     }
   };
