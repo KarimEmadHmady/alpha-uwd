@@ -38,15 +38,8 @@ const handleSubmit = async () => {
     }
 
     try {
-      const userData = await login(email, password);
-      
-      // Redirect based on user role
-      if (userData?.role === 'manager' || userData?.user?.role === 'manager') {
-        router.push('/dashboard/funds-manager');
-      } else {
-        router.push('/dashboard');
-      }
-      router.refresh(); // ← السطر الجديد
+      await login(email, password);
+      // Redirect will be handled by useEffect when isAuthenticated updates
     } catch (err) {
       console.error('Login failed:', err);
     }

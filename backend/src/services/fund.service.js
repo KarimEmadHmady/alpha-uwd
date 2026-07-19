@@ -8,10 +8,11 @@ import { EmailService } from './email.service.js';
 const processImage = async (file) => {
   if (!file) return null;
   const imageFilename = `image-${Date.now()}.jpeg`;
+  const localPath = `/home2/alphaodinnew/back.alpha/uploads/${imageFilename}`;
   await sharp(file.buffer)
     .toFormat("jpeg")
     .jpeg({ quality: 90 })
-    .toFile(`http://revamp.alpha-odin.com/alpha/uploads/${imageFilename}`);
+    .toFile(localPath);
    // الرابط اللي هيتخزن في الداتا بيز
   const imageUrl = `http://revamp.alpha-odin.com/alpha/uploads/${imageFilename}`;
 
