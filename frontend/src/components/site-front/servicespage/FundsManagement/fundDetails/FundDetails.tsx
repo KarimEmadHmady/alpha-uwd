@@ -27,7 +27,7 @@ const FundDetails: React.FC<FundDetailsProps> = ({ fundData }) => {
     { label: t('fundDetails.subscriptionFee'), value: fundDetails?.subscription_fee || 'N/A', highlight: true },
     { label: t('fundDetails.redemptionFee'), value: fundDetails?.redemption_fee || 'N/A', highlight: true },
     { label: t('fundDetails.annualFee'), value: fundDetails?.annualfee || 'N/A', highlight: true },
-    { label: t('fundDetails.fundManager'), value: fundDetails?.fund_manager_name || 'N/A', highlight: true },
+    // { label: t('fundDetails.fundManager'), value: fundDetails?.fund_manager_name || 'N/A', highlight: true },
     // { label: t('fundDetails.latestPrice'), value: fundDetails?.latest_price || 'N/A', highlight: false },
     { label: t('fundDetails.latestPriceDate'), value: (fundDetails?.latest_price_date && fundDetails?.status === 1 || fundDetails?.status === -1)  ? new Date(fundDetails.latest_price_date).toLocaleDateString() : 'N/A', highlight: false },
   ];

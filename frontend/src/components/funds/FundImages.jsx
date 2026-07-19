@@ -17,12 +17,12 @@ const FundImages = ({ fundData, handleImageChange }) => {
         />
         
         {/* Manager Image */}
-        <ImageUpload
+        {/* <ImageUpload
           label="Fund Manager Image"
           name="fund_manager_image"
           currentImage={fundData.fund_manager_image}
           onImageChange={handleImageChange}
-        />
+        /> */}
       </div>
     </div>
   );

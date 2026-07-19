@@ -236,7 +236,7 @@ const FundManagers = ({ fundId }) => {
                   <img 
                     src={manager.image.startsWith('http') ? manager.image : `${process.env.NEXT_PUBLIC_API_URL}/${manager.image}`}
                     alt={manager.name}
-                    className="w-16 h-16 object-cover rounded-full"
+                    className="w-16 h-16 object-contain rounded-full"
                   />
                 ) : (
                   <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center">

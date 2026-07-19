@@ -61,7 +61,7 @@ const BasicInformation = ({ fundData, handleFundChange }) => {
           </div>
 
           {/* Fund Manager Names - Side by side */}
-          <div>
+          {/* <div>
             <label className="block text-sm font-medium  mb-2">Fund Manager Name (Arabic)</label>
             <input
               type="text"
@@ -84,7 +84,7 @@ const BasicInformation = ({ fundData, handleFundChange }) => {
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00437a] focus:border-transparent outline-none transition placeholder-gray-500 "
               placeholder="Fund Manager"
             />
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
