@@ -307,7 +307,7 @@ const { showSuccess, showError } = useToast();
                   <select name="currency" value={formData.currency} onChange={handleChange}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00437a] focus:border-transparent outline-none transition text-black">
                     <option value="EGP">EGP</option>
-                    <option value="USD">USD</option>
+                    <option value="USD">$</option>
                     <option value="EUR">EUR</option>
                   </select>
                 </Field>
@@ -319,7 +319,7 @@ const { showSuccess, showError } = useToast();
                     <option value="يورو">يورو</option>
                   </select>
                 </Field>
-                <Field label="Category" error={fieldErrors.catid}>
+                <Field label="Choose Asset Class" error={fieldErrors.catid}>
                   <select name="catid" value={formData.catid} onChange={handleChange}
                     className={inputClass(!!fieldErrors.catid)}>
                     <option value="">Select a category</option>
@@ -334,7 +334,7 @@ const { showSuccess, showError } = useToast();
                   <input type="text" name="minimum_initial" value={formData.minimum_initial} onChange={handleChange}
                     className={inputClass(!!fieldErrors.minimum_initial)} />
                 </Field>
-                <Field label="الحد الأدنى للاستثمار الأول (عربي)" error={fieldErrors.minimum_initial_ar}>
+                <Field label="Minimum Initial Investment (Arabic)" error={fieldErrors.minimum_initial_ar}>
                   <input type="text" name="minimum_initial_ar" value={formData.minimum_initial_ar} onChange={handleChange}
                     className={inputClass(!!fieldErrors.minimum_initial_ar)} />
                 </Field>
@@ -342,7 +342,7 @@ const { showSuccess, showError } = useToast();
                   <input type="text" name="Minimum_redemption_amount" value={formData.Minimum_redemption_amount} onChange={handleChange}
                     className={inputClass(!!fieldErrors.Minimum_redemption_amount)} />
                 </Field>
-                <Field label="الحد الأدنى للاسترداد (عربي)" error={fieldErrors.Minimum_redemption_amount_ar}>
+                <Field label="Minimum Redemption Amount (Arabic)" error={fieldErrors.Minimum_redemption_amount_ar}>
                   <input type="text" name="Minimum_redemption_amount_ar" value={formData.Minimum_redemption_amount_ar} onChange={handleChange}
                     className={inputClass(!!fieldErrors.Minimum_redemption_amount_ar)} />
                 </Field>
@@ -361,7 +361,7 @@ const { showSuccess, showError } = useToast();
                   <input type="text" name="subscription_fee" value={formData.subscription_fee} onChange={handleChange}
                     className={inputClass(!!fieldErrors.subscription_fee)} />
                 </Field>
-                <Field label="رسوم الاشتراك (عربي)" error={fieldErrors.subscription_fee_ar}>
+                <Field label="Subscription Fee (Arabic)" error={fieldErrors.subscription_fee_ar}>
                   <input type="text" name="subscription_fee_ar" value={formData.subscription_fee_ar} onChange={handleChange}
                     className={inputClass(!!fieldErrors.subscription_fee_ar)} />
                 </Field>
@@ -369,7 +369,7 @@ const { showSuccess, showError } = useToast();
                   <input type="text" name="redemption_fee" value={formData.redemption_fee} onChange={handleChange}
                     className={inputClass(!!fieldErrors.redemption_fee)} />
                 </Field>
-                <Field label="رسوم الاسترداد (عربي)" error={fieldErrors.redemption_fee_ar}>
+                <Field label="Redemption Fee (Arabic)" error={fieldErrors.redemption_fee_ar}>
                   <input type="text" name="redemption_fee_ar" value={formData.redemption_fee_ar} onChange={handleChange}
                     className={inputClass(!!fieldErrors.redemption_fee_ar)} />
                 </Field>
@@ -377,7 +377,7 @@ const { showSuccess, showError } = useToast();
                   <input type="text" name="annualfee" value={formData.annualfee} onChange={handleChange}
                     className={inputClass(!!fieldErrors.annualfee)} />
                 </Field>
-                <Field label="الرسوم السنوية (عربي)" error={fieldErrors.annualfee_ar}>
+                <Field label="Annual Fee (Arabic)" error={fieldErrors.annualfee_ar}>
                   <input type="text" name="annualfee_ar" value={formData.annualfee_ar} onChange={handleChange}
                     className={inputClass(!!fieldErrors.annualfee_ar)} />
                 </Field>
@@ -385,88 +385,88 @@ const { showSuccess, showError } = useToast();
             </section>
 
             {/* ── Frequencies ── */}
-            <section>
-              <h3 className="text-lg font-semibold mb-4 pb-2 border-b">Frequencies</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+<section>
+  <h3 className="text-lg font-semibold mb-4 pb-2 border-b">Frequencies</h3>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-                <Field label="تكرار الاشتراك (عربي)" error={fieldErrors.subscription_frequency_ar}>
-                  <select
-                    name="subscription_frequency_ar"
-                    value={formData.subscription_frequency_ar}
-                    onChange={handleChange}
-                    className={inputClass(!!fieldErrors.subscription_frequency_ar)}
-                  >
-                    <option value="">-- اختر --</option>
-                    <option value="يومي">يومي</option>
-                    <option value="أسبوعي">أسبوعي</option>
-                    <option value="شهري">شهري</option>
-                    <option value="ربع سنوي">ربع سنوي</option>
-                  </select>
-                </Field>
+    <Field label="Subscription Frequency (Arabic)" error={fieldErrors.subscription_frequency_ar}>
+      <input
+        type="text"
+        name="subscription_frequency_ar"
+        value={formData.subscription_frequency_ar}
+        onChange={handleChange}
+        placeholder="مثال: شهري"
+        dir="rtl"
+        className={inputClass(!!fieldErrors.subscription_frequency_ar)}
+      />
+    </Field>
 
-                <Field label="Subscription Frequency (English)" error={fieldErrors.subscription_frequency_en}>
-                  <select
-                    name="subscription_frequency_en"
-                    value={formData.subscription_frequency_en}
-                    onChange={handleChange}
-                    className={inputClass(!!fieldErrors.subscription_frequency_en)}
-                  >
-                    <option value="">-- Select --</option>
-                    <option value="Daily">Daily</option>
-                    <option value="Weekly">Weekly</option>
-                    <option value="Monthly">Monthly</option>
-                    <option value="Quarterly">Quarterly</option>
-                  </select>
-                </Field>
+    <Field label="Subscription Frequency (English)" error={fieldErrors.subscription_frequency_en}>
+      <input
+        type="text"
+        name="subscription_frequency_en"
+        value={formData.subscription_frequency_en}
+        onChange={handleChange}
+        placeholder="e.g. Monthly"
+        className={inputClass(!!fieldErrors.subscription_frequency_en)}
+      />
+    </Field>
 
-                <Field label="تكرار الاسترداد (عربي)" error={fieldErrors.redemption_frequency_ar}>
-                  <select
-                    name="redemption_frequency_ar"
-                    value={formData.redemption_frequency_ar}
-                    onChange={handleChange}
-                    className={inputClass(!!fieldErrors.redemption_frequency_ar)}
-                  >
-                    <option value="">-- اختر --</option>
-                    <option value="يومي">يومي</option>
-                    <option value="أسبوعي">أسبوعي</option>
-                    <option value="شهري">شهري</option>
-                    <option value="ربع سنوي">ربع سنوي</option>
-                  </select>
-                </Field>
+    <Field label="Redemption Frequency (Arabic)" error={fieldErrors.redemption_frequency_ar}>
+      <input
+        type="text"
+        name="redemption_frequency_ar"
+        value={formData.redemption_frequency_ar}
+        onChange={handleChange}
+        placeholder="مثال: شهري"
+        dir="rtl"
+        className={inputClass(!!fieldErrors.redemption_frequency_ar)}
+      />
+    </Field>
 
-                <Field label="Redemption Frequency (English)" error={fieldErrors.redemption_frequency_en}>
-                  <select
-                    name="redemption_frequency_en"
-                    value={formData.redemption_frequency_en}
-                    onChange={handleChange}
-                    className={inputClass(!!fieldErrors.redemption_frequency_en)}
-                  >
-                    <option value="">-- Select --</option>
-                    <option value="Daily">Daily</option>
-                    <option value="Weekly">Weekly</option>
-                    <option value="Monthly">Monthly</option>
-                    <option value="Quarterly">Quarterly</option>
-                  </select>
-                </Field>
+    <Field label="Redemption Frequency (English)" error={fieldErrors.redemption_frequency_en}>
+      <input
+        type="text"
+        name="redemption_frequency_en"
+        value={formData.redemption_frequency_en}
+        onChange={handleChange}
+        placeholder="e.g. Monthly"
+        className={inputClass(!!fieldErrors.redemption_frequency_en)}
+      />
+    </Field>
 
-              </div>
-            </section>
-
+  </div>
+</section>
             {/* ── Fund Type ── */}
-            <section>
-              <h3 className="text-lg font-semibold mb-4 pb-2 border-b">Fund Type</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Field label="نوع الصندوق (عربي)" error={fieldErrors.type_ar}>
-                  <input type="text" name="type_ar" value={formData.type_ar} onChange={handleChange}
-                    className={inputClass(!!fieldErrors.type_ar)} placeholder="أسهم" />
-                </Field>
-                <Field label="Fund Type (English)" error={fieldErrors.type_en}>
-                  <input type="text" name="type_en" value={formData.type_en} onChange={handleChange}
-                    className={inputClass(!!fieldErrors.type_en)} placeholder="Equity" />
-                </Field>
-              </div>
-            </section>
-
+<section>
+  <h3 className="text-lg font-semibold mb-4 pb-2 border-b">Fund Type</h3>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <Field label="Fund Type (Arabic)" error={fieldErrors.type_ar}>
+      <select
+        name="type_ar"
+        value={formData.type_ar}
+        onChange={handleChange}
+        className={inputClass(!!fieldErrors.type_ar)}
+      >
+        <option value="">-- اختر --</option>
+        <option value="أسهم">مفتوح</option>
+        <option value="سندات">مغلق</option>
+      </select>
+    </Field>
+    <Field label="Fund Type (English)" error={fieldErrors.type_en}>
+      <select
+        name="type_en"
+        value={formData.type_en}
+        onChange={handleChange}
+        className={inputClass(!!fieldErrors.type_en)}
+      >
+        <option value="">-- Select --</option>
+        <option value="Equity">Open-End</option>
+        <option value="Bond">Closed-End</option>
+      </select>
+    </Field>
+  </div>
+</section>
             {/* ── Images ── */}
             <section>
               <h3 className="text-lg font-semibold mb-4 pb-2 border-b">Images</h3>

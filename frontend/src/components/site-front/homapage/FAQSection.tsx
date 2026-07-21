@@ -27,7 +27,7 @@ export default function FAQSection({ faqs, content, lang }: Props) {
               {content.subtitle}
             </h2>
             <Link
-              href="#"
+              href="/contact"
               className="inline-flex items-center gap-2 bg-[#00437A] hover:bg-[#003060] text-white px-6 py-3 rounded-full font-semibold text-sm transition-colors"
             >
               {content.buttonText}

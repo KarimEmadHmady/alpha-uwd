@@ -100,11 +100,15 @@ export default function ContactSection({ data, BASE_URL, lang }: ContactSectionP
           <div className="border border-[#00437A] dark:border-gray-800 rounded-2xl p-6 mb-6">
             <div className="space-y-4 text-sm text-gray-700 dark:text-gray-300">
               <div className="flex gap-2">
-                <span className="font-bold min-w-[110px] text-gray-800 dark:text-gray-50">Phone Number:</span>
+                <span className="font-bold min-w-[110px] text-gray-800 dark:text-gray-50">
+                  {lang === 'ar' ? 'رقم الهاتف:' : 'Phone Number:'}
+                </span>
                 <span>{safeData.phoneNumber || '01121622277 – 0235380104 – 0235380105'}</span>
               </div>
               <div className="flex gap-2">
-                <span className="font-bold min-w-[110px] text-gray-800 dark:text-gray-50">Address:</span>
+                <span className="font-bold min-w-[110px] text-gray-800 dark:text-gray-50">
+                  {lang === 'ar' ? 'العنوان:' : 'Address:'}
+                </span>
                 <span>
                   {safeData.address || 'Smart Village, Building Emerald Business Center No. 2210 B, Giza, Egypt'}
                 </span>
@@ -117,7 +121,7 @@ export default function ContactSection({ data, BASE_URL, lang }: ContactSectionP
               {/* Social Icons */}
               <div className="flex items-center gap-3 pt-2">
                 <span className="font-bold text-gray-800 dark:text-gray-50">
-                  {safeData.socialNetworkLabel || 'Social Network'}
+                  {safeData.socialNetworkLabel || (lang === 'ar' ? 'مواقع التواصل' : 'Social Network')}
                 </span>
                 {/* Facebook */}
                 <a href="#" className="w-8 h-8 bg-[#00437A] rounded-full flex items-center justify-center text-white hover:opacity-80 transition-opacity">

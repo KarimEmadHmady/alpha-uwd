@@ -30,9 +30,8 @@ const FinancialInformation = ({ fundData, handleFundChange }) => {
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00437a] focus:border-transparent outline-none"
           >
             <option value="EGP">EGP</option>
-            <option value="USD">USD</option>
+            <option value="USD">$</option>
             <option value="EUR">EUR</option>
-            <option value="SAR">SAR</option>
           </select>
         </div>
         <div>
@@ -52,13 +51,13 @@ const FinancialInformation = ({ fundData, handleFundChange }) => {
         <div>
           <label className="block text-sm font-medium  mb-2">Minimum Initial Investment</label>
           <input
-            type="number"
+            type="text"
             name="minimum_initial"
             value={fundData.minimum_initial}
             onChange={handleFundChange}
             required
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00437a] focus:border-transparent outline-none"
-            placeholder="1000"
+            placeholder="One Certificate"
           />
         </div>
         <div>
@@ -70,7 +69,7 @@ const FinancialInformation = ({ fundData, handleFundChange }) => {
             onChange={handleFundChange}
             required
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00437a] focus:border-transparent outline-none"
-            placeholder="ألف جنيه"
+            placeholder="وثيقة واحده"
           />
         </div>
 
@@ -78,13 +77,13 @@ const FinancialInformation = ({ fundData, handleFundChange }) => {
         <div>
           <label className="block text-sm font-medium  mb-2">Minimum Redemption Amount</label>
           <input
-            type="number"
+            type="text"
             name="Minimum_redemption_amount"
             value={fundData.Minimum_redemption_amount}
             onChange={handleFundChange}
             required
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00437a] focus:border-transparent outline-none"
-            placeholder="100"
+            placeholder="One Certificate"
           />
         </div>
         <div>
@@ -96,7 +95,7 @@ const FinancialInformation = ({ fundData, handleFundChange }) => {
             onChange={handleFundChange}
             required
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00437a] focus:border-transparent outline-none"
-            placeholder="مئة جنيه"
+            placeholder="وثيقة واحده"
           />
         </div>
       </div>

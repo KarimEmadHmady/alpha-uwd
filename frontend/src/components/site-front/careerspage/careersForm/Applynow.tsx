@@ -151,6 +151,7 @@ export default function ApplyNow({ lang = "en" }: ApplyNowProps) {
               className="w-full border border-gray-300 dark:border-gray-700 rounded-full px-5 py-3 text-sm text-gray-700 dark:text-gray-300 placeholder-gray-400 dark:placeholder-gray-600 bg-white dark:bg-[#1a1a1a] outline-none focus:border-[#00437A] focus:ring-1 focus:ring-[#00437A] transition"
             />
             <input
+             dir={lang === 'ar' ? 'rtl' : 'ltr'}
               type="tel"
               name="phone"
               placeholder={t.phonePlaceholder}
@@ -159,6 +160,7 @@ export default function ApplyNow({ lang = "en" }: ApplyNowProps) {
               className="w-full border border-gray-300 dark:border-gray-700 rounded-full px-5 py-3 text-sm text-gray-700 dark:text-gray-300 placeholder-gray-400 dark:placeholder-gray-600 bg-white dark:bg-[#1a1a1a] outline-none focus:border-[#00437A] focus:ring-1 focus:ring-[#00437A] transition"
             />
             <input
+             
               type="text"
               name="jobName"
               placeholder={t.jobPlaceholder}

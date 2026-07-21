@@ -183,7 +183,7 @@ function SidebarCard({ blog, lang }: { blog: BlogDetail; lang?: string }) {
   const safeDate = blog.date || 'Unknown Date';
 
 return (
-  <Link href={`/blogs/${id}`} className="group block">
+  <Link href={`/${lang}/blogs/${id}`} className="group block">
     <div className="rounded-xl overflow-hidden border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-md transition-shadow bg-white dark:bg-[#1a1a1a]">
       {/* Image */}
       <div className="relative w-full h-32 bg-gray-200 dark:bg-gray-700">

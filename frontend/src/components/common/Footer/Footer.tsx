@@ -42,7 +42,7 @@ const FALLBACK = {
   homeLinkText: 'Home',
   aboutLinkText: 'About Us',
   servicesLinkText: 'Our Services',
-  reportsLinkText: 'Financial Reports',
+  reportsLinkText: 'Careers',
   contactLinkText: 'Contact',
   copyrightText: '© 2025 Alpha Asset Management. All rights reserved.',
   logoImage: '',
@@ -103,7 +103,7 @@ export default async function Footer({ locale }: { locale: string }) {
                 </Link>
               </li>
               <li>
-                <Link href="/reports" className="text-sm text-gray-300 hover:text-white transition-colors">
+                <Link href="/careers" className="text-sm text-gray-300 hover:text-white transition-colors">
                   {footer.reportsLinkText}
                 </Link>
               </li>
@@ -120,25 +120,25 @@ export default async function Footer({ locale }: { locale: string }) {
             <h3 className="text-sm font-semibold text-gray-200 mb-4 tracking-wide">{footer.aboutUsTitle}</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/hello" className="text-sm text-gray-300 hover:text-white transition-colors">
+                <Link href="/about" className="text-sm text-gray-300 hover:text-white transition-colors">
                   {footer.helloLinkText}
                 </Link>
               </li>
               <li>
-                <Link href="/corporate-services" className="text-sm text-gray-300 hover:text-white transition-colors">
+                <Link href="/services/fundsmanagement" className="text-sm text-gray-300 hover:text-white transition-colors">
                   {footer.corporateServicesLinkText}
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/institutional-investors"
+                  href="/blogs"
                   className="text-sm text-gray-300 hover:text-white transition-colors"
                 >
                   {footer.institutionalInvestorsLinkText}
                 </Link>
               </li>
               <li>
-                <Link href="/team" className="text-sm text-gray-300 hover:text-white transition-colors">
+                <Link href="/about" className="text-sm text-gray-300 hover:text-white transition-colors">
                   {footer.ourTeamLinkText}
                 </Link>
               </li>

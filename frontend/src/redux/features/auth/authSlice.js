@@ -2,6 +2,23 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { authService } from '@/services/authService';
 
+// ============ Cookie Helpers ============
+// لازم نخزن التوكن في cookie كمان (مش بس localStorage)
+// عشان الـ middleware (اللي شغال على السيرفر) يقدر يشوفه ويتحقق من الـ auth
+
+const setCookie = (name, value, days = 7) => {
+  if (typeof window !== 'undefined') {
+    const expires = new Date(Date.now() + days * 864e5).toUTCString();
+    document.cookie = `${name}=${value}; expires=${expires}; path=/; SameSite=Lax`;
+  }
+};
+
+const removeCookie = (name) => {
+  if (typeof window !== 'undefined') {
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+  }
+};
+
 // Async thunk للـ login
 export const loginUser = createAsyncThunk(
   'auth/login',
@@ -58,7 +75,7 @@ const getInitialState = () => {
   if (typeof window !== 'undefined') {
     const token = localStorage.getItem('auth_token');
     const userStr = localStorage.getItem('auth_user');
-    
+
     if (token && userStr) {
       try {
         const user = JSON.parse(userStr);
@@ -75,10 +92,11 @@ const getInitialState = () => {
         console.error('Error parsing user from localStorage:', error);
         localStorage.removeItem('auth_token');
         localStorage.removeItem('auth_user');
+        removeCookie('auth_token');
       }
     }
   }
-  
+
   return {
     user: null,
     token: null,
@@ -106,6 +124,7 @@ const authSlice = createSlice({
       if (typeof window !== 'undefined') {
         localStorage.removeItem('auth_token');
         localStorage.removeItem('auth_user');
+        removeCookie('auth_token');
       }
       authService.logout();
     },
@@ -114,6 +133,9 @@ const authSlice = createSlice({
       state.user = action.payload.user;
       state.token = action.payload.token;
       state.isAuthenticated = true;
+      if (typeof window !== 'undefined' && action.payload.token) {
+        setCookie('auth_token', action.payload.token);
+      }
     },
     clearError: (state) => {
       state.error = null;
@@ -131,7 +153,7 @@ const authSlice = createSlice({
       if (typeof window !== 'undefined') {
         localStorage.setItem('auth_user', JSON.stringify(state.user));
       }
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -146,18 +168,20 @@ const authSlice = createSlice({
         state.user = action.payload.user || action.payload;
         state.token = action.payload.token;
         state.error = null;
-        
+
         // Save to localStorage for persistence
         if (typeof window !== 'undefined') {
           localStorage.setItem('auth_token', action.payload.token);
           localStorage.setItem('auth_user', JSON.stringify(state.user));
+          // Save to cookie too, so the middleware (server-side) can read it
+          setCookie('auth_token', action.payload.token);
         }
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       })
-      
+
       // Logout Cases
       .addCase(logoutUser.fulfilled, (state) => {
         state.user = null;
@@ -168,9 +192,10 @@ const authSlice = createSlice({
         if (typeof window !== 'undefined') {
           localStorage.removeItem('auth_token');
           localStorage.removeItem('auth_user');
+          removeCookie('auth_token');
         }
       })
-      
+
       // Forgot Password Cases
       .addCase(forgotPassword.pending, (state) => {
         state.isLoading = true;
@@ -187,7 +212,7 @@ const authSlice = createSlice({
         state.error = action.payload;
         state.resetEmailSent = false;
       })
-      
+
       // Reset Password Cases
       .addCase(resetPassword.pending, (state) => {
         state.isLoading = true;
@@ -207,12 +232,12 @@ const authSlice = createSlice({
   },
 });
 
-export const { 
-  logout, 
-  setCredentials, 
-  clearError, 
-  clearResetState, 
-  updateUserProfile 
+export const {
+  logout,
+  setCredentials,
+  clearError,
+  clearResetState,
+  updateUserProfile,
 } = authSlice.actions;
 
 export default authSlice.reducer;

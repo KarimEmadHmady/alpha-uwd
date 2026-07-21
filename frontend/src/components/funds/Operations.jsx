@@ -24,69 +24,59 @@ const Operations = ({ fundData, handleFundChange, categories = [] }) => {
     <div className="mt-8">
       <h3 className="text-lg font-semibold  mb-4 pb-2 border-b">Operations</h3>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Subscription Frequency */}
-        <div>
-          <label className="block text-sm font-medium  mb-2">Subscription Frequency (English)</label>
-          <select
-            name="subscription_frequency_en"
-            value={fundData.subscription_frequency_en}
-            onChange={handleOperationChange}
-            required
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00437a] focus:border-transparent outline-none"
-          >
-            <option value="Daily">Daily</option>
-            <option value="Weekly">Weekly</option>
-            <option value="Monthly">Monthly</option>
-            <option value="Quarterly">Quarterly</option>
-          </select>
-        </div>
-        <div>
-          <label className="block text-sm font-medium  mb-2">Subscription Frequency (Arabic)</label>
-          <select
-            name="subscription_frequency_ar"
-            value={fundData.subscription_frequency_ar}
-            onChange={handleFundChange}
-            required
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00437a] focus:border-transparent outline-none"
-          >
-            <option value="يومي">يومي</option>
-            <option value="أسبوعي">أسبوعي</option>
-            <option value="شهري">شهري</option>
-            <option value="ربع سنوي">ربع سنوي</option>
-          </select>
-        </div>
+ {/* Subscription Frequency */}
+<div>
+  <label className="block text-sm font-medium  mb-2">Subscription Frequency (English)</label>
+  <input
+    type="text"
+    name="subscription_frequency_en"
+    value={fundData.subscription_frequency_en}
+    onChange={handleOperationChange}
+    required
+    placeholder="e.g. Monthly"
+    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00437a] focus:border-transparent outline-none"
+  />
+</div>
+<div>
+  <label className="block text-sm font-medium  mb-2">Subscription Frequency (Arabic)</label>
+  <input
+    type="text"
+    name="subscription_frequency_ar"
+    value={fundData.subscription_frequency_ar}
+    onChange={handleFundChange}
+    required
+    placeholder="مثال: شهري"
+    dir="rtl"
+    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00437a] focus:border-transparent outline-none"
+  />
+</div>
 
-        {/* Redemption Frequency */}
-        <div>
-          <label className="block text-sm font-medium  mb-2">Redemption Frequency (English)</label>
-          <select
-            name="redemption_frequency_en"
-            value={fundData.redemption_frequency_en}
-            onChange={handleFundChange}
-            required
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00437a] focus:border-transparent outline-none"
-          >
-            <option value="Daily">Daily</option>
-            <option value="Weekly">Weekly</option>
-            <option value="Monthly">Monthly</option>
-            <option value="Quarterly">Quarterly</option>
-          </select>
-        </div>
-        <div>
-          <label className="block text-sm font-medium  mb-2">Redemption Frequency (Arabic)</label>
-          <select
-            name="redemption_frequency_ar"
-            value={fundData.redemption_frequency_ar}
-            onChange={handleFundChange}
-            required
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00437a] focus:border-transparent outline-none"
-          >
-            <option value="يومي">يومي</option>
-            <option value="أسبوعي">أسبوعي</option>
-            <option value="شهري">شهري</option>
-            <option value="ربع سنوي">ربع سنوي</option>
-          </select>
-        </div>
+{/* Redemption Frequency */}
+<div>
+  <label className="block text-sm font-medium  mb-2">Redemption Frequency (English)</label>
+  <input
+    type="text"
+    name="redemption_frequency_en"
+    value={fundData.redemption_frequency_en}
+    onChange={handleFundChange}
+    required
+    placeholder="e.g. Monthly"
+    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00437a] focus:border-transparent outline-none"
+  />
+</div>
+<div>
+  <label className="block text-sm font-medium  mb-2">Redemption Frequency (Arabic)</label>
+  <input
+    type="text"
+    name="redemption_frequency_ar"
+    value={fundData.redemption_frequency_ar}
+    onChange={handleFundChange}
+    required
+    placeholder="مثال: شهري"
+    dir="rtl"
+    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00437a] focus:border-transparent outline-none"
+  />
+</div>
 
         {/* Fund Type */}
         <div>
@@ -98,10 +88,8 @@ const Operations = ({ fundData, handleFundChange, categories = [] }) => {
             required
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00437a] focus:border-transparent outline-none"
           >
-            <option value="Equity">Equity</option>
-            <option value="Bond">Bond</option>
-            <option value="Money Market">Money Market</option>
-            <option value="Mixed">Mixed</option>
+            <option value="Equity">Open-End</option>
+            <option value="Bond">Closed-End</option>
           </select>
         </div>
         <div>
@@ -113,16 +101,14 @@ const Operations = ({ fundData, handleFundChange, categories = [] }) => {
             required
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00437a] focus:border-transparent outline-none"
           >
-            <option value="أسهم">أسهم</option>
-            <option value="سندات">سندات</option>
-            <option value="سوق النقد">سوق النقد</option>
-            <option value="مختلط">مختلط</option>
+            <option value="أسهم">مفتوح</option>
+            <option value="سندات">نوع الصندوق</option>
           </select>
         </div>
 
         {/* Category */}
         <div>
-          <label className="block text-sm font-medium  mb-2">Category</label>
+          <label className="block text-sm font-medium  mb-2">Choose Asset Class</label>
           <select
             name="catid"
             value={fundData.catid}

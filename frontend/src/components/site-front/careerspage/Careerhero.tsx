@@ -53,7 +53,7 @@ export default function CareerHero({ applyUrl = "/careers/applyform", lang = "en
 
       {/* CTA Button */}
       <Link
-        href={applyUrl}
+        href={`/${lang}${applyUrl}`}
         className="relative inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/10 px-6 py-2.5 text-sm font-semibold backdrop-blur-sm transition hover:bg-white/20"
       >
         {t.cta}

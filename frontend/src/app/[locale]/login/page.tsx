@@ -15,15 +15,16 @@ export default function LoginPage() {
   const { login, isLoading, error, clearAuthError, isAuthenticated, user } = useAuth();
 
   // لو المستخدم مسجل دخول، نوديه للداشبورد المناسب
-  useEffect(() => {
-    if (isAuthenticated && user) {
-      if (user.role === 'manager') {
-        router.push('/dashboard/funds-manager');
-      } else {
-        router.push('/dashboard');
-      }
+useEffect(() => {
+  if (isAuthenticated && user) {
+    if (user.role === 'manager') {
+      router.push('/dashboard/funds-manager');
+    } else {
+      router.push('/dashboard');
     }
-  }, [isAuthenticated, user, router]);
+    router.refresh(); 
+  }
+}, [isAuthenticated, user, router]);
 
   // لمسح الـ error لما المستخدم يبدأ يكتب
   useEffect(() => {
