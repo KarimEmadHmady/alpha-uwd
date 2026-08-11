@@ -37,7 +37,7 @@ function FundCard({ fund, priceHistory, lang }: { fund: Fund; priceHistory?: any
     : priceHistory?.previous?.date;
 
   return (
-    <div className="bg-white dark:bg-[#2a2a2a] rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm dark:shadow-black/30 p-4 flex flex-col gap-3 hover:shadow-md dark:hover:shadow-black/50 transition-shadow duration-200 cursor-pointer">
+    <div className="bg-white dark:bg-[#2a2a2a] rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm dark:shadow-black/30 p-4 flex flex-col gap-3 hover:shadow-md dark:hover:shadow-black/50 transition-shadow duration-200 cursor-pointer h-64">
       <div className="flex items-center justify-between">
       <div className="w-16 h-16 relative rounded-xl overflow-hidden border border-gray-100 dark:border-gray-800 flex-shrink-0 bg-white">
                             <Image
@@ -63,7 +63,12 @@ function FundCard({ fund, priceHistory, lang }: { fund: Fund; priceHistory?: any
 
       <div dir={lang === 'ar' ? 'rtl' : 'ltr'}>
         <h4 className="text-sm font-bold text-gray-800 dark:text-gray-50">{fund.name}</h4>
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{fund.description}</p>
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5"style={{
+                            display: '-webkit-box',
+                            WebkitLineClamp: 2,
+                            WebkitBoxOrient: 'vertical',
+                            overflow: 'hidden'
+                          }}>{fund.description}</p>
       </div>
 
       <div className="flex items-center justify-between mt-auto pt-2 border-t border-gray-100 dark:border-gray-700">

@@ -102,7 +102,7 @@ const Operations = ({ fundData, handleFundChange, categories = [] }) => {
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00437a] focus:border-transparent outline-none"
           >
             <option value="أسهم">مفتوح</option>
-            <option value="سندات">نوع الصندوق</option>
+            <option value="سندات">مغلق</option>
           </select>
         </div>
 

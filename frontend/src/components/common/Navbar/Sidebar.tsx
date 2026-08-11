@@ -362,7 +362,7 @@ export default function Sidebar() {
                           </ul>
                         )}
                       </li>
-
+                      <li><Link href="/dashboard/page-content/fund-hero" className={subLinkClass(pathname.includes('/dashboard/page-content/fund-hero'))}><span className="ms-3">Fund Hero</span></Link></li>
                       <li><Link href="/dashboard/page-content/blogs" className={subLinkClass(pathname.includes('/dashboard/page-content/blogs'))}><span className="ms-3">Blogs</span></Link></li>
                       <li><Link href="/dashboard/page-content/contact" className={subLinkClass(pathname.includes('/dashboard/page-content/contact'))}><span className="ms-3">Contact</span></Link></li>
                       <li><Link href="/dashboard/page-content/footer" className={subLinkClass(pathname.includes('/dashboard/page-content/footer'))}><span className="ms-3">Footer</span></Link></li>

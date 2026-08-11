@@ -4,7 +4,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useTheme } from '@/hooks/useTheme';
 
@@ -12,14 +12,18 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState<string | null>(null);
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const currentLocale = pathname.split('/')[1] || 'en';
   const t = useTranslations('Navigation');
   const isRTL = currentLocale === 'ar';
   const { theme, handleThemeChange } = useTheme();
 
   // Helper: swap locale in the current path
-  const switchLocalePath = (locale: 'en' | 'ar') =>
-    `/${locale}${pathname.replace(/^\/(en|ar)/, '')}`;
+  const switchLocalePath = (locale: 'en' | 'ar') => {
+    const newPath = `/${locale}${pathname.replace(/^\/(en|ar)/, '')}`;
+    const qs = searchParams.toString();
+    return qs ? `${newPath}?${qs}` : newPath;
+  };
 
   // ✅ Helper: prefix any path with the current locale
   const localePath = (path: string) =>
@@ -70,18 +74,18 @@ export default function Navbar() {
               <span className="md:hidden">{t('address.short')}</span>
             </div>
             <div className="hidden md:flex items-center space-x-4">
-              <div className="flex items-center space-x-2">
+              <a href={`tel:${t('phone1')}`} className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
                 <span>{t('phone1')}</span>
-              </div>
-              <div className="flex items-center space-x-2">
+              </a>
+              <a href={`tel:${t('phone2')}`} className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
                 <span>{t('phone2')}</span>
-              </div>
+              </a>
             </div>
             <div className="flex items-center space-x-3">
               <a href="#" className="hover:text-blue-200 transition-colors" aria-label="Facebook">
@@ -188,32 +192,35 @@ export default function Navbar() {
               </div>
 
               <div className="flex items-center -mx-2">
-                <div className="mx-2 flex items-center bg-gray-100 dark:bg-gray-800 rounded-full p-1">
-                  <Link
-                    href={switchLocalePath('en')}
-                    onClick={closeAll}
-                    className={`px-3 py-1 rounded-full text-sm font-bold transition-all duration-300 ${currentLocale === 'en' ? 'bg-[#00437a] text-white' : 'text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200'}`}>
+                <Link
+                  href={switchLocalePath(currentLocale === 'en' ? 'ar' : 'en')}
+                  onClick={closeAll}
+                  className="mx-2 flex items-center bg-gray-100 dark:bg-gray-800 rounded-full p-1"
+                >
+                  <span className={`px-3 py-1 rounded-full text-sm font-bold transition-all duration-300 ${currentLocale === 'en' ? 'bg-[#00437a] text-white' : 'text-gray-600 dark:text-gray-400'}`}>
                     En
-                  </Link>
-                  <Link
-                    href={switchLocalePath('ar')}
-                    onClick={closeAll}
-                    className={`px-3 py-1 rounded-full text-sm font-bold transition-all duration-300 ${currentLocale === 'ar' ? 'bg-[#00437a] text-white' : 'text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200'}`}>
+                  </span>
+                  <span className={`px-3 py-1 rounded-full text-sm font-bold transition-all duration-300 ${currentLocale === 'ar' ? 'bg-[#00437a] text-white' : 'text-gray-600 dark:text-gray-400'}`}>
                     Ar
-                  </Link>
-                </div>
-                <div className="mx-2 flex items-center bg-gray-100 dark:bg-gray-800 rounded-full p-1">
-                  <button onClick={() => handleThemeChange('light')} className={`p-2 rounded-full transition-all duration-300 ${theme === 'light' ? 'bg-[#00437a] text-white' : 'text-gray-600 dark:text-gray-400'}`} aria-label="Light mode" type="button">
+                  </span>
+                </Link>
+                <button
+                  onClick={() => handleThemeChange(theme === 'light' ? 'dark' : 'light')}
+                  className="mx-2 flex items-center bg-gray-100 dark:bg-gray-800 rounded-full p-1"
+                  type="button"
+                  aria-label="Toggle theme"
+                >
+                  <span className={`p-2 rounded-full transition-all duration-300 ${theme === 'light' ? 'bg-[#00437a] text-white' : 'text-gray-600 dark:text-gray-400'}`}>
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.07l-.71.71M21 12h-1M4 12H3m16.66 5.66l-.71-.71M4.05 4.93l-.71-.71M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                     </svg>
-                  </button>
-                  <button onClick={() => handleThemeChange('dark')} className={`p-2 rounded-full transition-all duration-300 ${theme === 'dark' ? 'bg-[#00437a] text-white' : 'text-gray-600 dark:text-gray-400'}`} aria-label="Dark mode" type="button">
+                  </span>
+                  <span className={`p-2 rounded-full transition-all duration-300 ${theme === 'dark' ? 'bg-[#00437a] text-white' : 'text-gray-600 dark:text-gray-400'}`}>
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" />
                     </svg>
-                  </button>
-                </div>
+                  </span>
+                </button>
               </div>
             </div>
 
@@ -317,32 +324,35 @@ export default function Navbar() {
 
                 {/* Bottom bar */}
                 <div className="px-3 py-2 border-t border-gray-200 dark:border-gray-700 bg-gradient-to-r from-gray-50 to-white dark:from-gray-900 dark:to-[#1a1a1a] flex items-center justify-between gap-2 flex-shrink-0">
-                  <div className="flex items-center bg-gray-200 dark:bg-gray-700 rounded-full p-1 flex-1">
-                    <Link
-                      href={switchLocalePath('en')}
-                      onClick={closeAll}
-                      className={`flex-1 px-2.5 py-1 rounded-full text-xs font-semibold transition-all duration-300 text-center ${currentLocale === 'en' ? 'bg-[#00437a] text-white shadow-md' : 'text-gray-700 dark:text-gray-300'}`}>
+                  <Link
+                    href={switchLocalePath(currentLocale === 'en' ? 'ar' : 'en')}
+                    onClick={closeAll}
+                    className="flex items-center bg-gray-200 dark:bg-gray-700 rounded-full p-1 flex-1"
+                  >
+                    <span className={`flex-1 px-2.5 py-1 rounded-full text-xs font-semibold transition-all duration-300 text-center ${currentLocale === 'en' ? 'bg-[#00437a] text-white shadow-md' : 'text-gray-700 dark:text-gray-300'}`}>
                       En
-                    </Link>
-                    <Link
-                      href={switchLocalePath('ar')}
-                      onClick={closeAll}
-                      className={`flex-1 px-2.5 py-1 rounded-full text-xs font-semibold transition-all duration-300 text-center ${currentLocale === 'ar' ? 'bg-[#00437a] text-white shadow-md' : 'text-gray-700 dark:text-gray-300'}`}>
+                    </span>
+                    <span className={`flex-1 px-2.5 py-1 rounded-full text-xs font-semibold transition-all duration-300 text-center ${currentLocale === 'ar' ? 'bg-[#00437a] text-white shadow-md' : 'text-gray-700 dark:text-gray-300'}`}>
                       Ar
-                    </Link>
-                  </div>
-                  <div className="flex items-center bg-gray-200 dark:bg-gray-700 rounded-full p-1">
-                    <button onClick={() => handleThemeChange('light')} className={`p-1.5 rounded-full transition-all duration-300 ${theme === 'light' ? 'bg-[#00437a] text-white shadow-md' : 'text-gray-700 dark:text-gray-300'}`} type="button" aria-label="Light mode">
+                    </span>
+                  </Link>
+                  <button
+                    onClick={() => handleThemeChange(theme === 'light' ? 'dark' : 'light')}
+                    className="flex items-center bg-gray-200 dark:bg-gray-700 rounded-full p-1"
+                    type="button"
+                    aria-label="Toggle theme"
+                  >
+                    <span className={`p-1.5 rounded-full transition-all duration-300 ${theme === 'light' ? 'bg-[#00437a] text-white shadow-md' : 'text-gray-700 dark:text-gray-300'}`}>
                       <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.07l-.71.71M21 12h-1M4 12H3m16.66 5.66l-.71-.71M4.05 4.93l-.71-.71M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                       </svg>
-                    </button>
-                    <button onClick={() => handleThemeChange('dark')} className={`p-1.5 rounded-full transition-all duration-300 ${theme === 'dark' ? 'bg-[#00437a] text-white shadow-md' : 'text-gray-700 dark:text-gray-300'}`} type="button" aria-label="Dark mode">
+                    </span>
+                    <span className={`p-1.5 rounded-full transition-all duration-300 ${theme === 'dark' ? 'bg-[#00437a] text-white shadow-md' : 'text-gray-700 dark:text-gray-300'}`}>
                       <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" />
                       </svg>
-                    </button>
-                  </div>
+                    </span>
+                  </button>
                 </div>
               </div>
             )}

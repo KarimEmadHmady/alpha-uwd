@@ -41,7 +41,6 @@ const FundFiles: React.FC<FundFilesProps> = ({ fundData }) => {
   const PdfIcon = () => (
     <div className="w-12 h-14 bg-red-500 rounded-lg flex items-center justify-center shrink-0 relative">
       <span className="text-white text-xs font-bold">PDF</span>
-      <div className="absolute -top-1 -right-1 w-4 h-4 bg-red-700 rounded-sm" />
     </div>
   );
 

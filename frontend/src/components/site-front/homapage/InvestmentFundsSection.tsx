@@ -175,7 +175,7 @@ export default function InvestmentFundsSection() {
                       href={`/services/fundsmanagement/${fund.id}`}
                       className="block h-full"
                     >
-                      <div className="bg-white dark:bg-[#1a1a1a] rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-5 hover:shadow-md transition-all duration-300 flex flex-col gap-4 h-full hover:bg-gray-50 dark:hover:bg-[#333] hover:-translate-y-0.5">
+                      <div className="bg-white dark:bg-[#1a1a1a] rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-5 hover:shadow-md transition-all duration-300 flex flex-col gap-4 h-80 hover:bg-gray-50 dark:hover:bg-[#333] hover:-translate-y-0.5">
                         {/* Top row */}
                         <div className="flex items-start justify-between">
                           <div className="w-16 h-16 relative rounded-xl overflow-hidden border border-gray-100 dark:border-gray-800 flex-shrink-0 bg-white">
@@ -216,10 +216,15 @@ export default function InvestmentFundsSection() {
 
                         {/* Name & description */}
                         <div dir={locale === "ar" ? "rtl" : "ltr"}>
-                          <h3 className="font-bold text-base leading-snug text-gray-800 dark:text-gray-200">
+                          <h3 className="font-bold text-sm leading-snug text-gray-800 dark:text-gray-200">
                             {fund.name || t("unnamedFund")}
                           </h3>
-                          <p className="text-sm mt-1 line-clamp-2 text-gray-800 dark:text-gray-50">
+                          <p className="text-sm mt-1 line-clamp-2 overflow-hidden text-gray-800 dark:text-gray-50" style={{
+                            display: '-webkit-box',
+                            WebkitLineClamp: 2,
+                            WebkitBoxOrient: 'vertical',
+                            overflow: 'hidden'
+                          }}>
                             {fund.description || t("investmentFund")}
                           </p>
                         </div>

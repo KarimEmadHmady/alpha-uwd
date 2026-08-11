@@ -76,14 +76,17 @@ return (
 
               {/* Info */}
               <div className="p-5">
+              <div className='flex items-center justify-between'>
                 <h3 className="font-bold text-gray-800 dark:text-gray-50 text-base group-hover:text-[#00437A] dark:group-hover:text-[#00437A] transition-colors">
                   {member.name}
                 </h3>
+                <span className="text-xs text-gray-300 dark:text-gray-600">#{String(i + 1).padStart(2, '0')}</span>
+              </div>
                 <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 leading-snug">{member.title}</p>
 
                 {/* Divider + social placeholder */}
-                <div className="mt-4 pt-3 border-t border-gray-100 dark:border-gray-700 flex items-center justify-between">
-                  <div className="flex gap-2">
+                {/* <div className="mt-4 pt-3 border-t border-gray-100 dark:border-gray-700 flex items-center justify-between">
+                   <div className="flex gap-2">
                     <a
                       href="#"
                       className="w-7 h-7 rounded-full border border-[#00437A] dark:border-gray-600 flex items-center justify-center text-gray-400 dark:text-gray-500 hover:border-[#00437A] hover:text-[#00437A] dark:hover:border-[#00437A] dark:hover:text-[#00437A] transition-colors"
@@ -102,9 +105,8 @@ return (
                         <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                       </svg>
                     </a>
-                  </div>
-                  <span className="text-xs text-gray-300 dark:text-gray-600">#{String(i + 1).padStart(2, '0')}</span>
-                </div>
+                  </div> 
+                </div> */}
               </div>
             </div>
           ))}

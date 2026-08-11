@@ -88,27 +88,27 @@ export default async function Footer({ locale }: { locale: string }) {
             <h3 className="text-sm font-semibold text-gray-200 mb-4 tracking-wide">{footer.importantLinksTitle}</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="text-sm text-gray-300 hover:text-white transition-colors">
+                <Link href={`/${locale}`} className="text-sm text-gray-300 hover:text-white transition-colors">
                   {footer.homeLinkText}
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-sm text-gray-300 hover:text-white transition-colors">
+                <Link href={`/${locale}/about`} className="text-sm text-gray-300 hover:text-white transition-colors">
                   {footer.aboutLinkText}
                 </Link>
               </li>
               <li>
-                <Link href="/services" className="text-sm text-gray-300 hover:text-white transition-colors">
+                <Link href={`/${locale}/services`} className="text-sm text-gray-300 hover:text-white transition-colors">
                   {footer.servicesLinkText}
                 </Link>
               </li>
               <li>
-                <Link href="/careers" className="text-sm text-gray-300 hover:text-white transition-colors">
+                <Link href={`/${locale}/careers`} className="text-sm text-gray-300 hover:text-white transition-colors">
                   {footer.reportsLinkText}
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-sm text-gray-300 hover:text-white transition-colors">
+                <Link href={`/${locale}/contact`} className="text-sm text-gray-300 hover:text-white transition-colors">
                   {footer.contactLinkText}
                 </Link>
               </li>
@@ -120,28 +120,28 @@ export default async function Footer({ locale }: { locale: string }) {
             <h3 className="text-sm font-semibold text-gray-200 mb-4 tracking-wide">{footer.aboutUsTitle}</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/about" className="text-sm text-gray-300 hover:text-white transition-colors">
+                <Link href={`/${locale}/about`} className="text-sm text-gray-300 hover:text-white transition-colors">
                   {footer.helloLinkText}
                 </Link>
               </li>
               <li>
-                <Link href="/services/fundsmanagement" className="text-sm text-gray-300 hover:text-white transition-colors">
+                <Link href={`/${locale}/services/fundsmanagement`} className="text-sm text-gray-300 hover:text-white transition-colors">
                   {footer.corporateServicesLinkText}
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/blogs"
+                  href={`/${locale}/blogs`}
                   className="text-sm text-gray-300 hover:text-white transition-colors"
                 >
                   {footer.institutionalInvestorsLinkText}
                 </Link>
               </li>
-              <li>
-                <Link href="/about" className="text-sm text-gray-300 hover:text-white transition-colors">
+              {/* <li>
+                <Link href="/${locale}/about" className="text-sm text-gray-300 hover:text-white transition-colors">
                   {footer.ourTeamLinkText}
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
 
@@ -163,7 +163,7 @@ export default async function Footer({ locale }: { locale: string }) {
               </li> */}
               <li>
                 <Link
-                  href="/contact"
+                  href={`/${locale}/contact`}
                   className="text-sm text-gray-300 hover:text-white transition-colors inline-block mt-2"
                 >
                   {footer.contactFormLinkText}

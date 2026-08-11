@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useLocale } from "next-intl";
 import FundSidebar from "./FundSidebar";
 import FundDetails from "./FundDetails";
@@ -12,7 +12,7 @@ import { fundService } from "@/services/fundService";
 import HeroSection from "./HeroSection";
 import Image from 'next/image';
 
-type Tab = "details" | "performance" | "manager" | "files";
+type Tab = "details" | "performance" | "manager" | "files" | "link";
 
 function OtherFundCard({
   name,
@@ -61,13 +61,28 @@ export default function FundPage() {
   const fundId = params?.id as string;
   const locale = useLocale();
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState<Tab>("details");
+    const searchParams = useSearchParams();
+
+  const tabFromUrl = (searchParams.get('tab') as Tab) || "details";
+  const [activeTab, setActiveTab] = useState<Tab>(tabFromUrl);
   const [fundData, setFundData] = useState<any>(null);
   const [otherFunds, setOtherFunds] = useState<any[]>([]);
   const [priceHistories, setPriceHistories] = useState<Record<number, any>>({});
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+    useEffect(() => {
+    setActiveTab(tabFromUrl);
+  }, [tabFromUrl]);
+
+
+  // Update URL when tab changes
+  const handleTabChange = (tab: Tab) => {
+    setActiveTab(tab);
+    const newParams = new URLSearchParams(searchParams.toString());
+    newParams.set('tab', tab);
+    router.replace(`?${newParams.toString()}`, { scroll: false });
+  };
   useEffect(() => {
     const fetchFundData = async () => {
       if (!fundId) return;
@@ -106,7 +121,7 @@ export default function FundPage() {
     };
 
     fetchFundData();
-  }, [fundId, locale]);
+  }, [fundId]);
 
   const renderContent = () => {
     switch (activeTab) {
@@ -172,7 +187,7 @@ return (
           <div className="order-1 lg:order-none w-full max-w-md mx-auto lg:max-w-none lg:mx-0">
             <FundSidebar
               activeTab={activeTab}
-              onTabChange={setActiveTab}
+              onTabChange={handleTabChange}
               fundName={fundData.fundDetails?.name || fundData.fundDetails?.fund_name}
               fundType={fundData.fundDetails?.type || fundData.fundDetails?.categoryName}
               price={parseFloat(fundData.fundDetails?.status === 1 ? (fundData.fundDetails?.newprice || fundData.fundDetails?.currentprice || '0') : (fundData.fundDetails?.currentprice || fundData.fundDetails?.newprice || '0')) || 0}

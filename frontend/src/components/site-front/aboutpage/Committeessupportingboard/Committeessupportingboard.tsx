@@ -105,37 +105,19 @@ function MemberCard({ img, name, title, index }: MemberCardProps) {
 
       {/* Info */}
       <div className="p-5">
-        <h3 className="font-bold text-gray-900 text-base group-hover:text-[#00437A] transition-colors">
-          {name}
-        </h3>
+        <div className='flex items-center justify-between'>
+          <h3 className="font-bold text-gray-900 text-base group-hover:text-[#00437A] transition-colors">
+            {name}
+          </h3>
+          <span className="text-xs text-gray-300">#{String(index + 1).padStart(2, '0')}</span>
+        </div>
+
+
+
         <p className="text-sm text-gray-500 mt-1 leading-snug">{title}</p>
 
         {/* Divider + social */}
-        <div className="mt-4 pt-3 border-t border-gray-50 flex items-center justify-between">
-          <div className="flex gap-2">
-            {/* LinkedIn */}
-            <a
-              href="#"
-              className="w-7 h-7 rounded-full border border-[#00437A] flex items-center justify-center text-gray-400 hover:border-[#00437A] hover:text-[#00437A] transition-colors"
-              aria-label="LinkedIn"
-            >
-              <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm15.5 11.268h-3v-5.604c0-1.337-.026-3.063-1.868-3.063-1.868 0-2.154 1.459-2.154 2.967v5.7h-3v-10h2.881v1.367h.041c.401-.761 1.381-1.563 2.841-1.563 3.039 0 3.6 2.001 3.6 4.601v5.595z" />
-              </svg>
-            </a>
-            {/* Email */}
-            <a
-              href="#"
-              className="w-7 h-7 rounded-full border border-[#00437A] flex items-center justify-center text-gray-400 hover:border-[#00437A] hover:text-[#00437A] transition-colors"
-              aria-label="Email"
-            >
-              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-            </a>
-          </div>
-          <span className="text-xs text-gray-300">#{String(index + 1).padStart(2, '0')}</span>
-        </div>
+
       </div>
     </div>
   );
@@ -230,7 +212,7 @@ export default function CommitteesSupportingBoard({ data, BASE_URL, lang }: Comm
   const members =
     activeTab === 'risk' ? CENTRAL_RISK_COMMITTEE : AUDIT_AND_GOVERNANCE_COMMITTEE;
 
-return (
+  return (
     <section className="py-20 bg-white dark:bg-[#1a1a1a]" dir={safeLang === 'ar' ? 'rtl' : 'ltr'}>
       <div className="max-w-7xl mx-auto px-6">
 
@@ -247,10 +229,9 @@ return (
                 key={tab.key}
                 onClick={() => setActiveTab(tab.key)}
                 className={`px-5 py-2 rounded-full text-sm font-medium border transition-all duration-200 cursor-pointer
-                  ${
-                    activeTab === tab.key
-                      ? 'bg-[#00437A] text-white border-[#00437A] shadow-sm'
-                      : 'bg-white dark:bg-transparent text-gray-600 dark:text-gray-400 border-gray-300 dark:border-gray-600 hover:border-[#00437A] hover:text-[#00437A] dark:hover:border-[#00437A] dark:hover:text-[#00437A]'
+                  ${activeTab === tab.key
+                    ? 'bg-[#00437A] text-white border-[#00437A] shadow-sm'
+                    : 'bg-white dark:bg-transparent text-gray-600 dark:text-gray-400 border-gray-300 dark:border-gray-600 hover:border-[#00437A] hover:text-[#00437A] dark:hover:border-[#00437A] dark:hover:text-[#00437A]'
                   }`}
               >
                 {tab.label}

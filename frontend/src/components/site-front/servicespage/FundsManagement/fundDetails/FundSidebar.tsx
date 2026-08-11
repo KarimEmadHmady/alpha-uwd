@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { useTranslations, useLocale } from "next-intl";
 
-type Tab = "details" | "performance" | "manager" | "files";
+type Tab = "details" | "performance" | "manager" | "files" | "link";
 
 interface FundSidebarProps {
   activeTab: Tab;
@@ -25,6 +25,7 @@ const tabs: { key: Tab; label: string }[] = [
   { key: "performance", label: "Performance" },
   { key: "manager", label: "Fund Manager" },
   { key: "files", label: "Files" },
+  { key: "link", label: "Fund Link" },
 ];
 
 export default function FundSidebar({
@@ -59,6 +60,7 @@ export default function FundSidebar({
     { key: "performance", label: t("fundSidebar.performance") },
     { key: "manager", label: t("fundSidebar.manager") },
     { key: "files", label: t("fundSidebar.files") },
+    ...(fundDetails?.fund_link ? [{ key: "link" as Tab, label: t("fundSidebar.fund_link") }] : []),
   ];
 
 return (
@@ -116,26 +118,51 @@ return (
       {/* Tabs */}
       <div className="p-3 flex flex-col gap-2">
         {tabs.map((tab) => (
-          <button
-            key={tab.key}
-            onClick={() => onTabChange(tab.key)}
-            className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
-              activeTab === tab.key
-                ? "bg-[#00437A] text-white"
-                : "bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-700"
-            }`}
-          >
-            <span>{tab.label}</span>
-            <span
-              className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 ${
+          tab.key === "link" ? (
+            <a
+              key={tab.key}
+              href={fundDetails?.fund_link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
                 activeTab === tab.key
-                  ? "bg-white text-[#00437A]"
-                  : "bg-white dark:bg-gray-700 text-gray-500 dark:text-gray-400 border border-[#00437A] dark:border-gray-600"
+                  ? "bg-[#00437A] text-white"
+                  : "bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-700"
               }`}
             >
-              <ArrowRight className="w-3.5 h-3.5" />
-            </span>
-          </button>
+              <span>{tab.label}</span>
+              <span
+                className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 ${
+                  activeTab === tab.key
+                    ? "bg-white text-[#00437A]"
+                    : "bg-white dark:bg-gray-700 text-gray-500 dark:text-gray-400 border border-[#00437A] dark:border-gray-600"
+                }`}
+              >
+                <ArrowRight className="w-3.5 h-3.5" />
+              </span>
+            </a>
+          ) : (
+            <button
+              key={tab.key}
+              onClick={() => onTabChange(tab.key)}
+              className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
+                activeTab === tab.key
+                  ? "bg-[#00437A] text-white"
+                  : "bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-700"
+              }`}
+            >
+              <span>{tab.label}</span>
+              <span
+                className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 ${
+                  activeTab === tab.key
+                    ? "bg-white text-[#00437A]"
+                    : "bg-white dark:bg-gray-700 text-gray-500 dark:text-gray-400 border border-[#00437A] dark:border-gray-600"
+                }`}
+              >
+                <ArrowRight className="w-3.5 h-3.5" />
+              </span>
+            </button>
+          )
         ))}
       </div>
     </div>
